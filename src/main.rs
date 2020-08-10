@@ -45,7 +45,7 @@ lazy_static! {
 }
 
 fn read_client_secret(file: String) -> ApplicationSecret {
-    read_application_secret(std::path::Path::new(&file)).unwrap()
+    read_application_secret(std::path::Path::new(&file)).expect("No App Secret")
 }
 
 fn main() {
@@ -87,7 +87,8 @@ fn main() {
 
     let secret = read_client_secret(secret_file.to_string());
 
-    let token_storage = DiskTokenStorage::new(&String::from("temp_token")).unwrap();
+    let token_storage = DiskTokenStorage::new(&String::from("temp_token"))
+        .expect("Cannot create temp storage token - write permissions?");
     let mut auth = Authenticator::new(
         &secret,
         DefaultAuthenticatorDelegate,
@@ -110,18 +111,22 @@ fn main() {
     //mkdir(&hub, "RpiCamSyncer");
 
     let (sender, receiver) = channel();
-    let mut watcher = watcher(sender, Duration::from_secs(DIR_SCAN_DELAY)).unwrap();
+    let mut watcher =
+        watcher(sender, Duration::from_secs(DIR_SCAN_DELAY)).expect("Cannot Watch Dir");
     watcher.watch(target_dir, RecursiveMode::Recursive).unwrap();
 
     loop {
         match receiver.recv() {
             Ok(notify::DebouncedEvent::Create(p)) => {
-                info!(log, "Dir Created {:?}", p);
-                let path = p.to_str().unwrap();
+                info!(log, "Create Request{:?}", p);
                 if let Some(path) = p.to_str() {
-                    upload(&hub, path);
+                    if std::path::Path::new(path).is_dir() {
+                        mkdir(&hub, path);
+                    } else {
+                        upload(&hub, path);
+                    }
                 } else {
-                    warn!(log, "Cannot create {:?}", p);
+                    warn!(log, "Cannot Create {:?}", p);
                 }
             }
             _ => info!(log, "unidentified event"),
