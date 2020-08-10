@@ -25,6 +25,9 @@ use tempfile::tempfile;
 mod common;
 use slog::{Fuse, Logger};
 
+const DIR_SCAN_DELAY: u64 = 1;
+
+//save me typing this for sigs
 type Hub = drive3::DriveHub<
     hyper::Client,
     oauth2::Authenticator<
@@ -80,7 +83,7 @@ fn main() {
         .unwrap_or("/tmp/pi_sync/images/");
 
     info!(log, "Using {} as WPS Script", secret_file);
-    info!(log, "Using {} as Dir to monitoe", target_dir);
+    info!(log, "Using {} as Dir to monitor", target_dir);
 
     let secret = read_client_secret(secret_file.to_string());
 
@@ -103,30 +106,26 @@ fn main() {
     );
 
     //TODO: first run
-    mkdir(&hub, "RpiCamSyncer");
+    //if ! -d "RpiCamSyncer"
+    //mkdir(&hub, "RpiCamSyncer");
 
     let (sender, receiver) = channel();
-    let mut watcher = watcher(sender, Duration::from_secs(10)).unwrap();
+    let mut watcher = watcher(sender, Duration::from_secs(DIR_SCAN_DELAY)).unwrap();
     watcher.watch(target_dir, RecursiveMode::Recursive).unwrap();
 
     loop {
         match receiver.recv() {
-            Ok(event) => {
-                match event {
-                    notify::DebouncedEvent::Create(p) => {
-                        info!(log, "Path to Ceate {:?}", p);
-                        let path = p.to_str().unwrap();
-                        if std::path::Path::new(path).is_dir() {
-                            mkdir(&hub, path);
-                        } else {
-                            upload(&hub, path);
-                        }
-                    }
-
-                    _ => info!(log, "err"),
-                };
+            Ok(notify::DebouncedEvent::Create(p)) => {
+                info!(log, "Dir Created {:?}", p);
+                let path = p.to_str().unwrap();
+                if let Some(path) = p.to_str() {
+                    upload(&hub, path);
+                } else {
+                    warn!(log, "Cannot create {:?}", p);
+                }
             }
-            Err(e) => info!(log, "watch error: {:?}", e),
+            _ => info!(log, "unidentified event"),
+            Err(e) => error!(log, "watch error: {:?}", e),
         }
     }
 }
@@ -142,7 +141,7 @@ fn get_folder_id(hub: &Hub, path: &str) -> std::result::Result<String, String> {
 
     info!(log, "{:?}", result);
 
-    Ok("1BYD5U5oC6AY19cBmGW6JC6S6pCLZnRsG".to_owned())
+    Ok("19ipt2Rg1TGzr5esE_vA_1oFjrt7l5g7a".to_owned())
 }
 
 fn upload(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
@@ -179,12 +178,12 @@ fn upload(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
             | Error::BadRequest(_)
             | Error::FieldClash(_)
             | Error::JsonDecodeError(_, _) => {
-                println!("{}", e);
+                error!(log, "Faile to invoke upload api {}", e);
                 Err(e.to_string())
             }
         },
         Ok(res) => {
-            println!("Success: {:?}", res);
+            info!(log, "Success Upload: {:?}", res);
             Ok(res.0.status.to_u16())
         }
     }
@@ -193,7 +192,7 @@ fn upload(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
 fn mkdir(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
     let dir_path = std::path::Path::new(path);
 
-    info!(log, "Dir to create: {:?}", dir_path);
+    info!(log, "Mkdir:: Dir to create: {:?}", dir_path);
 
     let mut file = tempfile().unwrap();
     let mut req = drive3::File::default();
@@ -221,13 +220,12 @@ fn mkdir(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
             | Error::BadRequest(_)
             | Error::FieldClash(_)
             | Error::JsonDecodeError(_, _) => {
-                println!("{}", e);
-
+                error!(log, "Failed to invoke mkdir API {}", e.to_string());
                 Err(e.to_string())
             }
         },
         Ok(res) => {
-            println!("Success: {:?}", res);
+            info!(log, "Success, dir  created: {:?}", res);
             Ok(res.0.status.to_u16())
         }
     }

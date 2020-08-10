@@ -1,0 +1,945 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+Action	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^enum Action {$/;"	g
+AddWatch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    AddWatch(PathBuf, RecursiveMode, Sender<Result<()>>),$/;"	e	enum:EventLoopMsg
+Arc	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D: Drain + ?Sized> Drain for Arc<D> {$/;"	c
+Arc	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> KV for Arc<T>$/;"	c
+Arc	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> Value for Arc<T>$/;"	c
+Arguments	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<'a> Value for fmt::Arguments<'a> {$/;"	c
+AsFmtSerializer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<F> Serializer for AsFmtSerializer<F>$/;"	c
+AsFmtSerializer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^struct AsFmtSerializer<F>(pub F)$/;"	s
+BorrowedKV	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<'a> KV for BorrowedKV<'a> {$/;"	c
+BorrowedKV	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct BorrowedKV<'a>($/;"	s
+Box	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D: Drain + ?Sized> Drain for Box<D> {$/;"	c
+Box	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> KV for Box<T>$/;"	c
+Box	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> Value for Box<T>$/;"	c
+Builder	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^impl<'a, 'b> Builder<'a, 'b> {$/;"	c
+Builder	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^impl<'a, 'b> Default for Builder<'a, 'b> {$/;"	c
+Builder	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^pub struct Builder<'a, 'b> {$/;"	s
+CFRunLoopIsWaiting	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    pub fn CFRunLoopIsWaiting(runloop: cf::CFRunLoopRef) -> bool;$/;"	f
+COOKIE_COUNTER	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^static mut COOKIE_COUNTER: u32 = 0;$/;"	v
+CheckOwned	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^        impl Drain for CheckOwned {$/;"	c	function:std_only::multichain
+CheckOwned	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^        struct CheckOwned;$/;"	s	function:std_only::multichain
+Chmod	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    Chmod(PathBuf),$/;"	e	enum:DebouncedEvent
+Create	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    Create(PathBuf),$/;"	e	enum:DebouncedEvent
+Critical	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Critical,$/;"	e	enum:FilterLevel
+Critical	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Critical,$/;"	e	enum:Level
+D	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<'a, D: Drain + 'a> Drain for &'a D {$/;"	c
+D	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<'a, D: Drain + 'a> Drain for &'a mut D {$/;"	c
+Debounce	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^impl Debounce {$/;"	c
+Debounce	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^pub struct Debounce {$/;"	s
+Debounced	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^    Debounced {$/;"	e	enum:EventTx
+DebouncedEvent	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^impl PartialEq for DebouncedEvent {$/;"	c
+DebouncedEvent	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub enum DebouncedEvent {$/;"	g
+DebouncedTx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^    DebouncedTx {$/;"	e	enum:EventTx
+Debug	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Debug,$/;"	e	enum:FilterLevel
+Debug	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Debug,$/;"	e	enum:Level
+Discard	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl Drain for Discard {$/;"	c
+Discard	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct Discard;$/;"	s
+Display	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<'a> Value for std::path::Display<'a> {$/;"	c
+Drain	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Drain(D::Err),$/;"	e	enum:MutexDrainError
+Drain	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait Drain {$/;"	i
+Duplicate	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D1: Drain, D2: Drain> Drain for Duplicate<D1, D2> {$/;"	c
+Duplicate	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D1: Drain, D2: Drain> Duplicate<D1, D2> {$/;"	c
+Duplicate	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct Duplicate<D1: Drain, D2: Drain>(pub D1, pub D2);$/;"	s
+Err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Err = ($/;"	t	implementation:Duplicate
+Err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Err = ();$/;"	t	implementation:FilterLevel
+Err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Err = ();$/;"	t	implementation:Level
+Err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Err = D::Err;$/;"	t
+Err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Err = D::Err;$/;"	t	implementation:Arc
+Err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Err = D::Err;$/;"	t	implementation:Box
+Err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Err = D::Err;$/;"	t	implementation:D
+Err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Err = D::Err;$/;"	t	implementation:LevelFilter
+Err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Err = E;$/;"	t	implementation:MapError
+Err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Err = MutexDrainError<D>;$/;"	t	implementation:Mutex
+Err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Err = Never;$/;"	t
+Err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Err = Never;$/;"	t	implementation:Discard
+Err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Err = Never;$/;"	t	implementation:IgnoreResult
+Err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Err;$/;"	t	interface:Drain
+Err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^            type Err = Never;$/;"	t	implementation:std_only::multichain::CheckOwned
+Err	/home/alan/nas/devel/pi_drive_sync/src/common/mod.rs	/^    type Err = ();$/;"	t	implementation:PrintlnDrain
+Error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    Error(Error, Option<PathBuf>),$/;"	e	enum:DebouncedEvent
+Error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^impl From<io::Error> for Error {$/;"	c
+Error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^impl StdError for Error {$/;"	c
+Error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^impl fmt::Display for Error {$/;"	c
+Error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub enum Error {$/;"	g
+Error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Error,$/;"	e	enum:FilterLevel
+Error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Error,$/;"	e	enum:Level
+Error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl From<Error> for std::io::Error {$/;"	c
+Error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl From<core::fmt::Error> for Error {$/;"	c
+Error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl From<std::io::Error> for Error {$/;"	c
+Error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl core::fmt::Display for Error {$/;"	c
+Error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl std::error::Error for Error {$/;"	c
+Error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub enum Error {$/;"	g
+Error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl From<PathPersistError> for io::Error {$/;"	c
+Error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl From<PersistError> for io::Error {$/;"	c
+EventLoop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^impl EventLoop {$/;"	c
+EventLoop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^struct EventLoop {$/;"	s
+EventLoopMsg	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^enum EventLoopMsg {$/;"	g
+EventTx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^impl EventTx {$/;"	c
+EventTx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^pub enum EventTx {$/;"	g
+Filter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D: Drain, F> Drain for Filter<D, F>$/;"	c
+Filter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D: Drain, F> Filter<D, F>$/;"	c
+Filter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct Filter<D: Drain, F>(pub D, pub F)$/;"	s
+FilterFn	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait FilterFn$/;"	i
+FilterFn	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait FilterFn: 'static + Sync + Send + Fn(&Record) -> bool {}$/;"	i
+FilterLevel	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl FilterLevel {$/;"	c
+FilterLevel	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl FromStr for FilterLevel {$/;"	c
+FilterLevel	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl fmt::Display for FilterLevel {$/;"	c
+FilterLevel	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub enum FilterLevel {$/;"	g
+Fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Fmt(core::fmt::Error),$/;"	e	enum:Error
+Fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Fmt(std::fmt::Error),$/;"	e	enum:Error
+FnValue	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<'a, V: 'a + Value, F> Value for FnValue<V, F>$/;"	c
+FnValue	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct FnValue<V: Value, F>(pub F)$/;"	s
+Foo	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^    impl Foo {$/;"	c	function:expressions
+Foo	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^    struct Foo;$/;"	s	function:expressions
+FsEventWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^impl Drop for FsEventWatcher {$/;"	c
+FsEventWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^impl FsEventWatcher {$/;"	c
+FsEventWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^impl Watcher for FsEventWatcher {$/;"	c
+FsEventWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^pub struct FsEventWatcher {$/;"	s
+FsEventWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^unsafe impl Send for FsEventWatcher {}$/;"	c
+FsEventWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^unsafe impl Sync for FsEventWatcher {}$/;"	c
+Fuse	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D: Drain> Drain for Fuse<D>$/;"	c
+Fuse	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D: Drain> Fuse<D>$/;"	c
+Fuse	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct Fuse<D: Drain>(pub D)$/;"	s
+Generic	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    Generic(String),$/;"	e	enum:Error
+Hub	/home/alan/nas/devel/pi_drive_sync/src/main.rs	/^type Hub = drive3::DriveHub<$/;"	t
+INotifyWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^impl Drop for INotifyWatcher {$/;"	c
+INotifyWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^impl Watcher for INotifyWatcher {$/;"	c
+INotifyWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^pub struct INotifyWatcher(Mutex<mio_extras::channel::Sender<EventLoopMsg>>);$/;"	s
+IgnoreResult	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D: Drain> Drain for IgnoreResult<D> {$/;"	c
+IgnoreResult	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D: Drain> IgnoreResult<D> {$/;"	c
+IgnoreResult	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct IgnoreResult<D: Drain> {$/;"	s
+InMemory	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^    InMemory(Cursor<Vec<u8>>),$/;"	e	enum:SpooledInner
+Info	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Info,$/;"	e	enum:FilterLevel
+Info	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Info,$/;"	e	enum:Level
+Io	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    Io(io::Error),$/;"	e	enum:Error
+Io	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Io(std::io::Error),$/;"	e	enum:Error
+IoResultExt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/error.rs	/^pub(crate) trait IoResultExt<T> {$/;"	i
+K	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^        impl KV for K {$/;"	c	function:expressions
+K	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^        struct K;$/;"	s	function:expressions
+KV	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl KV for () {$/;"	c
+KV	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait KV {$/;"	i
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl AsRef<str> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl Default for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl From<&'static str> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl From<String> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl FromIterator<String> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl FromIterator<char> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl Hash for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl PartialEq<Self> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl PartialEq<String> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl PartialEq<str> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl fmt::Debug for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl fmt::Display for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl<'a> FromIterator<&'a String> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl<'a> FromIterator<&'a char> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl<'a> FromIterator<&'a str> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl<'a> FromIterator<Cow<'a, str>> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^pub struct Key {$/;"	s
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl AsRef<str> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl Default for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl From<&'static str> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl From<String> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl FromIterator<String> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl FromIterator<char> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl Hash for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl PartialEq<Self> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl PartialEq<String> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl PartialEq<str> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl fmt::Debug for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl fmt::Display for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl<'a> FromIterator<&'a String> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl<'a> FromIterator<&'a char> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl<'a> FromIterator<&'a str> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^impl<'a> FromIterator<Cow<'a,str>> for Key {$/;"	c
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^pub struct Key {$/;"	s
+Key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/static.rs	/^pub type Key = &'static str;$/;"	t
+LOG_LEVEL_NAMES	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub static LOG_LEVEL_NAMES: [&'static str; 7] =$/;"	v
+LOG_LEVEL_SHORT_NAMES	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub static LOG_LEVEL_SHORT_NAMES: [&'static str; 7] =$/;"	v
+Lazy	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/lazy_static-1.4.0/src/core_lazy.rs	/^impl<T: Sync> Lazy<T> {$/;"	c
+Lazy	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/lazy_static-1.4.0/src/core_lazy.rs	/^pub struct Lazy<T: Sync>(Once<T>);$/;"	s
+Lazy	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/lazy_static-1.4.0/src/inline_lazy.rs	/^impl<T: Sync> Lazy<T> {$/;"	c
+Lazy	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/lazy_static-1.4.0/src/inline_lazy.rs	/^pub struct Lazy<T: Sync>(Cell<Option<T>>, Once);$/;"	s
+Lazy	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/lazy_static-1.4.0/src/inline_lazy.rs	/^unsafe impl<T: Sync> Sync for Lazy<T> {}$/;"	c
+LazyStatic	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/lazy_static-1.4.0/src/lib.rs	/^pub trait LazyStatic {$/;"	i
+Level	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl FromStr for Level {$/;"	c
+Level	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl Level {$/;"	c
+Level	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl fmt::Display for Level {$/;"	c
+Level	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub enum Level {$/;"	g
+LevelFilter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D: Drain> Drain for LevelFilter<D> {$/;"	c
+LevelFilter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D: Drain> LevelFilter<D> {$/;"	c
+LevelFilter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct LevelFilter<D: Drain>(pub D, pub Level);$/;"	s
+Logger	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D> Drain for Logger<D>$/;"	c
+Logger	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D> Logger<D>$/;"	c
+Logger	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D> fmt::Debug for Logger<D>$/;"	c
+Logger	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct Logger<D = Arc<SendSyncRefUnwindSafeDrain<Ok = (), Err = Never>>>$/;"	s
+MapErrFn	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait MapErrFn<EI, EO>$/;"	i
+MapErrFn	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait MapErrFn<EI, EO>: 'static + Sync + Send + Fn(EI) -> EO {}$/;"	i
+MapError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D: Drain, E> Drain for MapError<D, E> {$/;"	c
+MapError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D: Drain, E> MapError<D, E> {$/;"	c
+MapError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct MapError<D: Drain, E> {$/;"	s
+MetaEvent	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^pub enum MetaEvent {$/;"	g
+MultiListNode	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl KV for MultiListNode {$/;"	c
+MultiListNode	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^struct MultiListNode {$/;"	s
+Mutex	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Mutex,$/;"	e	enum:MutexDrainError
+Mutex	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D: Drain> Drain for std::sync::Mutex<D> {$/;"	c
+MutexDrainError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<'a, D: Drain> From<std::sync::PoisonError<std::sync::MutexGuard<'a, D>>>$/;"	c
+MutexDrainError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D: Drain> fmt::Display for MutexDrainError<D>$/;"	c
+MutexDrainError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D> fmt::Debug for MutexDrainError<D>$/;"	c
+MutexDrainError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<D> std::error::Error for MutexDrainError<D>$/;"	c
+MutexDrainError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub enum MutexDrainError<D: Drain> {$/;"	g
+NamedTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl AsRef<Path> for NamedTempFile {$/;"	c
+NamedTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl From<PersistError> for NamedTempFile {$/;"	c
+NamedTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl NamedTempFile {$/;"	c
+NamedTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl Read for NamedTempFile {$/;"	c
+NamedTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl Seek for NamedTempFile {$/;"	c
+NamedTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl Write for NamedTempFile {$/;"	c
+NamedTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl fmt::Debug for NamedTempFile {$/;"	c
+NamedTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl std::os::unix::io::AsRawFd for NamedTempFile {$/;"	c
+NamedTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl std::os::windows::io::AsRawHandle for NamedTempFile {$/;"	c
+NamedTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl<'a> Read for &'a NamedTempFile {$/;"	c
+NamedTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl<'a> Seek for &'a NamedTempFile {$/;"	c
+NamedTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl<'a> Write for &'a NamedTempFile {$/;"	c
+NamedTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^pub struct NamedTempFile {$/;"	s
+Never	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub type Never = private::NeverStruct;$/;"	t
+NeverStruct	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub struct NeverStruct(());$/;"	s	module:private
+NonRecursive	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    NonRecursive,$/;"	e	enum:RecursiveMode
+NoticeRemove	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    NoticeRemove(PathBuf),$/;"	e	enum:DebouncedEvent
+NoticeWrite	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    NoticeWrite(PathBuf),$/;"	e	enum:DebouncedEvent
+NullWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/null.rs	/^impl Watcher for NullWatcher {$/;"	c
+NullWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/null.rs	/^pub struct NullWatcher;$/;"	s
+Off	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Off,$/;"	e	enum:FilterLevel
+Ok	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Ok = ();$/;"	t
+Ok	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Ok = ();$/;"	t	implementation:Discard
+Ok	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Ok = ();$/;"	t	implementation:IgnoreResult
+Ok	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Ok = (D1::Ok, D2::Ok);$/;"	t	implementation:Duplicate
+Ok	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Ok = D::Ok;$/;"	t	implementation:Arc
+Ok	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Ok = D::Ok;$/;"	t	implementation:Box
+Ok	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Ok = D::Ok;$/;"	t	implementation:D
+Ok	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Ok = D::Ok;$/;"	t	implementation:MapError
+Ok	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Ok = D::Ok;$/;"	t	implementation:Mutex
+Ok	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Ok = Option<D::Ok>;$/;"	t
+Ok	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Ok = Option<D::Ok>;$/;"	t	implementation:LevelFilter
+Ok	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    type Ok;$/;"	t	interface:Drain
+Ok	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^            type Ok = ();$/;"	t	implementation:std_only::multichain::CheckOwned
+Ok	/home/alan/nas/devel/pi_drive_sync/src/common/mod.rs	/^    type Ok = ();$/;"	t	implementation:PrintlnDrain
+OnDisk	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^    OnDisk(File),$/;"	e	enum:SpooledInner
+OperationsBuffer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^pub type OperationsBuffer = Arc<Mutex<OperationsBufferInner>>;$/;"	t
+OperationsBufferInner	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^pub type OperationsBufferInner = HashMap<PathBuf, (Option<op::Op>, Option<PathBuf>, Option<u64>)/;"	t
+Option	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T: Value> Value for Option<T> {$/;"	c
+Other	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Other,$/;"	e	enum:Error
+OwnedKV	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> KV for OwnedKV<T>$/;"	c
+OwnedKV	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct OwnedKV<T>($/;"	s
+OwnedKVList	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl KV for OwnedKVList {$/;"	c
+OwnedKVList	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl OwnedKVList {$/;"	c
+OwnedKVList	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl fmt::Debug for OwnedKVList {$/;"	c
+OwnedKVList	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> convert::From<OwnedKV<T>> for OwnedKVList$/;"	c
+OwnedKVList	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct OwnedKVList {$/;"	s
+OwnedKVListNode	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> KV for OwnedKVListNode<T>$/;"	c
+OwnedKVListNode	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^struct OwnedKVListNode<T>$/;"	s
+OwnedKeyValueList	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub type OwnedKeyValueList = OwnedKVList;$/;"	t
+PathData	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^struct PathData {$/;"	s
+PathError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/error.rs	/^impl error::Error for PathError {$/;"	c
+PathError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/error.rs	/^impl fmt::Display for PathError {$/;"	c
+PathError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/error.rs	/^struct PathError {$/;"	s
+PathNotFound	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    PathNotFound,$/;"	e	enum:Error
+PathPersistError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl error::Error for PathPersistError {$/;"	c
+PathPersistError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl fmt::Display for PathPersistError {$/;"	c
+PathPersistError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^pub struct PathPersistError {$/;"	s
+PersistError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl error::Error for PersistError {$/;"	c
+PersistError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl fmt::Display for PersistError {$/;"	c
+PersistError	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^pub struct PersistError {$/;"	s
+PollWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^impl Drop for PollWatcher {$/;"	c
+PollWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^impl PollWatcher {$/;"	c
+PollWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^impl Watcher for PollWatcher {$/;"	c
+PollWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^pub struct PollWatcher {$/;"	s
+PollWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^unsafe impl Sync for PollWatcher {}$/;"	c
+PrintlnDrain	/home/alan/nas/devel/pi_drive_sync/src/common/mod.rs	/^impl Drain for PrintlnDrain {$/;"	c
+PrintlnDrain	/home/alan/nas/devel/pi_drive_sync/src/common/mod.rs	/^pub struct PrintlnDrain;$/;"	s
+PrintlnSerializer	/home/alan/nas/devel/pi_drive_sync/src/common/mod.rs	/^impl Serializer for PrintlnSerializer {$/;"	c
+PrintlnSerializer	/home/alan/nas/devel/pi_drive_sync/src/common/mod.rs	/^pub struct PrintlnSerializer;$/;"	s
+PushFnSerializer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub type PushFnSerializer<'a> = PushFnValueSerializer<'a>;$/;"	t
+PushFnValue	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<F> Value for PushFnValue<F>$/;"	c
+PushFnValue	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct PushFnValue<F>(pub F)$/;"	s
+PushFnValueSerializer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<'a> Drop for PushFnValueSerializer<'a> {$/;"	c
+PushFnValueSerializer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<'a> PushFnValueSerializer<'a> {$/;"	c
+PushFnValueSerializer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct PushFnValueSerializer<'a> {$/;"	s
+PushLazy	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub type PushLazy<T> = PushFnValue<T>;$/;"	t
+R	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T: KV, R: KV> KV for (T, R) {$/;"	c
+Raw	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^    Raw {$/;"	e	enum:EventTx
+RawEvent	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub struct RawEvent {$/;"	s
+RawEvent	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^unsafe impl Send for RawEvent {}$/;"	c
+Rc	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> Value for Rc<T>$/;"	c
+ReadData	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^struct ReadData {$/;"	s
+ReadDirectoryChangesServer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^impl ReadDirectoryChangesServer {$/;"	c
+ReadDirectoryChangesServer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^struct ReadDirectoryChangesServer {$/;"	s
+ReadDirectoryChangesWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^impl Drop for ReadDirectoryChangesWatcher {$/;"	c
+ReadDirectoryChangesWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^impl ReadDirectoryChangesWatcher {$/;"	c
+ReadDirectoryChangesWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^impl Watcher for ReadDirectoryChangesWatcher {$/;"	c
+ReadDirectoryChangesWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^pub struct ReadDirectoryChangesWatcher {$/;"	s
+ReadDirectoryChangesWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^unsafe impl Send for ReadDirectoryChangesWatcher {}$/;"	c
+ReadDirectoryChangesWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^unsafe impl Sync for ReadDirectoryChangesWatcher {}$/;"	c
+ReadDirectoryRequest	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^struct ReadDirectoryRequest {$/;"	s
+RecommendedWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub type RecommendedWatcher = FsEventWatcher;$/;"	t
+RecommendedWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub type RecommendedWatcher = INotifyWatcher;$/;"	t
+RecommendedWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub type RecommendedWatcher = PollWatcher;$/;"	t
+RecommendedWatcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub type RecommendedWatcher = ReadDirectoryChangesWatcher;$/;"	t
+Record	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<'a> Record<'a> {$/;"	c
+Record	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct Record<'a> {$/;"	s
+RecordLocation	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct RecordLocation {$/;"	s
+RecordStatic	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct RecordStatic<'a> {$/;"	s
+Recursive	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    Recursive,$/;"	e	enum:RecursiveMode
+RecursiveMode	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^impl RecursiveMode {$/;"	c
+RecursiveMode	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub enum RecursiveMode {$/;"	g
+Remove	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    Remove(PathBuf),$/;"	e	enum:DebouncedEvent
+RemoveWatch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    RemoveWatch(PathBuf, Sender<Result<()>>),$/;"	e	enum:EventLoopMsg
+Rename	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    Rename(PathBuf, PathBuf),$/;"	e	enum:DebouncedEvent
+RenameTimeout	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    RenameTimeout(u32),$/;"	e	enum:EventLoopMsg
+Rescan	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    Rescan,$/;"	e	enum:DebouncedEvent
+Result	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub type Result<T> = StdResult<T, Error>;$/;"	t
+Result	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub type Result<T = ()> = result::Result<T, Error>;$/;"	t
+Result	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/error.rs	/^impl<T> IoResultExt<T> for Result<T, io::Error> {$/;"	c
+STATIC_TERMINATOR_UNIT	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub static STATIC_TERMINATOR_UNIT: () = ();$/;"	v
+ScheduleWorker	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^impl ScheduleWorker {$/;"	c
+ScheduleWorker	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^struct ScheduleWorker {$/;"	s
+ScheduledEvent	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^struct ScheduledEvent {$/;"	s
+SendRefUnwindSafeDrain	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait SendRefUnwindSafeDrain: Drain + Send + RefUnwindSafe {}$/;"	i
+SendRefUnwindSafeDrain	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait SendRefUnwindSafeDrain: Drain + Send {}$/;"	i
+SendSyncRefUnwindSafeDrain	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait SendSyncRefUnwindSafeDrain: Drain + Send + Sync + RefUnwindSafe {}$/;"	i
+SendSyncRefUnwindSafeDrain	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait SendSyncRefUnwindSafeDrain: Drain + Send + Sync {}$/;"	i
+SendSyncRefUnwindSafeKV	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait SendSyncRefUnwindSafeKV: KV + Send + Sync + RefUnwindSafe {}$/;"	i
+SendSyncRefUnwindSafeKV	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait SendSyncRefUnwindSafeKV: KV + Send + Sync {}$/;"	i
+SendSyncRefUnwindSafeKV	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait SendSyncRefUnwindSafeKV: KV {}$/;"	i
+SendSyncUnwindSafe	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait SendSyncUnwindSafe: Send + Sync + UnwindSafe {}$/;"	i
+SendSyncUnwindSafeDrain	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait SendSyncUnwindSafeDrain: Drain + Send + Sync + UnwindSafe {}$/;"	i
+SendSyncUnwindSafeDrain	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait SendSyncUnwindSafeDrain: Drain + Send + Sync {}$/;"	i
+SerdeValue	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait SerdeValue: erased_serde::Serialize + Value {$/;"	i
+Serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub type Serialize = Value;$/;"	t
+Serializer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait Serializer {$/;"	i
+SerializerForward	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<'a, T: Serializer + 'a + ?Sized> Serializer for SerializerForward<'a, T> {$/;"	c
+SerializerForward	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^struct SerializerForward<'a, T: 'a + ?Sized>(&'a mut T);$/;"	s
+Shutdown	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    Shutdown,$/;"	e	enum:EventLoopMsg
+SingleKV	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<V: Value> From<(&'static str, V)> for SingleKV<V> {$/;"	c
+SingleKV	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<V: Value> From<(String, V)> for SingleKV<V> {$/;"	c
+SingleKV	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<V> KV for SingleKV<V>$/;"	c
+SingleKV	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub struct SingleKV<V>(pub Key, pub V)$/;"	s
+SingleWatchComplete	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    SingleWatchComplete,$/;"	e	enum:MetaEvent
+SocketAddr	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl Value for std::net::SocketAddr {$/;"	c
+SpooledInner	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^enum SpooledInner {$/;"	g
+SpooledTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^impl Read for SpooledTempFile {$/;"	c
+SpooledTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^impl Seek for SpooledTempFile {$/;"	c
+SpooledTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^impl SpooledTempFile {$/;"	c
+SpooledTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^impl Write for SpooledTempFile {$/;"	c
+SpooledTempFile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^pub struct SpooledTempFile {$/;"	s
+Stop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    Stop,$/;"	e	enum:Action
+StreamContextInfo	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^struct StreamContextInfo {$/;"	s
+String	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^impl From<Key> for String {$/;"	c
+String	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl Value for String {$/;"	c
+T	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<'a, T> KV for &'a T$/;"	c
+T	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T, EI, EO> MapErrFn<EI, EO> for T$/;"	c
+T	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> FilterFn for T$/;"	c
+T	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> SendRefUnwindSafeDrain for T$/;"	c
+T	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> SendSyncRefUnwindSafeDrain for T$/;"	c
+T	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> SendSyncRefUnwindSafeKV for T where T: KV + ?Sized {}$/;"	c
+T	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> SendSyncRefUnwindSafeKV for T where T: KV + Send + Sync + ?Sized {}$/;"	c
+T	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> SendSyncRefUnwindSafeKV for T where T: KV + Send + Sync + RefUnwindSafe + ?Sized {}$/;"	c
+T	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> SendSyncUnwindSafe for T$/;"	c
+T	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> SendSyncUnwindSafeDrain for T$/;"	c
+Target	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    type Target = Path;$/;"	t	implementation:TempPath
+TempDir	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^impl AsRef<Path> for TempDir {$/;"	c
+TempDir	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^impl Drop for TempDir {$/;"	c
+TempDir	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^impl TempDir {$/;"	c
+TempDir	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^impl fmt::Debug for TempDir {$/;"	c
+TempDir	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^pub struct TempDir {$/;"	s
+TempPath	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl AsRef<OsStr> for TempPath {$/;"	c
+TempPath	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl AsRef<Path> for TempPath {$/;"	c
+TempPath	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl Deref for TempPath {$/;"	c
+TempPath	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl Drop for TempPath {$/;"	c
+TempPath	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl From<PathPersistError> for TempPath {$/;"	c
+TempPath	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl TempPath {$/;"	c
+TempPath	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^impl fmt::Debug for TempPath {$/;"	c
+TempPath	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^pub struct TempPath {$/;"	s
+Trace	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Trace,$/;"	e	enum:FilterLevel
+Trace	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Trace,$/;"	e	enum:Level
+Unwatch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    Unwatch(PathBuf),$/;"	e	enum:Action
+V	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<'a, V> Value for &'a V$/;"	c
+Value	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl Value for () {$/;"	c
+Value	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub trait Value {$/;"	i
+ValueSerializer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub type ValueSerializer<'a> = PushFnValueSerializer<'a>;$/;"	t
+Warning	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Warning,$/;"	e	enum:FilterLevel
+Warning	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    Warning,$/;"	e	enum:Level
+Watch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    Watch(PathBuf, RecursiveMode),$/;"	e	enum:Action
+WatchData	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^struct WatchData {$/;"	s
+WatchNotFound	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    WatchNotFound,$/;"	e	enum:Error
+WatchState	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^struct WatchState {$/;"	s
+WatchTimer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^impl Drop for WatchTimer {$/;"	c
+WatchTimer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^impl WatchTimer {$/;"	c
+WatchTimer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^pub struct WatchTimer {$/;"	s
+Watcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub trait Watcher: Sized {$/;"	i
+WatcherAwakened	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    WatcherAwakened,$/;"	e	enum:MetaEvent
+Wrapping	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl<T> Value for core::num::Wrapping<T>$/;"	c
+Write	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    Write(PathBuf),$/;"	e	enum:DebouncedEvent
+X	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^    struct X {$/;"	s	function:expressions
+__lazy_static_create	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/lazy_static-1.4.0/src/core_lazy.rs	/^macro_rules! __lazy_static_create {$/;"	M
+__lazy_static_create	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/lazy_static-1.4.0/src/inline_lazy.rs	/^macro_rules! __lazy_static_create {$/;"	M
+__lazy_static_internal	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/lazy_static-1.4.0/src/lib.rs	/^macro_rules! __lazy_static_internal {$/;"	M
+__slog_builtin	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! __slog_builtin {$/;"	M
+__slog_static_max_level	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub fn __slog_static_max_level() -> FilterLevel {$/;"	f
+accepts	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn accepts(self, level: Level) -> bool {$/;"	P	implementation:FilterLevel
+add_single_watch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    fn add_single_watch($/;"	P	implementation:EventLoop
+add_watch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    fn add_watch(&mut self, path: PathBuf, is_recursive: bool, mut watch_self: bool) -> Result<(/;"	P	implementation:EventLoop
+add_watch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    fn add_watch(&mut self, path: PathBuf, is_recursive: bool) -> Result<PathBuf> {$/;"	P	implementation:ReadDirectoryChangesServer
+add_watch_by_event	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^fn add_watch_by_event($/;"	f
+append	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^    append: bool,$/;"	m	struct:Builder
+append	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^    pub fn append(&mut self, append: bool) -> &mut Self {$/;"	P	implementation:Builder
+append_path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    fn append_path<P: AsRef<Path>>($/;"	P	implementation:FsEventWatcher
+as_file	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn as_file(&self) -> &File {$/;"	P	implementation:NamedTempFile
+as_file_mut	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn as_file_mut(&mut self) -> &mut File {$/;"	P	implementation:NamedTempFile
+as_raw_fd	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn as_raw_fd(&self) -> std::os::unix::io::RawFd {$/;"	P	implementation:NamedTempFile
+as_raw_handle	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn as_raw_handle(&self) -> std::os::windows::io::RawHandle {$/;"	P	implementation:NamedTempFile
+as_ref	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    fn as_ref<'a>(&'a self) -> &'a str {$/;"	P	implementation:Key
+as_ref	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    pub fn as_ref(&self) -> &str {$/;"	P	implementation:Key
+as_ref	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    fn as_ref<'a>(&'a self) -> &'a str {$/;"	P	implementation:Key
+as_ref	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    pub fn as_ref(&self) -> &str {$/;"	P	implementation:Key
+as_ref	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^    fn as_ref(&self) -> &Path {$/;"	P	implementation:TempDir
+as_ref	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn as_ref(&self) -> &OsStr {$/;"	P	implementation:TempPath
+as_ref	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn as_ref(&self) -> &Path {$/;"	P	implementation:NamedTempFile
+as_ref	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn as_ref(&self) -> &Path {$/;"	P	implementation:TempPath
+as_serde	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn as_serde(&self) -> &erased_serde::Serialize;$/;"	P	interface:SerdeValue
+as_short_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn as_short_str(&self) -> &'static str {$/;"	P	implementation:FilterLevel
+as_short_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn as_short_str(&self) -> &'static str {$/;"	P	implementation:Level
+as_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    pub fn as_str(&self) -> &str {$/;"	P	implementation:Key
+as_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    pub fn as_str(&self) -> &str {$/;"	P	implementation:Key
+as_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn as_str(&self) -> &'static str {$/;"	P	implementation:FilterLevel
+as_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn as_str(&self) -> &'static str {$/;"	P	implementation:Level
+as_usize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn as_usize(&self) -> usize {$/;"	P	implementation:FilterLevel
+as_usize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn as_usize(&self) -> usize {$/;"	P	implementation:Level
+assert_from_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^fn assert_from_str<T>(expected: T, level_str: &str)$/;"	f
+assert_to_string_from_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^fn assert_to_string_from_str<T>(expected: T)$/;"	f
+b	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! b($/;"	M
+bar	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^        fn bar(&self) -> u32 {$/;"	P	implementation:expressions::Foo
+buffer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    buffer: [u8; BUF_SIZE as usize],$/;"	m	struct:ReadDirectoryRequest
+callback	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^pub unsafe extern "C" fn callback($/;"	f
+cause	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    fn cause(&self) -> Option<&StdError> {$/;"	P	implementation:Error
+cause	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn cause(&self) -> Option<&std::error::Error> {$/;"	P	implementation:Error
+cause	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn cause(&self) -> Option<&std::error::Error> {$/;"	f
+channel	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    fn channel(&self) -> mio_extras::channel::Sender<EventLoopMsg> {$/;"	P	implementation:EventLoop
+check_partial_rename	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^    fn check_partial_rename(&mut self, path: PathBuf, op: op::Op, cookie: Option<u32>) {$/;"	P	implementation:Debounce
+close	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^    pub fn close(mut self) -> io::Result<()> {$/;"	P	implementation:TempDir
+close	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn close(mut self) -> io::Result<()> {$/;"	P	implementation:TempPath
+close	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn close(self) -> io::Result<()> {$/;"	P	implementation:NamedTempFile
+cmd_rx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    cmd_rx: Receiver<Result<PathBuf>>,$/;"	m	struct:ReadDirectoryChangesWatcher
+cmd_tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    cmd_tx: Sender<Result<PathBuf>>,$/;"	m	struct:ReadDirectoryChangesServer
+column	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub column: u32,$/;"	m	struct:RecordLocation
+column	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn column(&self) -> u32 {$/;"	P	implementation:Record
+common	/home/alan/nas/devel/pi_drive_sync/src/main.rs	/^mod common;$/;"	n
+complete_sem	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    complete_sem: HANDLE,$/;"	m	struct:ReadData
+complete_sem	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    complete_sem: HANDLE,$/;"	m	struct:WatchState
+context	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    context: Option<Box<StreamContextInfo>>,$/;"	m	struct:FsEventWatcher
+cookie	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    pub cookie: Option<u32>,$/;"	m	struct:RawEvent
+counter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    counter: u64,$/;"	m	struct:WatchTimer
+create	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    pub fn create($/;"	P	implementation:ReadDirectoryChangesWatcher
+create	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^pub(crate) fn create(path: PathBuf) -> io::Result<TempDir> {$/;"	f
+create	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/other.rs	/^pub fn create(_dir: &Path) -> io::Result<File> {$/;"	f
+create	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/unix.rs	/^pub fn create(dir: &Path) -> io::Result<File> {$/;"	f
+create	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/windows.rs	/^pub fn create(dir: &Path) -> io::Result<File> {$/;"	f
+create_debounced	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    pub fn create_debounced($/;"	P	implementation:ReadDirectoryChangesWatcher
+create_helper	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/util.rs	/^pub fn create_helper<F, R>($/;"	f
+create_named	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/other.rs	/^pub fn create_named(_path: &Path, open_options: &mut OpenOptions) -> io::Result<File> {$/;"	f
+create_named	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/unix.rs	/^pub fn create_named(path: &Path, open_options: &mut OpenOptions) -> io::Result<File> {$/;"	f
+create_named	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/windows.rs	/^pub fn create_named(path: &Path, open_options: &mut OpenOptions) -> io::Result<File> {$/;"	f
+create_named	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^pub(crate) fn create_named($/;"	f
+create_unix	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/unix.rs	/^fn create_unix(dir: &Path) -> io::Result<File> {$/;"	f
+create_unlinked	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/unix.rs	/^fn create_unlinked(path: &Path) -> io::Result<File> {$/;"	f
+crit	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! crit($/;"	M
+cstr	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/unix.rs	/^pub fn cstr(path: &Path) -> io::Result<CString> {$/;"	f
+cvt_err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/unix.rs	/^pub fn cvt_err(result: Result<usize, syscall::Error>) -> io::Result<usize> {$/;"	f
+cvt_err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/unix.rs	/^pub fn cvt_err(result: c_int) -> io::Result<c_int> {$/;"	f
+data	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    data: ReadData,$/;"	m	struct:ReadDirectoryRequest
+data	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    data: Cow<'static, str>,$/;"	m	struct:Key
+data	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    data: Cow<'static, str>$/;"	m	struct:Key
+debounce	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^mod debounce;$/;"	n
+debug	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! debug($/;"	M
+default	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    fn default() -> Key {$/;"	P	implementation:Key
+default	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    fn default() -> Key {$/;"	P	implementation:Key
+default	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^    fn default() -> Self {$/;"	P	implementation:Builder
+delay	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    delay: Duration,$/;"	m	struct:WatchTimer
+deref	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn deref(&self) -> &Path {$/;"	P	implementation:TempPath
+description	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    fn description(&self) -> &str {$/;"	P	implementation:Error
+description	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn description(&self) -> &str {$/;"	P	implementation:Error
+description	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn description(&self) -> &str {$/;"	f
+dir	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    dir: PathBuf,          \/\/ directory that is being watched$/;"	m	struct:ReadData
+dir	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^mod dir;$/;"	n
+dir_handle	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    dir_handle: HANDLE,$/;"	m	struct:WatchState
+display_formatted_errors	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^fn display_formatted_errors() {$/;"	f
+done	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    done: Receiver<()>,$/;"	m	struct:StreamContextInfo
+done	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    done: bool,$/;"	m	struct:PushFnValueSerializer
+drain	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    drain: D,$/;"	m	struct:IgnoreResult
+drain	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    drain: D,$/;"	m	struct:Logger
+drain	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    drain: D,$/;"	m	struct:MapError
+drop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    fn drop(&mut self) {$/;"	P	implementation:WatchTimer
+drop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    fn drop(&mut self) {$/;"	P	implementation:FsEventWatcher
+drop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    fn drop(&mut self) {$/;"	P	implementation:INotifyWatcher
+drop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^    fn drop(&mut self) {$/;"	P	implementation:PollWatcher
+drop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    fn drop(&mut self) {$/;"	P	implementation:ReadDirectoryChangesWatcher
+drop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn drop(&mut self) {$/;"	P	implementation:PushFnValueSerializer
+drop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^    fn drop(&mut self) {$/;"	P	implementation:TempDir
+drop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn drop(&mut self) {$/;"	P	implementation:TempPath
+dynamic	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/mod.rs	/^mod dynamic;$/;"	n
+emit	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn emit<'b, S: 'b + Value>(mut self, s: S) -> Result {$/;"	P	implementation:PushFnValueSerializer
+emit_arguments	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn emit_arguments(&mut self, key: Key, val: &fmt::Arguments) -> Result {$/;"	P	implementation:SerializerForward
+emit_arguments	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn emit_arguments(&mut self, key: Key, val: &fmt::Arguments) -> Result {$/;"	f
+emit_arguments	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn emit_arguments(&mut self, key: Key, val: &fmt::Arguments) -> Result;$/;"	P	interface:Serializer
+emit_arguments	/home/alan/nas/devel/pi_drive_sync/src/common/mod.rs	/^    fn emit_arguments(&mut self, key: Key, val: &fmt::Arguments) -> Result {$/;"	P	implementation:PrintlnSerializer
+emit_none	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn emit_none(&mut self, key: Key) -> Result {$/;"	P	interface:Serializer
+emit_serde	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn emit_serde(&mut self, _key: Key, _value: &SerdeValue) -> Result {$/;"	P	implementation:SerializerForward
+emit_serde	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn emit_serde(&mut self, key: Key, value: &SerdeValue) -> Result {$/;"	P	interface:Serializer
+emit_unit	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn emit_unit(&mut self, key: Key) -> Result {$/;"	P	interface:Serializer
+eq	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    fn eq(&self, other: &DebouncedEvent) -> bool {$/;"	P	implementation:DebouncedEvent
+eq	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    fn eq(&self, other: &Self) -> bool {$/;"	P	implementation:Key
+eq	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    fn eq(&self, other: &String) -> bool {$/;"	P	implementation:Key
+eq	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    fn eq(&self, other: &str) -> bool {$/;"	P	implementation:Key
+eq	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    fn eq(&self, other: &Self) -> bool {$/;"	P	implementation:Key
+eq	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    fn eq(&self, other: &String) -> bool {$/;"	P	implementation:Key
+eq	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    fn eq(&self, other: &str) -> bool {$/;"	P	implementation:Key
+err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/error.rs	/^    err: io::Error,$/;"	m	struct:PathError
+error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! error($/;"	M
+error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub error: io::Error,$/;"	m	struct:PathPersistError
+error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub error: io::Error,$/;"	m	struct:PersistError
+error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^mod error;$/;"	n
+event	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^    pub fn event(&mut self, path: PathBuf, mut op: op::Op, cookie: Option<u32>) {$/;"	P	implementation:Debounce
+event_loop_rx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    event_loop_rx: mio_extras::channel::Receiver<EventLoopMsg>,$/;"	m	struct:EventLoop
+event_loop_thread	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    fn event_loop_thread(mut self) {$/;"	P	implementation:EventLoop
+event_loop_tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    event_loop_tx: mio_extras::channel::Sender<EventLoopMsg>,$/;"	m	struct:EventLoop
+event_tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    event_tx: Arc<Mutex<EventTx>>,$/;"	m	struct:FsEventWatcher
+event_tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    event_tx: Arc<Mutex<EventTx>>,$/;"	m	struct:StreamContextInfo
+event_tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    event_tx: EventTx,$/;"	m	struct:EventLoop
+event_tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^    event_tx: EventTx,$/;"	m	struct:PollWatcher
+event_tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    event_tx: Arc<Mutex<EventTx>>,$/;"	m	struct:ReadDirectoryChangesServer
+event_tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    event_tx: Arc<Mutex<EventTx>>,$/;"	m	struct:ReadDirectoryRequest
+events	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    events: Arc<Mutex<VecDeque<ScheduledEvent>>>,$/;"	m	struct:ScheduleWorker
+events	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    events: Arc<Mutex<VecDeque<ScheduledEvent>>>,$/;"	m	struct:WatchTimer
+expressions	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^fn expressions() {$/;"	f
+expressions_fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^fn expressions_fmt() {$/;"	f
+file	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    file: Option<PathBuf>, \/\/ if a file is being watched, this is its full path$/;"	m	struct:ReadData
+file	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub file: &'static str,$/;"	m	struct:RecordLocation
+file	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn file(&self) -> &'static str {$/;"	P	implementation:Record
+file	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    file: File,$/;"	m	struct:NamedTempFile
+file	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub file: NamedTempFile,$/;"	m	struct:PersistError
+file	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^mod file;$/;"	n
+filter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn filter<F>(self, f: F) -> Filter<Self, F>$/;"	P	interface:Drain
+filter_dir	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^fn filter_dir(e: walkdir::Result<walkdir::DirEntry>) -> Option<walkdir::DirEntry> {$/;"	f
+filter_level	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn filter_level(self, level: Level) -> LevelFilter<Self>$/;"	P	interface:Drain
+filter_level_accepts_tests	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^fn filter_level_accepts_tests() {$/;"	f
+filter_level_from_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^fn filter_level_from_str() {$/;"	f
+filter_level_sanity	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^fn filter_level_sanity() {$/;"	f
+filter_level_to_string_and_from_str_are_compatible	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^fn filter_level_to_string_and_from_str_are_compatible() {$/;"	f
+fire_due_events	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    fn fire_due_events(&self, now: Instant) -> Option<Instant> {$/;"	P	implementation:ScheduleWorker
+fire_event	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    fn fire_event($/;"	P	implementation:ScheduleWorker
+flags	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    flags: fs::FSEventStreamCreateFlags,$/;"	m	struct:FsEventWatcher
+flush	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn flush(&mut self) -> io::Result<()> {$/;"	P	implementation:NamedTempFile
+flush	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^    fn flush(&mut self) -> io::Result<()> {$/;"	P	implementation:SpooledTempFile
+fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {$/;"	P	implementation:Error
+fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {$/;"	P	implementation:Key
+fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {$/;"	P	implementation:Key
+fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {$/;"	P	implementation:FilterLevel
+fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {$/;"	P	implementation:Level
+fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {$/;"	P	implementation:OwnedKVList
+fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {$/;"	f
+fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn fmt(&self, f: &mut fmt::Formatter) -> result::Result<(), fmt::Error> {$/;"	f
+fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn fmt(&self, fmt: &mut core::fmt::Formatter) -> std::fmt::Result {$/;"	P	implementation:Error
+fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {$/;"	P	implementation:TempDir
+fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/error.rs	/^    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {$/;"	P	implementation:PathError
+fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {$/;"	P	implementation:NamedTempFile
+fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {$/;"	P	implementation:PathPersistError
+fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {$/;"	P	implementation:PersistError
+fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {$/;"	P	implementation:TempPath
+foo	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^        foo: Foo,$/;"	m	struct:expressions::X
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    fn from(err: io::Error) -> Error {$/;"	P	implementation:Error
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    fn from(data: &'static str) -> Key {$/;"	P	implementation:Key
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    fn from(data: String) -> Key {$/;"	P	implementation:Key
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    fn from(s: Key) -> String {$/;"	P	implementation:String
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    fn from(data: &'static str) -> Key {$/;"	P	implementation:Key
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    fn from(data: String) -> Key {$/;"	P	implementation:Key
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn from($/;"	P	implementation:MutexDrainError
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn from(_: core::fmt::Error) -> Error {$/;"	P	implementation:Error
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn from(e: Error) -> std::io::Error {$/;"	P	implementation:Error
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn from(err: std::io::Error) -> Error {$/;"	P	implementation:Error
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn from(from: OwnedKV<T>) -> Self {$/;"	f
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn from(x: (&'static str, V)) -> SingleKV<V> {$/;"	P	implementation:SingleKV
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn from(x: (String, V)) -> SingleKV<V> {$/;"	P	implementation:SingleKV
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn from(error: PathPersistError) -> TempPath {$/;"	P	implementation:TempPath
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn from(error: PathPersistError) -> io::Error {$/;"	P	implementation:Error
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn from(error: PersistError) -> NamedTempFile {$/;"	P	implementation:NamedTempFile
+from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn from(error: PersistError) -> io::Error {$/;"	P	implementation:Error
+from_iter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    fn from_iter<I: IntoIterator<Item = &'a String>>(iter: I) -> Key {$/;"	P	implementation:Key
+from_iter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    fn from_iter<I: IntoIterator<Item = &'a char>>(iter: I) -> Key {$/;"	P	implementation:Key
+from_iter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    fn from_iter<I: IntoIterator<Item = &'a str>>(iter: I) -> Key {$/;"	P	implementation:Key
+from_iter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    fn from_iter<I: IntoIterator<Item = Cow<'a, str>>>(iter: I) -> Key {$/;"	P	implementation:Key
+from_iter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    fn from_iter<I: IntoIterator<Item = String>>(iter: I) -> Key {$/;"	P	implementation:Key
+from_iter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    fn from_iter<I: IntoIterator<Item = char>>(iter: I) -> Key {$/;"	P	implementation:Key
+from_iter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    fn from_iter<I: IntoIterator<Item=&'a String>>(iter: I) -> Key {$/;"	P	implementation:Key
+from_iter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    fn from_iter<I: IntoIterator<Item=&'a char>>(iter: I) -> Key {$/;"	P	implementation:Key
+from_iter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    fn from_iter<I: IntoIterator<Item=&'a str>>(iter: I) -> Key {$/;"	P	implementation:Key
+from_iter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    fn from_iter<I: IntoIterator<Item=Cow<'a,str>>>(iter: I) -> Key {$/;"	P	implementation:Key
+from_iter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    fn from_iter<I: IntoIterator<Item=String>>(iter: I) -> Key {$/;"	P	implementation:Key
+from_iter	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    fn from_iter<I: IntoIterator<Item=char>>(iter: I) -> Key {$/;"	P	implementation:Key
+from_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn from_str(name: &str) -> core::result::Result<FilterLevel, ()> {$/;"	P	implementation:FilterLevel
+from_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn from_str(name: &str) -> core::result::Result<Level, ()> {$/;"	P	implementation:Level
+from_usize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn from_usize(u: usize) -> Option<FilterLevel> {$/;"	P	implementation:FilterLevel
+from_usize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn from_usize(u: usize) -> Option<Level> {$/;"	P	implementation:Level
+fsevent	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub mod fsevent;$/;"	n
+function	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn function(&self) -> &'static str {$/;"	P	implementation:Record
+function	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub function: &'static str,$/;"	m	struct:RecordLocation
+fuse	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn fuse(self) -> Fuse<Self>$/;"	P	interface:Drain
+get	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/lazy_static-1.4.0/src/core_lazy.rs	/^    pub fn get<F>(&'static self, builder: F) -> &T$/;"	P	implementation:Lazy
+get	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/lazy_static-1.4.0/src/inline_lazy.rs	/^    pub fn get<F>(&'static self, f: F) -> &T$/;"	P	implementation:Lazy
+get_folder_id	/home/alan/nas/devel/pi_drive_sync/src/main.rs	/^fn get_folder_id(hub: &Hub, path: &str) -> std::result::Result<String, String> {$/;"	f
+handle	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    handle: HANDLE,$/;"	m	struct:ReadDirectoryRequest
+handle_event	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    fn handle_event(&mut self, event: &mio::Event) {$/;"	P	implementation:EventLoop
+handle_event	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^unsafe extern "system" fn handle_event($/;"	f
+handle_inotify	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    fn handle_inotify(&mut self) {$/;"	P	implementation:EventLoop
+handle_messages	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    fn handle_messages(&mut self) {$/;"	P	implementation:EventLoop
+hash	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    fn hash<H: Hasher>(&self, state: &mut H) {$/;"	P	implementation:Key
+hash	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    fn hash<H: Hasher>(&self, state: &mut H) {$/;"	P	implementation:Key
+id	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    id: u64,$/;"	m	struct:ScheduledEvent
+ignore	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    pub fn ignore(&self, id: u64) {$/;"	P	implementation:WatchTimer
+ignore_res	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn ignore_res(self) -> IgnoreResult<Self>$/;"	P	interface:Drain
+imp	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^mod imp;$/;"	n
+impl_default_as_fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! impl_default_as_fmt{$/;"	M
+impl_value_for	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! impl_value_for{$/;"	M
+index_of_log_level_name	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^fn index_of_log_level_name(name: &str) -> Option<usize> {$/;"	f
+index_of_str_ignore_case	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^fn index_of_str_ignore_case(haystack: &[&str], needle: &str) -> Option<usize> {$/;"	f
+info	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! info($/;"	M
+initialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/lazy_static-1.4.0/src/lib.rs	/^    fn initialize(lazy: &Self);$/;"	P	interface:LazyStatic
+initialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/lazy_static-1.4.0/src/lib.rs	/^pub fn initialize<T: LazyStatic>(lazy: &T) {$/;"	f
+inner	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^    inner: SpooledInner,$/;"	m	struct:SpooledTempFile
+inotify	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    inotify: Option<Inotify>,$/;"	m	struct:EventLoop
+inotify	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub mod inotify;$/;"	n
+integer_128_types	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^fn integer_128_types() {$/;"	f
+into_erased	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn into_erased($/;"	f
+into_file	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn into_file(self) -> File {$/;"	P	implementation:NamedTempFile
+into_parts	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn into_parts(self) -> (File, TempPath) {$/;"	P	implementation:NamedTempFile
+into_path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^    pub fn into_path(mut self) -> PathBuf {$/;"	P	implementation:TempDir
+into_temp_path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn into_temp_path(self) -> TempPath {$/;"	P	implementation:NamedTempFile
+is_at_least	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn is_at_least(&self, level: Self) -> bool {$/;"	P	implementation:Level
+is_critical_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_critical_enabled(&self) -> bool {$/;"	P	interface:Drain
+is_debug_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_debug_enabled(&self) -> bool {$/;"	P	interface:Drain
+is_empty	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    pub fn is_empty(&self) -> bool {$/;"	P	implementation:Key
+is_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_enabled(&self, _1: Level) -> bool {$/;"	P	implementation:Discard
+is_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_enabled(&self, level: Level) -> bool {$/;"	P	implementation:Arc
+is_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_enabled(&self, level: Level) -> bool {$/;"	P	implementation:Box
+is_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_enabled(&self, level: Level) -> bool {$/;"	P	implementation:D
+is_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_enabled(&self, level: Level) -> bool {$/;"	P	implementation:Duplicate
+is_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_enabled(&self, level: Level) -> bool {$/;"	P	implementation:IgnoreResult
+is_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_enabled(&self, level: Level) -> bool {$/;"	P	implementation:LevelFilter
+is_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_enabled(&self, level: Level) -> bool {$/;"	P	implementation:MapError
+is_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_enabled(&self, level: Level) -> bool {$/;"	P	implementation:Mutex
+is_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_enabled(&self, level: Level) -> bool {$/;"	P	interface:Drain
+is_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_enabled(&self, level: Level) -> bool {$/;"	f
+is_error_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_error_enabled(&self) -> bool {$/;"	P	interface:Drain
+is_info_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_info_enabled(&self) -> bool {$/;"	P	interface:Drain
+is_recursive	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    fn is_recursive(&self) -> bool {$/;"	P	implementation:RecursiveMode
+is_recursive	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^    is_recursive: bool,$/;"	m	struct:WatchData
+is_recursive	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    is_recursive: bool,$/;"	m	struct:ReadData
+is_rolled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^    pub fn is_rolled(&self) -> bool {$/;"	P	implementation:SpooledTempFile
+is_running	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    fn is_running(&self) -> bool {$/;"	P	implementation:FsEventWatcher
+is_trace_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_trace_enabled(&self) -> bool {$/;"	P	interface:Drain
+is_warning_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_warning_enabled(&self) -> bool {$/;"	P	interface:Drain
+keep	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/other.rs	/^pub fn keep(path: &Path) -> io::Result<()> {$/;"	f
+keep	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/unix.rs	/^pub fn keep(_: &Path) -> io::Result<()> {$/;"	f
+keep	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/windows.rs	/^pub fn keep(path: &Path) -> io::Result<()> {$/;"	f
+keep	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn keep(mut self) -> Result<PathBuf, PathPersistError> {$/;"	P	implementation:TempPath
+keep	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn keep(self) -> Result<(File, PathBuf), PersistError> {$/;"	P	implementation:NamedTempFile
+key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    key: Key,$/;"	m	struct:PushFnValueSerializer
+key	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^mod key;$/;"	n
+kv	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    kv: BorrowedKV<'a>,$/;"	m	struct:Record
+kv	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    kv: T,$/;"	m	struct:OwnedKVListNode
+kv	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn kv(&self) -> BorrowedKV {$/;"	P	implementation:Record
+kv	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! kv($/;"	M
+last_check	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^    last_check: Instant,$/;"	m	struct:PathData
+latency	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    latency: cf::CFTimeInterval,$/;"	m	struct:FsEventWatcher
+lazy	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/lazy_static-1.4.0/src/lib.rs	/^pub mod lazy;$/;"	n
+lazy_static	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/lazy_static-1.4.0/src/lib.rs	/^macro_rules! lazy_static {$/;"	M
+len	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic.rs	/^    pub fn len(&self) -> usize {$/;"	P	implementation:Key
+len	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    pub fn len(&self) -> usize {$/;"	P	implementation:Key
+level	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn level(&self) -> Level {$/;"	P	implementation:Record
+level	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub level: Level,$/;"	m	struct:RecordStatic
+level_at_least	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^fn level_at_least() {$/;"	f
+level_from_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^fn level_from_str() {$/;"	f
+level_to_string_and_from_str_are_compatible	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^fn level_to_string_and_from_str_are_compatible() {$/;"	f
+line	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn line(&self) -> u32 {$/;"	P	implementation:Record
+line	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub line: u32,$/;"	m	struct:RecordLocation
+list	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    list: OwnedKVList,$/;"	m	struct:Logger
+list	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn list(&self) -> &OwnedKVList {$/;"	f
+location	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn location(&self) -> &RecordLocation {$/;"	P	implementation:Record
+location	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub location: &'a RecordLocation,$/;"	m	struct:RecordStatic
+log	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn log($/;"	P	implementation:Arc
+log	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn log($/;"	P	implementation:Box
+log	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn log($/;"	P	implementation:D
+log	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn log($/;"	P	implementation:Duplicate
+log	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn log($/;"	P	implementation:IgnoreResult
+log	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn log($/;"	P	implementation:LevelFilter
+log	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn log($/;"	P	implementation:MapError
+log	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn log($/;"	P	implementation:Mutex
+log	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn log($/;"	P	interface:Drain
+log	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn log($/;"	f
+log	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn log(&self, _: &Record, _: &OwnedKVList) -> result::Result<(), Never> {$/;"	P	implementation:Discard
+log	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn log(&self, record: &Record) {$/;"	f
+log	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! log($/;"	M
+log	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^            fn log($/;"	P	implementation:std_only::multichain::CheckOwned
+log	/home/alan/nas/devel/pi_drive_sync/src/common/mod.rs	/^    fn log($/;"	P	implementation:PrintlnDrain
+logger_by_ref	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^fn logger_by_ref() {$/;"	f
+logger_fmt_debug_sanity	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^    fn logger_fmt_debug_sanity() {$/;"	f	module:std_only
+logger_to_erased	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^fn logger_to_erased() {$/;"	f
+main	/home/alan/nas/devel/pi_drive_sync/src/main.rs	/^fn main() {$/;"	f
+makers	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^fn makers() {$/;"	f
+map	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn map<F, R>(self, f: F) -> R$/;"	P	interface:Drain
+map_err	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn map_err<F, E>(self, f: F) -> MapError<Self, E>$/;"	P	interface:Drain
+map_fn	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    map_fn: Box<MapErrFn<D::Err, E, Output = E>>,$/;"	m	struct:MapError
+max	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn max() -> Self {$/;"	P	implementation:FilterLevel
+max_size	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^    max_size: usize,$/;"	m	struct:SpooledTempFile
+meta_tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    meta_tx: Sender<MetaEvent>,$/;"	m	struct:ReadDirectoryChangesServer
+min	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn min() -> Self {$/;"	P	implementation:FilterLevel
+mixed_bitflags_form	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    fn mixed_bitflags_form() {$/;"	f	module:op_test
+mkdir	/home/alan/nas/devel/pi_drive_sync/src/main.rs	/^fn mkdir(hub: &Hub, path: &str) -> std::result::Result<u16, String> {$/;"	f
+module	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn module(&self) -> &'static str {$/;"	P	implementation:Record
+module	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub module: &'static str,$/;"	m	struct:RecordLocation
+msg	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    msg: &'a fmt::Arguments<'a>,$/;"	m	struct:Record
+msg	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn msg(&self) -> &fmt::Arguments {$/;"	P	implementation:Record
+mtime	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^    mtime: i64,$/;"	m	struct:PathData
+multichain	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^    fn multichain() {$/;"	f	module:std_only
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^    pub fn new(delay: Duration, tx: mpsc::Sender<DebouncedEvent>) -> Debounce {$/;"	P	implementation:Debounce
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    pub fn new($/;"	P	implementation:WatchTimer
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    fn new(tx: Sender<DebouncedEvent>, delay: Duration) -> Result<FsEventWatcher> {$/;"	P	implementation:FsEventWatcher
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    fn new(tx: Sender<DebouncedEvent>, delay: Duration) -> Result<INotifyWatcher> {$/;"	P	implementation:INotifyWatcher
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    pub fn new(inotify: Inotify, event_tx: EventTx) -> Result<EventLoop> {$/;"	P	implementation:EventLoop
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    fn new(tx: Sender<DebouncedEvent>, delay: Duration) -> Result<Self>;$/;"	P	interface:Watcher
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/null.rs	/^    fn new(tx: Sender<DebouncedEvent>, delay: Duration) -> Result<NullWatcher> {$/;"	P	implementation:NullWatcher
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^    fn new(tx: Sender<DebouncedEvent>, delay: Duration) -> Result<PollWatcher> {$/;"	P	implementation:PollWatcher
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    fn new(tx: Sender<DebouncedEvent>, delay: Duration) -> Result<ReadDirectoryChangesWatcher> {$/;"	P	implementation:ReadDirectoryChangesWatcher
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn new<T>($/;"	P	implementation:OwnedKVList
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn new($/;"	P	implementation:Record
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn new(drain1: D1, drain2: D2) -> Self {$/;"	P	implementation:Duplicate
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn new(drain: D) -> Self {$/;"	P	implementation:IgnoreResult
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn new(drain: D) -> Self {$/;"	f
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn new(drain: D, cond: F) -> Self {$/;"	f
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn new(drain: D, level: Level) -> Self {$/;"	P	implementation:LevelFilter
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn new<F>(drain: D, map_fn: F) -> Self$/;"	P	implementation:MapError
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn new<T>(&self, values: OwnedKV<T>) -> Logger<D>$/;"	f
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^    pub fn new() -> io::Result<TempDir> {$/;"	P	implementation:TempDir
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn new() -> io::Result<NamedTempFile> {$/;"	P	implementation:NamedTempFile
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^    pub fn new() -> Self {$/;"	P	implementation:Builder
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^    pub fn new(max_size: usize) -> SpooledTempFile {$/;"	P	implementation:SpooledTempFile
+new_bitflags_form	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    fn new_bitflags_form() {$/;"	f	module:op_test
+new_event_trigger	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    new_event_trigger: Arc<Condvar>,$/;"	m	struct:ScheduleWorker
+new_event_trigger	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    new_event_trigger: Arc<Condvar>,$/;"	m	struct:WatchTimer
+new_in	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^    pub fn new_in<P: AsRef<Path>>(dir: P) -> io::Result<TempDir> {$/;"	P	implementation:TempDir
+new_in	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn new_in<P: AsRef<Path>>(dir: P) -> io::Result<NamedTempFile> {$/;"	P	implementation:NamedTempFile
+new_raw	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    fn new_raw(tx: Sender<RawEvent>) -> Result<FsEventWatcher> {$/;"	P	implementation:FsEventWatcher
+new_raw	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    fn new_raw(tx: Sender<RawEvent>) -> Result<INotifyWatcher> {$/;"	P	implementation:INotifyWatcher
+new_raw	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    fn new_raw(tx: Sender<RawEvent>) -> Result<Self>;$/;"	P	interface:Watcher
+new_raw	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/null.rs	/^    fn new_raw(tx: Sender<RawEvent>) -> Result<NullWatcher> {$/;"	P	implementation:NullWatcher
+new_raw	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^    fn new_raw(tx: Sender<RawEvent>) -> Result<PollWatcher> {$/;"	P	implementation:PollWatcher
+new_raw	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    fn new_raw(tx: Sender<RawEvent>) -> Result<ReadDirectoryChangesWatcher> {$/;"	P	implementation:ReadDirectoryChangesWatcher
+next_node	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    next_node: Arc<SendSyncRefUnwindSafeKV + 'static>,$/;"	m	struct:MultiListNode
+next_node	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    next_node: Arc<SendSyncRefUnwindSafeKV + 'static>,$/;"	m	struct:OwnedKVListNode
+no_imports	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^mod no_imports {$/;"	n
+node	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    node: Arc<SendSyncRefUnwindSafeKV + 'static>,$/;"	m	struct:MultiListNode
+node	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    node: Arc<SendSyncRefUnwindSafeKV + 'static>,$/;"	m	struct:OwnedKVList
+not_supported	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/other.rs	/^fn not_supported<T>() -> io::Result<T> {$/;"	f
+null	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub mod null;$/;"	n
+o	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! o($/;"	M
+old_bitflags_form	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    fn old_bitflags_form() {$/;"	f	module:op_test
+op	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    pub op: Result<Op>,$/;"	m	struct:RawEvent
+op	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub mod op {$/;"	n
+op_test	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^mod op_test {$/;"	n
+open	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^    open: Arc<RwLock<bool>>,$/;"	m	struct:PollWatcher
+operations_buffer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^    operations_buffer: OperationsBuffer,$/;"	m	struct:Debounce
+operations_buffer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    operations_buffer: OperationsBuffer,$/;"	m	struct:ScheduleWorker
+path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    path: PathBuf,$/;"	m	struct:ScheduledEvent
+path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    pub path: Option<PathBuf>,$/;"	m	struct:RawEvent
+path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^    path: Option<PathBuf>,$/;"	m	struct:TempDir
+path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^    pub fn path(&self) -> &path::Path {$/;"	P	implementation:TempDir
+path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/error.rs	/^    path: PathBuf,$/;"	m	struct:PathError
+path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    path: PathBuf,$/;"	m	struct:TempPath
+path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    path: TempPath,$/;"	m	struct:NamedTempFile
+path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn path(&self) -> &Path {$/;"	P	implementation:NamedTempFile
+path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub path: TempPath,$/;"	m	struct:PathPersistError
+paths	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    paths: cf::CFMutableArrayRef,$/;"	m	struct:FsEventWatcher
+paths	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    paths: HashMap<WatchDescriptor, PathBuf>,$/;"	m	struct:EventLoop
+paths	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^    paths: HashMap<PathBuf, PathData>,$/;"	m	struct:WatchData
+persist	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/other.rs	/^pub fn persist(_old_path: &Path, _new_path: &Path, _overwrite: bool) -> io::Result<()> {$/;"	f
+persist	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/unix.rs	/^pub fn persist(old_path: &Path, new_path: &Path, overwrite: bool) -> io::Result<()> {$/;"	f
+persist	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/windows.rs	/^pub fn persist(old_path: &Path, new_path: &Path, overwrite: bool) -> io::Result<()> {$/;"	f
+persist	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn persist<P: AsRef<Path>>(mut self, new_path: P) -> Result<(), PathPersistError> {$/;"	P	implementation:TempPath
+persist	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn persist<P: AsRef<Path>>(self, new_path: P) -> Result<File, PersistError> {$/;"	P	implementation:NamedTempFile
+persist_noclobber	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn persist_noclobber<P: AsRef<Path>>($/;"	P	implementation:TempPath
+persist_noclobber	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn persist_noclobber<P: AsRef<Path>>(self, new_path: P) -> Result<File, PersistError> {$/;"	P	implementation:NamedTempFile
+poll	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    poll: mio::Poll,$/;"	m	struct:EventLoop
+poll	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub mod poll;$/;"	n
+prefix	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^    prefix: &'a OsStr,$/;"	m	struct:Builder
+prefix	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^    pub fn prefix<S: AsRef<OsStr> + ?Sized>(&mut self, prefix: &'a S) -> &mut Self {$/;"	P	implementation:Builder
+private	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^mod private {$/;"	n
+rand_bytes	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^    pub fn rand_bytes(&mut self, rand: usize) -> &mut Self {$/;"	P	implementation:Builder
+random_len	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^    random_len: usize,$/;"	m	struct:Builder
+raw_watcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub fn raw_watcher(tx: Sender<RawEvent>) -> Result<RecommendedWatcher> {$/;"	f
+read	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {$/;"	P	implementation:NamedTempFile
+read	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^    fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {$/;"	P	implementation:SpooledTempFile
+read_client_secret	/home/alan/nas/devel/pi_drive_sync/src/main.rs	/^fn read_client_secret(file: String) -> ApplicationSecret {$/;"	f
+record	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    record: &'a Record<'a>,$/;"	m	struct:PushFnValueSerializer
+record	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! record($/;"	M
+record_static	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! record_static($/;"	M
+recursive_info	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    recursive_info: HashMap<PathBuf, bool>,$/;"	m	struct:FsEventWatcher
+recursive_info	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    recursive_info: HashMap<PathBuf, bool>,$/;"	m	struct:StreamContextInfo
+refute_from_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^fn refute_from_str<T>(level_str: &str)$/;"	f
+remove_all_watches	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    fn remove_all_watches(&mut self) -> Result<()> {$/;"	P	implementation:EventLoop
+remove_path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    fn remove_path<P: AsRef<Path>>(&mut self, path: P) -> Result<()> {$/;"	P	implementation:FsEventWatcher
+remove_repeated_events	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^fn remove_repeated_events(mut op: op::Op, prev_op: Option<op::Op>) -> op::Op {$/;"	f
+remove_watch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    fn remove_watch(&mut self, path: PathBuf, remove_recursive: bool) -> Result<()> {$/;"	P	implementation:EventLoop
+remove_watch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    fn remove_watch(&mut self, path: PathBuf) {$/;"	P	implementation:ReadDirectoryChangesServer
+remove_watch_by_event	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^fn remove_watch_by_event($/;"	f
+rename_cookie	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^    rename_cookie: Option<u32>,$/;"	m	struct:Debounce
+rename_event	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    rename_event: Option<RawEvent>,$/;"	m	struct:EventLoop
+rename_path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^    rename_path: Option<PathBuf>,$/;"	m	struct:Debounce
+reopen	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/other.rs	/^pub fn reopen(_file: &File, _path: &Path) -> io::Result<File> {$/;"	f
+reopen	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/unix.rs	/^pub fn reopen(file: &File, path: &Path) -> io::Result<File> {$/;"	f
+reopen	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/windows.rs	/^pub fn reopen(file: &File, _path: &Path) -> io::Result<File> {$/;"	f
+reopen	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn reopen(&self) -> io::Result<File> {$/;"	P	implementation:NamedTempFile
+restart_timer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^fn restart_timer(timer_id: &mut Option<u64>, path: PathBuf, timer: &mut WatchTimer) {$/;"	f
+roll	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^    pub fn roll(&mut self) -> io::Result<()> {$/;"	P	implementation:SpooledTempFile
+root	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn root<T>(values: OwnedKV<T>) -> Self$/;"	P	implementation:OwnedKVList
+root	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn root<T>(drain: D, values: OwnedKV<T>) -> Logger$/;"	f
+root_typed	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn root_typed<T>(drain: D, values: OwnedKV<T>) -> Logger<D>$/;"	f
+rstatic	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    rstatic: &'a RecordStatic<'a>,$/;"	m	struct:Record
+run	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    fn run(&mut self) {$/;"	P	implementation:ScheduleWorker
+run	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    fn run(&mut self) -> Result<()> {$/;"	P	implementation:FsEventWatcher
+run	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    pub fn run(self) {$/;"	P	implementation:EventLoop
+run	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^    fn run(&mut self, delay: Duration, mut event_tx: EventTx) {$/;"	P	implementation:PollWatcher
+run	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    fn run(mut self) {$/;"	P	implementation:ReadDirectoryChangesServer
+runloop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    runloop: Option<usize>,$/;"	m	struct:FsEventWatcher
+running	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    running: bool,$/;"	m	struct:EventLoop
+rx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    rx: Receiver<Action>,$/;"	m	struct:ReadDirectoryChangesServer
+schedule	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    pub fn schedule(&mut self, path: PathBuf) -> u64 {$/;"	P	implementation:WatchTimer
+seek	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn seek(&mut self, pos: SeekFrom) -> io::Result<u64> {$/;"	P	implementation:NamedTempFile
+seek	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^    fn seek(&mut self, pos: SeekFrom) -> io::Result<u64> {$/;"	P	implementation:SpooledTempFile
+send	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^    pub fn send(&mut self, event: RawEvent) {$/;"	P	implementation:EventTx
+send_action_require_ack	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    fn send_action_require_ack(&mut self, action: Action, pb: &PathBuf) -> Result<()> {$/;"	P	implementation:ReadDirectoryChangesWatcher
+send_pending_rename_event	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^fn send_pending_rename_event(event: Option<RawEvent>, event_tx: &mut EventTx) {$/;"	f
+send_pending_rename_event	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^fn send_pending_rename_event(rename_event: &mut Option<RawEvent>, event_tx: &mut EventTx) {$/;"	f
+send_pending_rename_event	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^fn send_pending_rename_event(event: Option<RawEvent>, event_tx: &mut EventTx) {$/;"	f
+ser	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub mod ser {$/;"	n
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn serialize($/;"	P	implementation:Arguments
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn serialize($/;"	P	implementation:BorrowedKV
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn serialize($/;"	P	implementation:Display
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn serialize($/;"	P	implementation:KV
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn serialize($/;"	P	implementation:MultiListNode
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn serialize($/;"	P	implementation:Option
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn serialize($/;"	P	implementation:OwnedKVList
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn serialize($/;"	P	implementation:R
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn serialize($/;"	P	implementation:SocketAddr
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn serialize($/;"	P	implementation:String
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn serialize($/;"	P	implementation:Value
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn serialize($/;"	P	implementation:str
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn serialize($/;"	P	interface:Value
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn serialize($/;"	f
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn serialize(&self, record: &Record, serializer: &mut Serializer)$/;"	P	interface:KV
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn serialize<'b, S: 'b + Value>(self, s: S) -> Result {$/;"	P	implementation:PushFnValueSerializer
+serialize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^            fn serialize($/;"	P	implementation:expressions::K
+serialize_fallback	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn serialize_fallback($/;"	P	interface:SerdeValue
+serializer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    serializer: &'a mut Serializer,$/;"	m	struct:PushFnValueSerializer
+set_len	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^    pub fn set_len(&mut self, size: u64) -> Result<(), io::Error> {$/;"	P	implementation:SpooledTempFile
+simple_logger_erased	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^fn simple_logger_erased() {$/;"	f
+since_when	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    since_when: fs::FSEventStreamEventId,$/;"	m	struct:FsEventWatcher
+slog_b	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! slog_b($/;"	M
+slog_crit	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! slog_crit($/;"	M
+slog_debug	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! slog_debug($/;"	M
+slog_error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! slog_error($/;"	M
+slog_info	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! slog_info($/;"	M
+slog_kv	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! slog_kv($/;"	M
+slog_log	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! slog_log($/;"	M
+slog_o	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! slog_o($/;"	M
+slog_record	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! slog_record($/;"	M
+slog_record_static	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! slog_record_static($/;"	M
+slog_trace	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! slog_trace($/;"	M
+slog_warn	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! slog_warn($/;"	M
+source	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/error.rs	/^    fn source(&self) -> Option<&(dyn error::Error + 'static)> {$/;"	P	implementation:PathError
+source	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn source(&self) -> Option<&(dyn error::Error + 'static)> {$/;"	P	implementation:PathPersistError
+source	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn source(&self) -> Option<&(dyn error::Error + 'static)> {$/;"	P	implementation:PersistError
+spooled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^mod spooled;$/;"	n
+spooled_tempfile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^pub fn spooled_tempfile(max_size: usize) -> SpooledTempFile {$/;"	f
+start	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    fn start($/;"	P	implementation:ReadDirectoryChangesServer
+start_read	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^fn start_read(rd: &ReadData, event_tx: Arc<Mutex<EventTx>>, handle: HANDLE) {$/;"	f
+static_	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/mod.rs	/^mod static_;$/;"	n
+std_only	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^mod std_only {$/;"	n
+stop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    fn stop(&mut self) {$/;"	P	implementation:FsEventWatcher
+stop_trigger	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    stop_trigger: Arc<Condvar>,$/;"	m	struct:ScheduleWorker
+stop_trigger	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    stop_trigger: Arc<Condvar>,$/;"	m	struct:WatchTimer
+stop_watch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^fn stop_watch(ws: &WatchState, meta_tx: &Sender<MetaEvent>) {$/;"	f
+stopped	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    stopped: Arc<AtomicBool>,$/;"	m	struct:ScheduleWorker
+stopped	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    stopped: Arc<AtomicBool>,$/;"	m	struct:WatchTimer
+str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/static.rs	/^pub type Key = &'static str;$/;"	v
+str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^impl Value for str {$/;"	c
+str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub static LOG_LEVEL_NAMES: [&'static str; 7] =$/;"	v
+str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^pub static LOG_LEVEL_SHORT_NAMES: [&'static str; 7] =$/;"	v
+suffix	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^    pub fn suffix<S: AsRef<OsStr> + ?Sized>(&mut self, suffix: &'b S) -> &mut Self {$/;"	P	implementation:Builder
+suffix	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^    suffix: &'b OsStr,$/;"	m	struct:Builder
+tag	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn tag(&self) -> &str {$/;"	P	implementation:Record
+tag	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub tag: &'a str,$/;"	m	struct:RecordStatic
+takes_arced_drain	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^    fn takes_arced_drain(_l: Logger) {}$/;"	f	function:logger_to_erased
+takes_arced_drain	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^    fn takes_arced_drain(_l: Logger) {}$/;"	f	function:simple_logger_erased
+tempdir	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^pub fn tempdir() -> io::Result<TempDir> {$/;"	f
+tempdir	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^    pub fn tempdir(&self) -> io::Result<TempDir> {$/;"	P	implementation:Builder
+tempdir_in	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^pub fn tempdir_in<P: AsRef<Path>>(dir: P) -> io::Result<TempDir> {$/;"	f
+tempdir_in	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^    pub fn tempdir_in<P: AsRef<Path>>(&self, dir: P) -> io::Result<TempDir> {$/;"	P	implementation:Builder
+tempfile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^pub fn tempfile() -> io::Result<File> {$/;"	f
+tempfile	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^    pub fn tempfile(&self) -> io::Result<NamedTempFile> {$/;"	P	implementation:Builder
+tempfile_in	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^pub fn tempfile_in<P: AsRef<Path>>(dir: P) -> io::Result<File> {$/;"	f
+tempfile_in	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^    pub fn tempfile_in<P: AsRef<Path>>(&self, dir: P) -> io::Result<NamedTempFile> {$/;"	P	implementation:Builder
+test_fsevent_watcher_drop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^fn test_fsevent_watcher_drop() {$/;"	f
+test_o_macro_expansion	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^    fn test_o_macro_expansion() {$/;"	f	module:no_imports
+test_slog_o_macro_expansion	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/tests.rs	/^    fn test_slog_o_macro_expansion() {$/;"	f	module:no_imports
+tests	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^mod tests;$/;"	n
+timer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^    timer: WatchTimer,$/;"	m	struct:Debounce
+timer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^mod timer;$/;"	n
+tmpname	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/util.rs	/^fn tmpname(prefix: &OsStr, suffix: &OsStr, rand_len: usize) -> OsString {$/;"	f
+to_erased	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn to_erased($/;"	f
+to_sendable	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn to_sendable(&self) -> Box<SerdeValue + Send + 'static>;$/;"	P	interface:SerdeValue
+to_utf16	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/windows.rs	/^fn to_utf16(s: &Path) -> Vec<u16> {$/;"	f
+trace	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! trace($/;"	M
+translate_flags	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^fn translate_flags(flags: fse::StreamFlags) -> op::Op {$/;"	f
+tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/mod.rs	/^    tx: mpsc::Sender<DebouncedEvent>,$/;"	m	struct:Debounce
+tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    tx: mpsc::Sender<DebouncedEvent>,$/;"	m	struct:ScheduleWorker
+tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    tx: Sender<Action>,$/;"	m	struct:ReadDirectoryChangesWatcher
+unwatch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    fn unwatch<P: AsRef<Path>>(&mut self, path: P) -> Result<()> {$/;"	P	implementation:FsEventWatcher
+unwatch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    fn unwatch<P: AsRef<Path>>(&mut self, path: P) -> Result<()> {$/;"	P	implementation:INotifyWatcher
+unwatch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    fn unwatch<P: AsRef<Path>>(&mut self, path: P) -> Result<()>;$/;"	P	interface:Watcher
+unwatch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/null.rs	/^    fn unwatch<P: AsRef<Path>>(&mut self, path: P) -> Result<()> {$/;"	P	implementation:NullWatcher
+unwatch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^    fn unwatch<P: AsRef<Path>>(&mut self, path: P) -> Result<()> {$/;"	P	implementation:PollWatcher
+unwatch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    fn unwatch<P: AsRef<Path>>(&mut self, path: P) -> Result<()> {$/;"	P	implementation:ReadDirectoryChangesWatcher
+upload	/home/alan/nas/devel/pi_drive_sync/src/main.rs	/^fn upload(hub: &Hub, path: &str) -> std::result::Result<u16, String> {$/;"	f
+util	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/lib.rs	/^mod util;$/;"	n
+wakeup_sem	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    wakeup_sem: HANDLE,$/;"	m	struct:ReadDirectoryChangesServer
+wakeup_sem	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    wakeup_sem: HANDLE,$/;"	m	struct:ReadDirectoryChangesWatcher
+wakeup_server	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    fn wakeup_server(&mut self) {$/;"	P	implementation:ReadDirectoryChangesWatcher
+warn	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^macro_rules! warn($/;"	M
+watch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    fn watch<P: AsRef<Path>>(&mut self, path: P, recursive_mode: RecursiveMode) -> Result<()> {$/;"	P	implementation:FsEventWatcher
+watch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    fn watch<P: AsRef<Path>>(&mut self, path: P, recursive_mode: RecursiveMode) -> Result<()> {$/;"	P	implementation:INotifyWatcher
+watch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    fn watch<P: AsRef<Path>>(&mut self, path: P, recursive_mode: RecursiveMode) -> Result<()>;$/;"	P	interface:Watcher
+watch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/null.rs	/^    fn watch<P: AsRef<Path>>(&mut self, path: P, recursive_mode: RecursiveMode) -> Result<()> {$/;"	P	implementation:NullWatcher
+watch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^    fn watch<P: AsRef<Path>>(&mut self, path: P, recursive_mode: RecursiveMode) -> Result<()> {$/;"	P	implementation:PollWatcher
+watch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    fn watch<P: AsRef<Path>>(&mut self, path: P, recursive_mode: RecursiveMode) -> Result<()> {$/;"	P	implementation:ReadDirectoryChangesWatcher
+watcher	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub fn watcher(tx: Sender<DebouncedEvent>, delay: Duration) -> Result<RecommendedWatcher> {$/;"	f
+watches	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    watches: HashMap<PathBuf, (WatchDescriptor, WatchMask, bool)>,$/;"	m	struct:EventLoop
+watches	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^    watches: Arc<Mutex<HashMap<PathBuf, WatchData>>>,$/;"	m	struct:PollWatcher
+watches	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    watches: HashMap<PathBuf, WatchState>,$/;"	m	struct:ReadDirectoryChangesServer
+when	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    when: Instant,$/;"	m	struct:ScheduledEvent
+windows	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^pub mod windows;$/;"	n
+with_delay_ms	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^    pub fn with_delay_ms(tx: Sender<RawEvent>, delay: u32) -> Result<PollWatcher> {$/;"	P	implementation:PollWatcher
+with_err_path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/error.rs	/^    fn with_err_path<F, P>(self, path: F) -> Self$/;"	P	implementation:Result
+with_err_path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/error.rs	/^    fn with_err_path<F, P>(self, path: F) -> Self$/;"	P	interface:IoResultExt
+write	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn write(&mut self, buf: &[u8]) -> io::Result<usize> {$/;"	P	implementation:NamedTempFile
+write	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^    fn write(&mut self, buf: &[u8]) -> io::Result<usize> {$/;"	P	implementation:SpooledTempFile
