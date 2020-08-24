@@ -2,16 +2,17 @@
 extern crate slog;
 #[macro_use]
 extern crate lazy_static;
-
 extern crate google_drive3 as drive3;
 extern crate hyper;
 extern crate hyper_rustls;
+extern crate md5;
 extern crate notify;
 extern crate tempfile;
 extern crate yup_oauth2 as oauth2;
 
 use clap::{App, Arg, SubCommand};
 use drive3::{Comment, DriveHub, Error, File, Result};
+use md5::compute;
 use notify::{watcher, RecursiveMode, Watcher};
 use oauth2::{
     parse_application_secret, read_application_secret, ApplicationSecret, Authenticator,
@@ -26,6 +27,9 @@ mod common;
 use slog::{Fuse, Logger};
 
 const DIR_SCAN_DELAY: u64 = 1;
+const ROOT_FOLDER_ID: &str = "19ipt2Rg1TGzr5esE_vA_1oFjrt7l5g7a"; //TODO, needs to be smarter
+const LOCAL_FILE_STORE: &str = "/tmp/pi_sync/images";
+const ROOT_OF_MD5: &str = "RpiCamSyncer";
 
 //save me typing this for sigs
 type Hub = drive3::DriveHub<
@@ -72,15 +76,21 @@ fn main() {
                 .help("Directory to monitor and sync")
                 .takes_value(true),
         )
+        .arg(
+            Arg::with_name("scan_interval_seconds")
+                .short("i")
+                .long("scan_interval_seconds")
+                .value_name("scan_interval_seconds")
+                .help("Directory to monitor and sync")
+                .takes_value(true),
+        )
         .get_matches();
 
     let secret_file = matches
         .value_of("secret_file")
         .unwrap_or("/home/alan/.google-service-cli/drive3-secret.json");
 
-    let target_dir = matches
-        .value_of("target_dir")
-        .unwrap_or("/tmp/pi_sync/images/");
+    let target_dir = matches.value_of("target_dir").unwrap_or(LOCAL_FILE_STORE);
 
     info!(log, "Using {} as WPS Script", secret_file);
     info!(log, "Using {} as Dir to monitor", target_dir);
@@ -135,25 +145,42 @@ fn main() {
     }
 }
 
-fn get_folder_id(hub: &Hub, path: &str) -> std::result::Result<String, String> {
-    let result = hub
-        .files()
-        .list()
-        .corpora("user")
-        .q("mimeType = 'application/vnd.google-apps.folder'")
-        .q(format!("name='{}'", path).as_str())
-        .doit();
+///Return  MD5 Hash of Parent  [ROOT_ID + File Name]
+///expecting file to be YYYYMMDDHHSS.[?]
+fn create_unique_file_id(local_path: &str) -> Option<String> {
+    get_file_name(local_path).and_then(|file_name| {
+        let md5_buf = md5::compute(format!("{}_{}", ROOT_OF_MD5, &file_name));
+        Some(String::from_utf8_lossy(&md5_buf.clone().to_vec()).into_owned())
+    })
+}
 
-    info!(log, "{:?}", result);
+///Return  MD5 Hash of Parent  [ROOT_ID + File Name]
+///expecting file to be YYYYMMDDHHSS.[?]
+fn create_unique_dir_id(local_dir: &str) -> Option<String> {
+    let path = std::path::Path::new(strip_local_fs(local_dir)); //TODO p! on /
+    let dir_name = path.file_name()?.to_str()?.to_string();
+    let md5_buf_w_base = md5::compute(format!("{}_{}", ROOT_OF_MD5, &dir_name).as_bytes());
+    info!(log,"create_unique_dir_id"; "name"=>dir_name);
+    Some(String::from_utf8_lossy(&md5_buf_w_base.clone().to_vec()).into_owned())
+}
 
-    Ok("19ipt2Rg1TGzr5esE_vA_1oFjrt7l5g7a".to_owned())
+fn strip_local_fs(lfsn: &str) -> &str {
+    &lfsn[LOCAL_FILE_STORE.len()..]
+}
+
+fn get_file_name(lfsn: &str) -> Option<&str> {
+    let path = std::path::Path::new(strip_local_fs(lfsn)); //TODO p! on /
+    path.file_name()?.to_str()
 }
 
 fn upload(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
-    let file_path = std::path::Path::new(path);
+    info!(log,"entering"; "method"=>"upload");
+    //relative to base of Drive
     let mut req = drive3::File::default();
-    req.name = Some(file_path.file_name().unwrap().to_str().unwrap().to_string());
-    req.parents = Some(vec![get_folder_id(&hub, "").unwrap()]);
+    req.name = Some("new_file".to_string());
+    req.id = create_unique_file_id(path);
+    req.parents = Some(vec![ROOT_FOLDER_ID.to_owned()]);
+    info!(log, "Upload Req {:?}", req);
 
     // Values shown here are possibly random and not representative !
     let result = hub
@@ -166,7 +193,7 @@ fn upload(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
         .ignore_default_visibility(true)
         .enforce_single_parent(true)
         .upload_resumable(
-            std::fs::File::open(file_path.to_str().unwrap()).unwrap(),
+            std::fs::File::open(path).unwrap(),
             "application/octet-stream".parse().unwrap(),
         );
 
@@ -183,7 +210,7 @@ fn upload(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
             | Error::BadRequest(_)
             | Error::FieldClash(_)
             | Error::JsonDecodeError(_, _) => {
-                error!(log, "Faile to invoke upload api {}", e);
+                error!(log, "Failed to invoke upload api {}", e);
                 Err(e.to_string())
             }
         },
@@ -194,23 +221,25 @@ fn upload(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
     }
 }
 
+///expecting folders to be hierarcihal so
+/// 2020 -> [01,02,...12] W 0[*]: {1..31}
 fn mkdir(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
-    let dir_path = std::path::Path::new(path);
-
-    info!(log, "Mkdir:: Dir to create: {:?}", dir_path);
-
-    let mut file = tempfile().unwrap();
+    info!(log, "Mkdir:: Dir to create: {:?}", path);
+    let mut temp_file = tempfile().unwrap();
     let mut req = drive3::File::default();
-    req.parents = Some(vec![get_folder_id(&hub, "").unwrap()]);
 
+    req.name = Some("new_dir".to_owned());
+    req.id = create_unique_dir_id(path);
+    req.parents = Some(vec![ROOT_FOLDER_ID.to_owned()]);
     req.mime_type = Some("application/vnd.google-apps.folder".to_string());
-    req.name = Some(dir_path.file_name().unwrap().to_str().unwrap().to_string());
+
+    info!(log, "Mkdir Req {:?}", req);
 
     // Values shown here are possibly random and not representative !
-    let result = hub
-        .files()
-        .create(req)
-        .upload(file, "application/vnd.google-apps.folder".parse().unwrap());
+    let result = hub.files().create(req).upload(
+        temp_file,
+        "application/vnd.google-apps.folder".parse().unwrap(),
+    );
 
     match result {
         Err(e) => match e {
