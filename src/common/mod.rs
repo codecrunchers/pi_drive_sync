@@ -1,36 +1,51 @@
+use slog::Drain;
 use slog::*;
-use std::{fmt, result};
 
-pub struct PrintlnSerializer;
+lazy_static::lazy_static! {
+    pub static ref LOG: Logger = {
+        let debug = "debug".to_string();
+        let info = "info".to_string();
+        let warning = "warn".to_string();
+        let error = "error".to_string();
+        let trace = "trace".to_string();
 
-impl Serializer for PrintlnSerializer {
-    fn emit_arguments(&mut self, key: Key, val: &fmt::Arguments) -> Result {
-        print!(", {}={}", key, val);
-        Ok(())
-    }
-}
+        let log_level = match std::env::var("RUST_LOG") {
+            Ok(l) =>  {
+                if info == l {
+                    slog::Level::Info
+                }
+                else if trace == l {
+                    slog::Level::Trace
+                }
+                else if  debug  == l {
+                    slog::Level::Debug
+                }
+                else if warning == l {
+                    slog::Level::Warning
+                }
+                else if error == l {
+                    slog::Level::Error
+                }else {
+                    slog::Level::Info
+                }
+            },
+            Err(_) =>  slog::Level::Info
 
-pub struct PrintlnDrain;
+        };
 
-impl Drain for PrintlnDrain {
-    type Ok = ();
-    type Err = ();
 
-    fn log(
-        &self,
-        record: &Record,
-        values: &OwnedKVList,
-    ) -> result::Result<Self::Ok, Self::Err> {
 
-        print!("{}", record.msg());
+let decorator = slog_term::TermDecorator::new().build();
+let drain = slog_term::FullFormat::new(decorator).build();
+let drain = slog_async::Async::new( LevelFilter::new(drain, log_level).fuse() ).build().fuse(); //Lossy logger - chanel size dependent, will warn and drop
 
-        record
-            .kv()
-            .serialize(record, &mut PrintlnSerializer)
-            .unwrap();
-        values.serialize(record, &mut PrintlnSerializer).unwrap();
+slog::Logger::root(
+    drain,
+    o!(
+        "version" => env!("CARGO_PKG_VERSION"),
+        "service" => env!("CARGO_PKG_NAME")
 
-        println!("");
-        Ok(())
-    }
+    ))
+
+    };
 }
