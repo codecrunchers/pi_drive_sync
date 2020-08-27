@@ -2,34 +2,38 @@
 extern crate slog;
 #[macro_use]
 extern crate lazy_static;
+extern crate base64;
 extern crate google_drive3 as drive3;
 extern crate hyper;
 extern crate hyper_rustls;
-extern crate md5;
 extern crate notify;
 extern crate tempfile;
 extern crate yup_oauth2 as oauth2;
 
+mod upload_handler;
+use self::base64::{decode, encode};
 use clap::{App, Arg, SubCommand};
 use drive3::{Comment, DriveHub, Error, File, Result};
-use md5::compute;
 use notify::{watcher, RecursiveMode, Watcher};
 use oauth2::{
     parse_application_secret, read_application_secret, ApplicationSecret, Authenticator,
     DefaultAuthenticatorDelegate, DiskTokenStorage, MemoryStorage,
 };
+use std::collections::HashMap;
 use std::default::Default;
 use std::path::Path;
 use std::sync::mpsc::channel;
 use std::time::Duration;
 use tempfile::tempfile;
+use upload_handler::*;
 mod common;
-use slog::{Fuse, Logger};
+use slog::Logger;
 
-const DIR_SCAN_DELAY: u64 = 1;
+const DIR_SCAN_DELAY: &str = "1";
 const ROOT_FOLDER_ID: &str = "19ipt2Rg1TGzr5esE_vA_1oFjrt7l5g7a"; //TODO, needs to be smarter
 const LOCAL_FILE_STORE: &str = "/tmp/pi_sync/images";
 const ROOT_OF_MD5: &str = "RpiCamSyncer";
+const IS_ROOT: usize = 1;
 
 //save me typing this for sigs
 type Hub = drive3::DriveHub<
@@ -41,19 +45,14 @@ type Hub = drive3::DriveHub<
     >,
 >;
 
-lazy_static! {
-    pub static ref log: slog::Logger = Logger::root(
-        Fuse(common::PrintlnDrain),
-        o!("version" => "1", "app" => " Rusty Cam Syncer"),
-    );
-}
+use common::LOG as log;
 
 fn read_client_secret(file: String) -> ApplicationSecret {
     read_application_secret(std::path::Path::new(&file)).expect("No App Secret")
 }
 
 fn main() {
-    info!(log, "Statring Syncer");
+    trace!(log, "Statring Syncer");
 
     let matches = App::new("Rusty Cam Syncer")
         .version("1.0")
@@ -92,8 +91,16 @@ fn main() {
 
     let target_dir = matches.value_of("target_dir").unwrap_or(LOCAL_FILE_STORE);
 
-    info!(log, "Using {} as WPS Script", secret_file);
-    info!(log, "Using {} as Dir to monitor", target_dir);
+    let scan_interval_seconds = String::from(
+        matches
+            .value_of("scan_interval_seconds")
+            .unwrap_or(DIR_SCAN_DELAY),
+    )
+    .parse::<u64>()
+    .unwrap();
+
+    trace!(log, "Using {} as WPS Script", secret_file);
+    trace!(log, "Using {} as Dir to monitor", target_dir);
 
     let secret = read_client_secret(secret_file.to_string());
 
@@ -118,69 +125,156 @@ fn main() {
 
     //TODO: first run
     //if ! -d "RpiCamSyncer"
-    //mkdir(&hub, "RpiCamSyncer");
+    mkdir(&hub, "/RpiCamSyncer-ignore");
 
     let (sender, receiver) = channel();
     let mut watcher =
-        watcher(sender, Duration::from_secs(DIR_SCAN_DELAY)).expect("Cannot Watch Dir");
-    watcher.watch(target_dir, RecursiveMode::Recursive).unwrap();
+        watcher(sender, Duration::from_secs(scan_interval_seconds)).expect("Cannot Create Watcher");
+    watcher
+        .watch(target_dir, RecursiveMode::Recursive)
+        .expect("Canot Watch Dir");
+
+    let handle_event = |h, p: std::path::PathBuf| {
+        if let Some(path) = p.to_str() {
+            if std::path::Path::new(path).is_dir() {
+                mkdir(&hub, path);
+            } else {
+                upload(&hub, path);
+            }
+        } else {
+            warn!(log, "Cannot Create {:?}", p);
+        }
+    };
 
     loop {
+        let hub = &hub;
         match receiver.recv() {
             Ok(notify::DebouncedEvent::Create(p)) => {
-                info!(log, "Create Request{:?}", p);
-                if let Some(path) = p.to_str() {
-                    if std::path::Path::new(path).is_dir() {
-                        mkdir(&hub, path);
-                    } else {
-                        upload(&hub, path);
-                    }
-                } else {
-                    warn!(log, "Cannot Create {:?}", p);
-                }
+                handle_event(hub, p.clone());
             }
-            _ => info!(log, "unidentified event"),
+            _ => trace!(log, "unidentified event"),
             Err(e) => error!(log, "watch error: {:?}", e),
         }
     }
 }
 
-///Return  MD5 Hash of Parent  [ROOT_ID + File Name]
-///expecting file to be YYYYMMDDHHSS.[?]
-fn create_unique_file_id(local_path: &str) -> Option<String> {
-    get_file_name(local_path).and_then(|file_name| {
-        let md5_buf = md5::compute(format!("{}_{}", ROOT_OF_MD5, &file_name));
-        Some(String::from_utf8_lossy(&md5_buf.clone().to_vec()).into_owned())
+///Return base64 of Parent  [ROOT_ID + File Name] - will work for now, clashes possible with poor
+///encoder ///expecting file to be YYYYMMDDHHSS.[?]
+fn get_unique_entry_id(base_path: &str) -> Option<String> {
+    trace!(log,"get_unique_entry_id for {:?}", base_path; "base_path"=>true);
+    strip_local_fs(base_path).and_then(|file_name| {
+        trace!(log,"get_unique_entry_id {:?}", file_name; "relative_path"=>true);
+        let base64_buf = encode(format!("{}{}", ROOT_OF_MD5, &file_name));
+        trace!(log,"get_unique_entry_id as b64 {:?}", base64_buf; "x"=>1);
+        Some(base64_buf.clone())
     })
 }
 
-///Return  MD5 Hash of Parent  [ROOT_ID + File Name]
-///expecting file to be YYYYMMDDHHSS.[?]
-fn create_unique_dir_id(local_dir: &str) -> Option<String> {
-    let path = std::path::Path::new(strip_local_fs(local_dir)); //TODO p! on /
-    let dir_name = path.file_name()?.to_str()?.to_string();
-    let md5_buf_w_base = md5::compute(format!("{}_{}", ROOT_OF_MD5, &dir_name).as_bytes());
-    info!(log,"create_unique_dir_id"; "name"=>dir_name);
-    Some(String::from_utf8_lossy(&md5_buf_w_base.clone().to_vec()).into_owned())
-}
+fn strip_local_fs(lfsn: &str) -> Option<&str> {
+    debug!(log,"strip_local_fs"; "lfsn"=>lfsn);
 
-fn strip_local_fs(lfsn: &str) -> &str {
-    &lfsn[LOCAL_FILE_STORE.len()..]
+    if lfsn.len() > LOCAL_FILE_STORE.len() && lfsn[0..LOCAL_FILE_STORE.len()].eq(LOCAL_FILE_STORE) {
+        std::path::Path::new(&lfsn[LOCAL_FILE_STORE.len() + 1..]).to_str()
+    } else {
+        Some("")
+    }
 }
 
 fn get_file_name(lfsn: &str) -> Option<&str> {
-    let path = std::path::Path::new(strip_local_fs(lfsn)); //TODO p! on /
+    trace!(log,"get_file_name"; "name"=>lfsn);
+    let path = std::path::Path::new(lfsn);
     path.file_name()?.to_str()
 }
 
+fn parent_id_as_base_64(local_path: &str) -> Option<String> {
+    debug!(log, "Path to id for {}", local_path);
+
+    if strip_local_fs(local_path).unwrap().len() == IS_ROOT {
+        debug!(log, "File Search Result {}",strip_local_fs(local_path).unwrap().len(); "is_root"=>true);
+        None
+    } else {
+        debug!(log, "File Search Result"; "is_root"=>false, "len"=>strip_local_fs(local_path).unwrap().len());
+        match std::path::Path::new(local_path).is_file() {
+            true => {
+                let mut ancestors = Path::new(local_path).ancestors().next();
+                trace!(
+                    log,
+                    "ancestors={:?}, len = {}",
+                    &ancestors,
+                    strip_local_fs(local_path).unwrap().len()
+                );
+                get_unique_entry_id(ancestors?.file_name()?.to_str()?)
+            }
+            false => get_unique_entry_id(local_path),
+        }
+    }
+}
+
+fn local_dir_to_drive_file_id(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
+    //hyper::client::Response, drive3::DriveList)> {
+    info!(log, "File Search for"; "path"=>path);
+
+    let b64_id = parent_id_as_base_64(path)
+        .unwrap_or(ROOT_FOLDER_ID.to_owned()) //here we use root
+        .as_str()
+        .to_owned();
+
+    trace!(log, "B64 id  = {} for path {}", b64_id, path);
+
+    let q = &format!(
+        "{} {{ key='{}' and value='{}' }}",
+        "appProperties has ", PI_DRIVE_SYNC_PROPS_KEY, b64_id
+    );
+
+    trace!(log, "Query {:?}", q);
+
+    let result = hub.drives().list().q(q).doit();
+
+    match result {
+        Err(e) => match e {
+            // The Error enum provides details about what exactly happened.
+            // You can also just use its `Debug`, `Display` or `Error` traits
+            Error::HttpError(_)
+            | Error::MissingAPIKey
+            | Error::MissingToken(_)
+            | Error::Cancelled
+            | Error::UploadSizeLimitExceeded(_, _)
+            | Error::Failure(_)
+            | Error::BadRequest(_)
+            | Error::FieldClash(_)
+            | Error::JsonDecodeError(_, _) => {
+                error!(log, "Failed to invoke upload api {}", e);
+                Err(e.to_string())
+            }
+        },
+        Ok(res) => {
+            trace!(log, "Success Upload: {:?}", res);
+            Ok(res.0.status.to_u16())
+        }
+    }
+}
+
+const PI_DRIVE_SYNC_PROPS_KEY: &str = "pi_sync-id";
+
+fn app_props_map(id: &str) -> Option<HashMap<String, String>> {
+    let mut app_props = HashMap::new();
+    app_props.insert(PI_DRIVE_SYNC_PROPS_KEY.into(), id.to_owned());
+    Some(app_props)
+}
+
 fn upload(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
-    info!(log,"entering"; "method"=>"upload");
-    //relative to base of Drive
+    trace!(log,"entering"; "method"=>"upload");
     let mut req = drive3::File::default();
-    req.name = Some("new_file".to_string());
-    req.id = create_unique_file_id(path);
-    req.parents = Some(vec![ROOT_FOLDER_ID.to_owned()]);
-    info!(log, "Upload Req {:?}", req);
+    req.name = get_file_name(path).and_then(|p| Some(p.into()));
+    let id = get_unique_entry_id(path).unwrap();
+    trace!(log, "Added Drive Idr"; "id"=>&id);
+    req.app_properties = app_props_map(&id);
+
+    local_dir_to_drive_file_id(&hub, &id)
+        .and_then(|drive_id| Ok(req.parents = { Some(vec!["".to_owned()]) }))
+        .expect("drive id conversion fail");
+
+    trace!(log, "Upload Req {:?}", req);
 
     // Values shown here are possibly random and not representative !
     let result = hub
@@ -215,7 +309,7 @@ fn upload(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
             }
         },
         Ok(res) => {
-            info!(log, "Success Upload: {:?}", res);
+            trace!(log, "Success Upload: {:?}", res);
             Ok(res.0.status.to_u16())
         }
     }
@@ -224,16 +318,25 @@ fn upload(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
 ///expecting folders to be hierarcihal so
 /// 2020 -> [01,02,...12] W 0[*]: {1..31}
 fn mkdir(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
-    info!(log, "Mkdir:: Dir to create: {:?}", path);
+    trace!(log, "Mkdir:: Dir to create: {:?}", path);
     let mut temp_file = tempfile().unwrap();
     let mut req = drive3::File::default();
 
-    req.name = Some("new_dir".to_owned());
-    req.id = create_unique_dir_id(path);
-    req.parents = Some(vec![ROOT_FOLDER_ID.to_owned()]);
+    req.name = get_file_name(path).and_then(|p| Some(p.into()));
+
+    let id = get_unique_entry_id(path).unwrap(); //.or_else(return Err("Cannot create file id");
+
+    local_dir_to_drive_file_id(&hub, &path)
+        .and_then(|drive_id| Ok(req.parents = { Some(vec!["".to_owned()]) }))
+        .expect("drive id conversion fail");
+    trace!(log, "Upload Req {:?}", req);
+
+    req.app_properties = app_props_map(&id);
+    trace!(log, "Added Drive Idr"; "id"=>id);
+
     req.mime_type = Some("application/vnd.google-apps.folder".to_string());
 
-    info!(log, "Mkdir Req {:?}", req);
+    trace!(log, "Mkdir Req {:?}", req);
 
     // Values shown here are possibly random and not representative !
     let result = hub.files().create(req).upload(
@@ -259,8 +362,80 @@ fn mkdir(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
             }
         },
         Ok(res) => {
-            info!(log, "Success, dir  created: {:?}", res);
+            trace!(log, "Success, dir  created: {:?}", res);
             Ok(res.0.status.to_u16())
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+
+    #[test]
+    fn test_strip_local_fs() {
+        assert_eq!(
+            Some("123"),
+            crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "123"))
+        );
+
+        assert_eq!(
+            Some("?123"),
+            crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "?123"))
+        );
+
+        assert_eq!(
+            Some("\\123"),
+            crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "\\123"))
+        );
+
+        assert_eq!(
+            Some("tmp/a/b/c/123"),
+            crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "tmp/a/b/c/123"))
+        );
+
+        assert_eq!(
+            Some(""),
+            crate::strip_local_fs(&format!("{}", crate::LOCAL_FILE_STORE))
+        );
+    }
+
+    #[test]
+    fn test_get_unique_entry_id_dir() {
+        let b64 =
+            crate::get_unique_entry_id(&format!("{}{}", crate::LOCAL_FILE_STORE, "/test/1/2/"));
+        println!("{:?}", b64);
+        assert_eq!(String::from("UnBpQ2FtU3luY2VyMg=="), b64.unwrap());
+    }
+
+    #[test]
+    fn test_create_unique_dir_id_for_root_entry() {
+        let b64 = crate::get_unique_entry_id(&format!("{}{}", crate::LOCAL_FILE_STORE, "/test"));
+        println!("{:?}", b64);
+        assert_eq!(String::from("UnBpQ2FtU3luY2VydGVzdA=="), b64.unwrap());
+    }
+
+    #[test]
+    fn test_create_unique_dir_id_for_root_root_entry() {
+        let b64 = crate::get_unique_entry_id("/test");
+        println!("{:?}", b64);
+        assert_eq!(String::from("UnBpQ2FtU3luY2VydGVzdA=="), b64.unwrap());
+    }
+
+    #[test]
+    fn test_parent_id_as_base_64() {
+        let pid = crate::parent_id_as_base_64(&format!("{}{}", crate::LOCAL_FILE_STORE, "/test"));
+        println!("{:?}", pid);
+        assert_eq!(pid, None)
+    }
+
+    #[test]
+    fn test_get_unique_entry_id() {
+        let b64 = crate::get_unique_entry_id(&format!(
+            "{}{}",
+            crate::LOCAL_FILE_STORE,
+            "/test/1/2/abc.txt"
+        ));
+        println!("{:?}", b64);
+        assert_eq!(String::from("UnBpQ2FtU3luY2VyYWJjLnR4dA=="), b64.unwrap());
     }
 }
