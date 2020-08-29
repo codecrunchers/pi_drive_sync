@@ -1,3 +1,3 @@
-fn do_x() -> bool {
-    todo!()
+trait Uploader {
+    fn upload(&self, remote_path: Path);
 }

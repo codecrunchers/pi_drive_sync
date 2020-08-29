@@ -11,8 +11,8 @@ extern crate tempfile;
 extern crate yup_oauth2 as oauth2;
 
 mod upload_handler;
-use self::base64::{decode, encode};
-use clap::{App, Arg, SubCommand};
+use self::base64::encode;
+use clap::{App, Arg};
 use drive3::{Comment, DriveHub, Error, File, Result};
 use notify::{watcher, RecursiveMode, Watcher};
 use oauth2::{
@@ -25,15 +25,14 @@ use std::path::Path;
 use std::sync::mpsc::channel;
 use std::time::Duration;
 use tempfile::tempfile;
-use upload_handler::*;
-mod common;
-use slog::Logger;
 
+mod common;
+
+const PI_DRIVE_SYNC_PROPS_KEY: &str = "pi_sync_id";
 const DIR_SCAN_DELAY: &str = "1";
 const ROOT_FOLDER_ID: &str = "19ipt2Rg1TGzr5esE_vA_1oFjrt7l5g7a"; //TODO, needs to be smarter
 const LOCAL_FILE_STORE: &str = "/tmp/pi_sync/images";
-const ROOT_OF_MD5: &str = "RpiCamSyncer";
-const IS_ROOT: usize = 1;
+const DRIVE_ROOT_FOLDER: &str = "RpiCamSyncer";
 
 //save me typing this for sigs
 type Hub = drive3::DriveHub<
@@ -106,7 +105,7 @@ fn main() {
 
     let token_storage = DiskTokenStorage::new(&String::from("temp_token"))
         .expect("Cannot create temp storage token - write permissions?");
-    let mut auth = Authenticator::new(
+    let auth = Authenticator::new(
         &secret,
         DefaultAuthenticatorDelegate,
         hyper::Client::with_connector(hyper::net::HttpsConnector::new(
@@ -116,7 +115,7 @@ fn main() {
         Some(yup_oauth2::FlowType::InstalledInteractive),
     );
 
-    let mut hub = DriveHub::new(
+    let hub = DriveHub::new(
         hyper::Client::with_connector(hyper::net::HttpsConnector::new(
             hyper_rustls::TlsClient::new(),
         )),
@@ -125,7 +124,7 @@ fn main() {
 
     //TODO: first run
     //if ! -d "RpiCamSyncer"
-    mkdir(&hub, "/RpiCamSyncer-ignore");
+    mkdir(&hub, DRIVE_ROOT_FOLDER).unwrap();
 
     let (sender, receiver) = channel();
     let mut watcher =
@@ -134,12 +133,20 @@ fn main() {
         .watch(target_dir, RecursiveMode::Recursive)
         .expect("Canot Watch Dir");
 
-    let handle_event = |h, p: std::path::PathBuf| {
+    let handle_event = |_h, p: std::path::PathBuf| {
         if let Some(path) = p.to_str() {
             if std::path::Path::new(path).is_dir() {
-                mkdir(&hub, path);
+                trace!(log, "Dir  Create {:?}", p);
+                mkdir(&hub, path).unwrap_or({
+                    warn!(log, "Cannot create dir");
+                    0
+                });
             } else {
-                upload(&hub, path);
+                trace!(log, "File Upload {:?}", p);
+                upload(&hub, path).unwrap_or({
+                    warn!(log, "Cannot create file");
+                    0
+                });
             }
         } else {
             warn!(log, "Cannot Create {:?}", p);
@@ -164,19 +171,19 @@ fn get_unique_entry_id(base_path: &str) -> Option<String> {
     trace!(log,"get_unique_entry_id for {:?}", base_path; "base_path"=>true);
     strip_local_fs(base_path).and_then(|file_name| {
         trace!(log,"get_unique_entry_id {:?}", file_name; "relative_path"=>true);
-        let base64_buf = encode(format!("{}{}", ROOT_OF_MD5, &file_name));
-        trace!(log,"get_unique_entry_id as b64 {:?}", base64_buf; "x"=>1);
+        let base64_buf = encode(format!("{}{}", DRIVE_ROOT_FOLDER, &file_name));
+        trace!(log,"get_unique_entry_id as b64 of {}{} = {:?}", DRIVE_ROOT_FOLDER, &file_name, base64_buf; "x"=>1);
         Some(base64_buf.clone())
     })
 }
 
 fn strip_local_fs(lfsn: &str) -> Option<&str> {
-    debug!(log,"strip_local_fs"; "lfsn"=>lfsn);
-
+    trace!(log,"strip_local_fs"; "lfsn"=>lfsn);
     if lfsn.len() > LOCAL_FILE_STORE.len() && lfsn[0..LOCAL_FILE_STORE.len()].eq(LOCAL_FILE_STORE) {
-        std::path::Path::new(&lfsn[LOCAL_FILE_STORE.len() + 1..]).to_str()
+        Some(&lfsn[LOCAL_FILE_STORE.len() + 1..])
     } else {
-        Some("")
+        trace!(log, "Invalid file {}, returning root of FileSystem", &lfsn);
+        std::path::Path::new(lfsn).file_name()?.to_str()
     }
 }
 
@@ -186,35 +193,23 @@ fn get_file_name(lfsn: &str) -> Option<&str> {
     path.file_name()?.to_str()
 }
 
-fn parent_id_as_base_64(local_path: &str) -> Option<String> {
-    debug!(log, "Path to id for {}", local_path);
+fn parent_path_to_base_64(local_path: &str) -> Option<String> {
+    trace!(log, "Path to id for {}", local_path);
 
-    if strip_local_fs(local_path).unwrap().len() == IS_ROOT {
-        debug!(log, "File Search Result {}",strip_local_fs(local_path).unwrap().len(); "is_root"=>true);
-        None
-    } else {
-        debug!(log, "File Search Result"; "is_root"=>false, "len"=>strip_local_fs(local_path).unwrap().len());
-        match std::path::Path::new(local_path).is_file() {
-            true => {
-                let mut ancestors = Path::new(local_path).ancestors().next();
-                trace!(
-                    log,
-                    "ancestors={:?}, len = {}",
-                    &ancestors,
-                    strip_local_fs(local_path).unwrap().len()
-                );
-                get_unique_entry_id(ancestors?.file_name()?.to_str()?)
-            }
-            false => get_unique_entry_id(local_path),
-        }
-    }
+    let ancestors = Path::new(local_path)
+        .strip_prefix(Path::new(LOCAL_FILE_STORE))
+        .and_then(|p| Ok(p.ancestors().next()))
+        .ok();
+
+    trace!(log, "ancestors={:?}", &ancestors,);
+    ancestors.and_then(|a| get_unique_entry_id(a.unwrap().file_name()?.to_str()?))
 }
 
-fn local_dir_to_drive_file_id(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
+fn local_dir_to_drive_file_id(hub: &Hub, path: &str) -> Option<String> {
     //hyper::client::Response, drive3::DriveList)> {
-    info!(log, "File Search for"; "path"=>path);
+    trace!(log, "File Search for"; "path"=>path);
 
-    let b64_id = parent_id_as_base_64(path)
+    let b64_id = parent_path_to_base_64(path)
         .unwrap_or(ROOT_FOLDER_ID.to_owned()) //here we use root
         .as_str()
         .to_owned();
@@ -228,12 +223,12 @@ fn local_dir_to_drive_file_id(hub: &Hub, path: &str) -> std::result::Result<u16,
 
     trace!(log, "Query {:?}", q);
 
-    let result = hub.drives().list().q(q).doit();
+    let result = hub.files().list().q(q).doit();
 
     match result {
         Err(e) => match e {
             // The Error enum provides details about what exactly happened.
-            // You can also just use its `Debug`, `Display` or `Error` traits
+            // You can also just use its `trace`, `Display` or `Error` traits
             Error::HttpError(_)
             | Error::MissingAPIKey
             | Error::MissingToken(_)
@@ -244,17 +239,15 @@ fn local_dir_to_drive_file_id(hub: &Hub, path: &str) -> std::result::Result<u16,
             | Error::FieldClash(_)
             | Error::JsonDecodeError(_, _) => {
                 error!(log, "Failed to invoke upload api {}", e);
-                Err(e.to_string())
+                None
             }
         },
         Ok(res) => {
-            trace!(log, "Success Upload: {:?}", res);
-            Ok(res.0.status.to_u16())
+            trace!(log, "Query Success {:?}", res);
+            res.1.files?.get(0)?.id.clone()
         }
     }
 }
-
-const PI_DRIVE_SYNC_PROPS_KEY: &str = "pi_sync-id";
 
 fn app_props_map(id: &str) -> Option<HashMap<String, String>> {
     let mut app_props = HashMap::new();
@@ -270,9 +263,11 @@ fn upload(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
     trace!(log, "Added Drive Idr"; "id"=>&id);
     req.app_properties = app_props_map(&id);
 
-    local_dir_to_drive_file_id(&hub, &id)
-        .and_then(|drive_id| Ok(req.parents = { Some(vec!["".to_owned()]) }))
-        .expect("drive id conversion fail");
+    if path.ne(DRIVE_ROOT_FOLDER) {
+        req.parents = Some(vec![
+            local_dir_to_drive_file_id(&hub, &path).unwrap_or("".to_owned())
+        ])
+    }
 
     trace!(log, "Upload Req {:?}", req);
 
@@ -294,7 +289,7 @@ fn upload(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
     match result {
         Err(e) => match e {
             // The Error enum provides details about what exactly happened.
-            // You can also just use its `Debug`, `Display` or `Error` traits
+            // You can also just use its `trace`, `Display` or `Error` traits
             Error::HttpError(_)
             | Error::MissingAPIKey
             | Error::MissingToken(_)
@@ -316,23 +311,24 @@ fn upload(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
 }
 
 ///expecting folders to be hierarcihal so
-/// 2020 -> [01,02,...12] W 0[*]: {1..31}
+/// 2020 -> [01,02,...12] [m]: n=>{1..31}, [d] [0-7]...
 fn mkdir(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
     trace!(log, "Mkdir:: Dir to create: {:?}", path);
-    let mut temp_file = tempfile().unwrap();
+    let mut temp_file = tempfile().expect("err");
     let mut req = drive3::File::default();
 
     req.name = get_file_name(path).and_then(|p| Some(p.into()));
+    trace!(log, "File name {:?}", req.name);
 
-    let id = get_unique_entry_id(path).unwrap(); //.or_else(return Err("Cannot create file id");
+    if path.ne(DRIVE_ROOT_FOLDER) {
+        req.parents = Some(vec![local_dir_to_drive_file_id(&hub, &path)
+            .unwrap_or("1iwbQaaWNQgWYxGI4NSjrOzfDtbRrnc_o".to_owned())])
+    }
 
-    local_dir_to_drive_file_id(&hub, &path)
-        .and_then(|drive_id| Ok(req.parents = { Some(vec!["".to_owned()]) }))
-        .expect("drive id conversion fail");
-    trace!(log, "Upload Req {:?}", req);
-
-    req.app_properties = app_props_map(&id);
-    trace!(log, "Added Drive Idr"; "id"=>id);
+    get_unique_entry_id(path).and_then(|b64_id| {
+        trace!(log, "Added Drive Id"; "id"=>b64_id.clone());
+        Some(req.app_properties = app_props_map(&b64_id))
+    });
 
     req.mime_type = Some("application/vnd.google-apps.folder".to_string());
 
@@ -347,7 +343,7 @@ fn mkdir(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
     match result {
         Err(e) => match e {
             // The Error enum provides details about what exactly happened.
-            // You can also just use its `Debug`, `Display` or `Error` traits
+            // You can also just use its `trace`, `Display` or `Error` traits
             Error::HttpError(_)
             | Error::MissingAPIKey
             | Error::MissingToken(_)
@@ -370,9 +366,30 @@ fn mkdir(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
 
 #[cfg(test)]
 mod tests {
+    use crate::common::LOG as log;
 
     #[test]
     fn test_strip_local_fs() {
+        assert_eq!(
+            Some("RpiCamSyncer"),
+            crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "RpiCamSyncer"))
+        );
+
+        assert_eq!(
+            Some("a/b.txt"),
+            crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "a/b.txt"))
+        );
+
+        assert_eq!(
+            Some("a/b"),
+            crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "a/b"))
+        );
+
+        assert_eq!(
+            Some("a"),
+            crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "a"))
+        );
+
         assert_eq!(
             Some("123"),
             crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "123"))
@@ -404,7 +421,7 @@ mod tests {
         let b64 =
             crate::get_unique_entry_id(&format!("{}{}", crate::LOCAL_FILE_STORE, "/test/1/2/"));
         println!("{:?}", b64);
-        assert_eq!(String::from("UnBpQ2FtU3luY2VyMg=="), b64.unwrap());
+        assert_eq!(String::from("UnBpQ2FtU3luY2VydGVzdC8xLzIK"), b64.unwrap());
     }
 
     #[test]
@@ -422,10 +439,10 @@ mod tests {
     }
 
     #[test]
-    fn test_parent_id_as_base_64() {
-        let pid = crate::parent_id_as_base_64(&format!("{}{}", crate::LOCAL_FILE_STORE, "/test"));
+    fn test_parent_path_to_base_64() {
+        let pid = crate::parent_path_to_base_64(&format!("{}{}", crate::LOCAL_FILE_STORE, "/test"));
         println!("{:?}", pid);
-        assert_eq!(pid, None)
+        assert_eq!(Some("UnBpQ2FtU3luY2VydGVzdA==".to_owned()), pid);
     }
 
     #[test]

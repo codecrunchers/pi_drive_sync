@@ -2,7 +2,9 @@ use slog::Drain;
 use slog::*;
 
 lazy_static::lazy_static! {
-    pub static ref LOG: Logger = {
+    ///Configure the global logger
+    pub static ref LOG :Logger = {
+
         let debug = "debug".to_string();
         let info = "info".to_string();
         let warning = "warn".to_string();
@@ -33,19 +35,17 @@ lazy_static::lazy_static! {
 
         };
 
+        let decorator = slog_term::TermDecorator::new().build();
+        let drain = slog_term::FullFormat::new(decorator).build();
+        let drain = slog_async::Async::new( LevelFilter::new(drain, log_level).fuse() ).build().fuse(); //Lossy logger - chanel size dependent, will warn and drop
 
+        slog::Logger::root(
+            drain,
+            o!(
+                "version" => env!("CARGO_PKG_VERSION"),
+                "service" => env!("CARGO_PKG_NAME")
 
-let decorator = slog_term::TermDecorator::new().build();
-let drain = slog_term::FullFormat::new(decorator).build();
-let drain = slog_async::Async::new( LevelFilter::new(drain, log_level).fuse() ).build().fuse(); //Lossy logger - chanel size dependent, will warn and drop
-
-slog::Logger::root(
-    drain,
-    o!(
-        "version" => env!("CARGO_PKG_VERSION"),
-        "service" => env!("CARGO_PKG_NAME")
-
-    ))
-
+            ))
     };
+
 }
