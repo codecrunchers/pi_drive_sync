@@ -511,6 +511,7 @@ DecoderReader	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-
 DecoderReader	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/read/decoder.rs	/^impl<'a, R: io::Read> fmt::Debug for DecoderReader<'a, R> {$/;"	c
 DecoderReader	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/read/decoder.rs	/^pub struct DecoderReader<'a, R: 'a + io::Read> {$/;"	s
 Decorator	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-term-2.6.0/src/lib.rs	/^pub trait Decorator {$/;"	i
+Default	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    Default,$/;"	e	enum:FieldAttr
 DefaultAuthenticatorDelegate	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12/src/authenticator_delegate.rs	/^impl AuthenticatorDelegate for DefaultAuthenticatorDelegate {}$/;"	c
 DefaultAuthenticatorDelegate	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12/src/authenticator_delegate.rs	/^pub struct DefaultAuthenticatorDelegate;$/;"	s
 DefaultConnector	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/net.rs	/^pub type DefaultConnector = HttpConnector;$/;"	t
@@ -941,7 +942,11 @@ Field	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/s
 Field	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/de/impls.rs	/^        impl<'de> Deserialize<'de> for Field {$/;"	c	method:SystemTime::deserialize
 Field	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/de/impls.rs	/^    enum Field {$/;"	g	module:range
 Field	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/de/impls.rs	/^    impl<'de> Deserialize<'de> for Field {$/;"	c	module:range
+FieldAttr	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^enum FieldAttr {$/;"	g
+FieldAttr	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^impl FieldAttr {$/;"	c
 FieldClash	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/cmn.rs	/^    FieldClash(&'static str),$/;"	e	enum:Error
+FieldExt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^impl<'a> FieldExt<'a> {$/;"	c
+FieldExt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^struct FieldExt<'a> {$/;"	s
 FieldVisitor	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/de/impls.rs	/^                impl<'de> Visitor<'de> for FieldVisitor {$/;"	c	method:Duration::deserialize::Field::deserialize
 FieldVisitor	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/de/impls.rs	/^                impl<'de> Visitor<'de> for FieldVisitor {$/;"	c	method:SystemTime::deserialize::Field::deserialize
 FieldVisitor	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/de/impls.rs	/^                impl<'de> Visitor<'de> for FieldVisitor {$/;"	c	method:deserialize::Field::deserialize
@@ -1340,6 +1345,7 @@ InvalidEscape	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_j
 InvalidLastSymbol	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/decode.rs	/^    InvalidLastSymbol(usize, u8),$/;"	e	enum:DecodeError
 InvalidLength	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/decode.rs	/^    InvalidLength,$/;"	e	enum:DecodeError
 InvalidNumber	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/error.rs	/^    InvalidNumber,$/;"	e	enum:ErrorCode
+InvalidPathError	/home/alan/local-devel/pi_drive_sync/src/pi_err.rs	/^    InvalidPathError,$/;"	e	enum:SyncerErrors
 InvalidScope	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12/src/types.rs	/^    InvalidScope(String),$/;"	e	enum:RequestError
 InvalidSubcommand	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/errors.rs	/^    InvalidSubcommand,$/;"	e	enum:ErrorKind
 InvalidUnicodeCodePoint	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/error.rs	/^    InvalidUnicodeCodePoint,$/;"	e	enum:ErrorCode
@@ -2760,6 +2766,13 @@ Switched	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/
 SwitchingProtocols	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/status.rs	/^    SwitchingProtocols,$/;"	e	enum:StatusCode
 Sync	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/mod.rs	/^impl HeaderFormat + Send + Sync {$/;"	c
 Sync	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/mod.rs	/^impl<'a> fmt::Display for &'a (HeaderFormat + Send + Sync) {$/;"	c
+Syncable	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^impl Uploader for Syncable {$/;"	c
+Syncable	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^struct Syncable {$/;"	s
+SyncerErrors	/home/alan/local-devel/pi_drive_sync/src/pi_err.rs	/^impl From<StripPrefixError> for SyncerErrors {$/;"	c
+SyncerErrors	/home/alan/local-devel/pi_drive_sync/src/pi_err.rs	/^impl fmt::Display for SyncerErrors {$/;"	c
+SyncerErrors	/home/alan/local-devel/pi_drive_sync/src/pi_err.rs	/^impl std::error::Error for SyncerErrors {}$/;"	c
+SyncerErrors	/home/alan/local-devel/pi_drive_sync/src/pi_err.rs	/^pub enum SyncerErrors {$/;"	g
+SyncerNoneError	/home/alan/local-devel/pi_drive_sync/src/pi_err.rs	/^    SyncerNoneError,$/;"	e	enum:SyncerErrors
 Syntax	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/error.rs	/^    Syntax,$/;"	e	enum:Category
 SystemTime	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/de/impls.rs	/^impl<'de> Deserialize<'de> for SystemTime {$/;"	c
 SystemTime	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/ser/impls.rs	/^impl Serialize for SystemTime {$/;"	c
@@ -2995,6 +3008,7 @@ Unwatch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15
 Up	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/common/link.rs	/^    Up,$/;"	e	enum:RelationType
 UpgradeRequired	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/status.rs	/^    UpgradeRequired,$/;"	e	enum:StatusCode
 UploadSizeLimitExceeded	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/cmn.rs	/^    UploadSizeLimitExceeded(u64, u64),$/;"	e	enum:Error
+Uploader	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^trait Uploader {$/;"	i
 Uri	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/error.rs	/^    Uri(url::ParseError),$/;"	e	enum:Error
 UriTooLong	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/status.rs	/^    UriTooLong,$/;"	e	enum:StatusCode
 Url	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/client/mod.rs	/^impl IntoUrl for Url {$/;"	c
@@ -3022,6 +3036,7 @@ ValidArgFound	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.
 ValidNegNumFound	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/app/settings.rs	/^    ValidNegNumFound,$/;"	e	enum:AppSettings
 Validator	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/app/validator.rs	/^impl<'a, 'b, 'z> Validator<'a, 'b, 'z> {$/;"	c
 Validator	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/app/validator.rs	/^pub struct Validator<'a, 'b, 'z>(&'z mut Parser<'a, 'b>)$/;"	s
+Value	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    Value(proc_macro2::TokenStream),$/;"	e	enum:FieldAttr
 Value	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/common/access_control_allow_origin.rs	/^    Value(String),$/;"	e	enum:AccessControlAllowOrigin
 Value	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/de/ignored_any.rs	/^    type Value = IgnoredAny;$/;"	t	implementation:IgnoredAny
 Value	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/de/impls.rs	/^                    type Value = Field;$/;"	t	implementation:Duration::deserialize::Field::deserialize::FieldVisitor
@@ -3772,6 +3787,7 @@ argument_conflict	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/cla
 argument_not_found_auto	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/errors.rs	/^    pub fn argument_not_found_auto<A>(arg: A) -> Self$/;"	P	implementation:Error
 array_impls	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/de/impls.rs	/^macro_rules! array_impls {$/;"	M
 array_impls	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/ser/impls.rs	/^macro_rules! array_impls {$/;"	M
+as_arg	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    pub fn as_arg(&self) -> proc_macro2::TokenStream {$/;"	P	implementation:FieldExt
 as_arg_trait	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/app/help.rs	/^fn as_arg_trait<'a, 'b, T: ArgWithOrder<'a, 'b>>(x: &T) -> &ArgWithOrder<'a, 'b> {$/;"	f
 as_array	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/value/mod.rs	/^    pub fn as_array(&self) -> Option<&Vec<Value>> {$/;"	P	implementation:Value
 as_array_mut	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/value/mod.rs	/^    pub fn as_array_mut(&mut self) -> Option<&mut Vec<Value>> {$/;"	P	implementation:Value
@@ -3790,6 +3806,7 @@ as_file	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.
 as_file_mut	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn as_file_mut(&mut self) -> &mut File {$/;"	P	implementation:NamedTempFile
 as_i64	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/number.rs	/^    pub fn as_i64(&self) -> Option<i64> {$/;"	P	implementation:Number
 as_i64	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/value/mod.rs	/^    pub fn as_i64(&self) -> Option<i64> {$/;"	P	implementation:Value
+as_init	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    pub fn as_init(&self) -> proc_macro2::TokenStream {$/;"	P	implementation:FieldExt
 as_limb	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/lexical/math.rs	/^pub(crate) fn as_limb<T: Integer>(t: T) -> Limb {$/;"	f
 as_mut	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/http/h1.rs	/^    pub fn as_mut(&mut self) -> &mut T { self.obj.as_mut().unwrap() }$/;"	P	implementation:Wrapper
 as_null	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/value/mod.rs	/^    pub fn as_null(&self) -> Option<()> {$/;"	P	implementation:Value
@@ -3828,6 +3845,7 @@ as_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src
 as_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/key/dynamic_nostd.rs	/^    pub fn as_str(&self) -> &str {$/;"	P	implementation:Key
 as_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn as_str(&self) -> &'static str {$/;"	P	implementation:FilterLevel
 as_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn as_str(&self) -> &'static str {$/;"	P	implementation:Level
+as_tokens	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    pub fn as_tokens(&self) -> proc_macro2::TokenStream {$/;"	P	implementation:FieldAttr
 as_u128	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/lexical/num.rs	/^    fn as_u128(self) -> u128;$/;"	P	interface:AsPrimitive
 as_u32	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/lexical/num.rs	/^    fn as_u32(self) -> u32;$/;"	P	interface:AsPrimitive
 as_u64	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/lexical/num.rs	/^    fn as_u64(self) -> u64;$/;"	P	interface:AsPrimitive
@@ -3845,6 +3863,7 @@ assert_no_body	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-
 assert_to_string_from_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^fn assert_to_string_from_str<T>(expected: T)$/;"	f
 atomic_impl	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/de/impls.rs	/^macro_rules! atomic_impl {$/;"	M
 atomic_impl	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/ser/impls.rs	/^macro_rules! atomic_impl {$/;"	M
+attr	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    attr: Option<FieldAttr>,$/;"	m	struct:FieldExt
 aud	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12/src/service_account.rs	/^    aud: String,$/;"	m	struct:Claims
 auth	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/cmn.rs	/^    pub auth: &'a mut A,$/;"	m	struct:ResumableUploadHelper
 auth	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    auth: RefCell<A>,$/;"	m	struct:DriveHub
@@ -4146,6 +4165,8 @@ close	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/
 close	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn close(self) -> io::Result<()> {$/;"	P	implementation:NamedTempFile
 close_connection	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/http/h1.rs	/^    fn close_connection(&mut self) -> ::Result<()> {$/;"	P	implementation:Http11Message
 close_connection	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/http/message.rs	/^    fn close_connection(&mut self) -> ::Result<()>;$/;"	P	interface:HttpMessage
+cloud_path	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn cloud_path(&self) -> Result<PathBuf, SyncerErrors> {$/;"	P	implementation:Syncable
+cloud_path	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn cloud_path(&self) -> Result<PathBuf, SyncerErrors>;$/;"	P	interface:Uploader
 cmd_rx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    cmd_rx: Receiver<Result<PathBuf>>,$/;"	m	struct:ReadDirectoryChangesWatcher
 cmd_tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    cmd_tx: Sender<Result<PathBuf>>,$/;"	m	struct:ReadDirectoryChangesServer
 cmn	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^mod cmn;$/;"	n
@@ -4155,6 +4176,7 @@ code	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.5
 col	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/iter.rs	/^    col: usize,$/;"	m	struct:LineColIterator
 col	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/iter.rs	/^    pub fn col(&self) -> usize {$/;"	f
 collect_map	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/ser/mod.rs	/^    fn collect_map<K, V, I>(self, iter: I) -> Result<Self::Ok, Self::Error>$/;"	P	interface:Serializer
+collect_parent_lint_attrs	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^fn collect_parent_lint_attrs(attrs: &[syn::Attribute]) -> Vec<syn::Attribute> {$/;"	f
 collect_seq	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/ser/mod.rs	/^    fn collect_seq<I>(self, iter: I) -> Result<Self::Ok, Self::Error>$/;"	P	interface:Serializer
 collect_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/private/ser.rs	/^    fn collect_str<T: ?Sized>(self, _: &T) -> Result<Self::Ok, Self::Error>$/;"	f
 collect_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/ser/fmt.rs	/^    fn collect_str<T: ?Sized>(self, value: &T) -> fmt::Result$/;"	P	implementation:Formatter
@@ -4565,6 +4587,7 @@ deref_mut	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-driv
 deref_mut	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/common/authorization.rs	/^    fn deref_mut(&mut self) -> &mut S {$/;"	P	implementation:Authorization
 deref_mut	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/mod.rs	/^    fn deref_mut(&mut self) -> &mut Cow<'static, str> {$/;"	P	implementation:CowStr
 derive	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/lib.rs	/^mod derive {$/;"	n
+derive	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^pub fn derive(input: TokenStream) -> TokenStream {$/;"	f
 derive_display_order	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/app/parser.rs	/^    pub fn derive_display_order(&mut self) {$/;"	f
 description	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/decode.rs	/^    fn description(&self) -> &str {$/;"	P	implementation:DecodeError
 description	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/errors.rs	/^    fn description(&self) -> &str {$/;"	P	implementation:Error
@@ -4817,7 +4840,6 @@ display_val_names_req	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823
 disposition	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/common/content_disposition.rs	/^    pub disposition: DispositionType,$/;"	m	struct:ContentDisposition
 do_encode_random_config_matches_normal_encode	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/write/encoder_tests.rs	/^fn do_encode_random_config_matches_normal_encode(max_input_len: usize) {$/;"	f
 do_installed_flow	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12/src/authenticator.rs	/^    fn do_installed_flow(&mut self, scopes: &Vec<&str>) -> Result<Token, Box<Error>> {$/;"	f
-do_x	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^fn do_x() -> bool {$/;"	f
 doit	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    fn doit<RS>(mut self, mut reader: RS, reader_mime_type: mime::Mime, protocol: &'static str) /;"	f
 doit	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub fn doit(mut self) -> Result<(hyper::client::Response, About)> {$/;"	f
 doit	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub fn doit(mut self) -> Result<(hyper::client::Response, ChangeList)> {$/;"	f
@@ -5507,6 +5529,7 @@ fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12
 fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12/src/storage.rs	/^    fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {$/;"	P	implementation:NullError
 fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12/src/types.rs	/^    fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {$/;"	P	implementation:RequestError
 fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12/src/types.rs	/^    fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {$/;"	P	implementation:StringError
+fmt	/home/alan/local-devel/pi_drive_sync/src/pi_err.rs	/^    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {$/;"	P	implementation:SyncerErrors
 fmt_comma_delimited	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/parsing.rs	/^pub fn fmt_comma_delimited<T: Display>(f: &mut fmt::Formatter, parts: &[T]) -> fmt::Result {$/;"	f
 fmt_delimited	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/common/link.rs	/^fn fmt_delimited<T: fmt::Display>(f: &mut fmt::Formatter, p: &[T], d: &str, b: (&str, &str)) -> /;"	f
 fmt_header	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/cmn.rs	/^    fn fmt_header(&self, _: &mut fmt::Formatter) -> fmt::Result {$/;"	P	implementation:RangeResponseHeader
@@ -5632,6 +5655,7 @@ from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/s
 from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12/src/types.rs	/^    fn from(err: &'a Error) -> StringError {$/;"	P	implementation:StringError
 from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12/src/types.rs	/^    fn from(value: JsonError) -> RequestError {$/;"	P	implementation:RequestError
 from	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12/src/types.rs	/^    fn from(value: String) -> StringError {$/;"	P	implementation:StringError
+from	/home/alan/local-devel/pi_drive_sync/src/pi_err.rs	/^    fn from(_: StripPrefixError) -> Self {$/;"	P	implementation:SyncerErrors
 from_and_cause	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/error.rs	/^    macro_rules! from_and_cause {$/;"	M	module:tests
 from_arg	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/args/arg_builder/positional.rs	/^    pub fn from_arg(mut a: Arg<'n, 'e>, idx: u64) -> Self {$/;"	P	implementation:PosBuilder
 from_arg_ref	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/args/arg_builder/positional.rs	/^    pub fn from_arg_ref(a: &Arg<'n, 'e>, idx: u64) -> Self {$/;"	P	implementation:PosBuilder
@@ -5837,6 +5861,8 @@ get_start_page_token	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/
 get_tooltip	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/completions/elvish.rs	/^fn get_tooltip<T: ToString>(help: Option<&str>, data: T) -> String {$/;"	f
 get_tooltip	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/completions/powershell.rs	/^fn get_tooltip<T: ToString>(help: Option<&str>, data: T) -> String {$/;"	f
 get_unique_entry_id	/home/alan/local-devel/pi_drive_sync/src/main.rs	/^fn get_unique_entry_id(base_path: &str) -> Option<String> {$/;"	f
+get_unique_id	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn get_unique_id(&self) -> Result<String, SyncerErrors> {$/;"	P	implementation:Syncable
+get_unique_id	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn get_unique_id(&self) -> Result<String, SyncerErrors>;$/;"	P	interface:Uploader
 get_zsh_arg_conflicts	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/completions/macros.rs	/^macro_rules! get_zsh_arg_conflicts {$/;"	M
 global	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/args/arg.rs	/^    pub fn global(self, g: bool) -> Self {$/;"	P	implementation:Arg
 global_args	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/app/parser.rs	/^    pub global_args: Vec<Arg<'a, 'b>>,$/;"	m	struct:Parser
@@ -5876,6 +5902,7 @@ handler	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16
 handles_short_read_from_delegate	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/base64-0.12.3/src/read/decoder_tests.rs	/^fn handles_short_read_from_delegate() {$/;"	f
 has	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/mod.rs	/^    pub fn has<H: Header + HeaderFormat>(&self) -> bool {$/;"	P	implementation:Headers
 has_args	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/app/parser.rs	/^    pub fn has_args(&self) -> bool {$/;"	f
+has_attr	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    pub fn has_attr(&self) -> bool {$/;"	P	implementation:FieldExt
 has_augmented_permissions	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub has_augmented_permissions: Option<bool>,$/;"	m	struct:File
 has_body	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/http/h1.rs	/^    fn has_body(&self) -> bool {$/;"	P	implementation:Http11Message
 has_body	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/http/message.rs	/^    fn has_body(&self) -> bool;$/;"	P	interface:HttpMessage
@@ -6085,6 +6112,7 @@ id	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.
 id	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/mock.rs	/^    pub id: u64,$/;"	m	struct:MockStream
 id	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    id: u64,$/;"	m	struct:ScheduledEvent
 idempotent	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/method.rs	/^    pub fn idempotent(&self) -> bool {$/;"	P	implementation:Method
+ident	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    ident: syn::Ident,$/;"	m	struct:FieldExt
 idle	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/client/pool.rs	/^    idle: Option<Instant>,$/;"	m	struct:PooledStreamInner
 idle_duration	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/client/pool.rs	/^        pub fn idle_duration(&self) -> Duration {$/;"	P	implementation:stale::StaleCheck
 idle_timeout	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/client/pool.rs	/^    idle_timeout: Option<Duration>,$/;"	m	struct:Config2
@@ -6302,6 +6330,7 @@ is_array	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1
 is_at_least	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    pub fn is_at_least(&self, level: Self) -> bool {$/;"	P	implementation:Level
 is_bin_name	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/app/parser.rs	/^    fn is_bin_name(&self, value: &str) -> bool {$/;"	f
 is_boolean	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/value/mod.rs	/^    pub fn is_boolean(&self) -> bool {$/;"	P	implementation:Value
+is_cfg_attr_lint	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    fn is_cfg_attr_lint(item: &syn::Meta) -> bool {$/;"	f	function:collect_parent_lint_attrs
 is_client_error	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/status.rs	/^    pub fn is_client_error(&self) -> bool {$/;"	P	implementation:StatusCode
 is_closed	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/client/pool.rs	/^    is_closed: AtomicBool,$/;"	m	struct:PooledStream
 is_closed	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/mock.rs	/^    pub is_closed: bool,$/;"	m	struct:MockStream
@@ -6310,6 +6339,8 @@ is_data	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.
 is_debug_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_debug_enabled(&self) -> bool {$/;"	P	interface:Drain
 is_denormal	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/lexical/num.rs	/^    fn is_denormal(self) -> bool {$/;"	P	interface:Float
 is_depleted	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/cmn.rs	/^    fn is_depleted(&self) -> bool {$/;"	P	implementation:MultiPartReader
+is_dir	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn is_dir(&self) -> bool {$/;"	P	implementation:Syncable
+is_dir	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn is_dir(&self) -> bool;$/;"	P	interface:Uploader
 is_empty	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/args/arg_matcher.rs	/^    pub fn is_empty(&self) -> bool {$/;"	P	implementation:ArgMatcher
 is_empty	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/map.rs	/^        pub fn is_empty(&self) -> bool {$/;"	P	implementation:vec_map::VecMap
 is_empty	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/map.rs	/^    pub fn is_empty(&self) -> bool {$/;"	P	implementation:Map
@@ -6329,6 +6360,8 @@ is_eof	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0
 is_error_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn is_error_enabled(&self) -> bool {$/;"	P	interface:Drain
 is_f64	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/number.rs	/^    pub fn is_f64(&self) -> bool {$/;"	P	implementation:Number
 is_f64	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/value/mod.rs	/^    pub fn is_f64(&self) -> bool {$/;"	P	implementation:Value
+is_file	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn is_file(&self) -> bool {$/;"	P	implementation:Syncable
+is_file	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn is_file(&self) -> bool;$/;"	P	interface:Uploader
 is_human_readable	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/de/mod.rs	/^    fn is_human_readable(&self) -> bool {$/;"	P	interface:Deserializer
 is_human_readable	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/ser/mod.rs	/^    fn is_human_readable(&self) -> bool {$/;"	P	interface:Serializer
 is_i64	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/number.rs	/^    pub fn is_i64(&self) -> bool {$/;"	P	implementation:Number
@@ -6338,11 +6371,13 @@ is_info_enabled	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-
 is_informational	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/status.rs	/^    pub fn is_informational(&self) -> bool {$/;"	P	implementation:StatusCode
 is_io	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/error.rs	/^    pub fn is_io(&self) -> bool {$/;"	P	implementation:Error
 is_last_part	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/cmn.rs	/^    fn is_last_part(&self) -> bool {$/;"	P	implementation:MultiPartReader
+is_lint	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    fn is_lint(item: &syn::Meta) -> bool {$/;"	f	function:collect_parent_lint_attrs
 is_missing_required_ok	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/app/validator.rs	/^    fn is_missing_required_ok(&self, a: &AnyArg, matcher: &ArgMatcher) -> bool {$/;"	P	implementation:Validator
 is_new_arg	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/app/parser.rs	/^    fn is_new_arg(&mut self, arg_os: &OsStr, needs_val_of: ParseResult) -> bool {$/;"	f
 is_null	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/value/mod.rs	/^    pub fn is_null(&self) -> bool {$/;"	P	implementation:Value
 is_number	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/value/mod.rs	/^    pub fn is_number(&self) -> bool {$/;"	P	implementation:Value
 is_object	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/value/mod.rs	/^    pub fn is_object(&self) -> bool {$/;"	P	implementation:Value
+is_phantom_data	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    pub fn is_phantom_data(&self) -> bool {$/;"	P	implementation:FieldExt
 is_present	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/args/arg_matcher.rs	/^    pub fn is_present(&self, name: &str) -> bool {$/;"	P	implementation:ArgMatcher
 is_present	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/args/arg_matches.rs	/^    pub fn is_present<S: AsRef<str>>(&self, name: S) -> bool {$/;"	P	implementation:ArgMatches
 is_proxied	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/http/h1.rs	/^    is_proxied: bool,$/;"	m	struct:Http11Message
@@ -6570,6 +6605,9 @@ local_addr	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10
 local_addr	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/net.rs	/^    fn local_addr(&mut self) -> io::Result<SocketAddr>;$/;"	P	interface:NetworkListener
 local_addr	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/server/mod.rs	/^    pub fn local_addr(&mut self) -> io::Result<SocketAddr> {$/;"	P	implementation:Server
 local_dir_to_drive_file_id	/home/alan/local-devel/pi_drive_sync/src/main.rs	/^fn local_dir_to_drive_file_id(hub: &Hub, path: &str) -> Option<String> {$/;"	f
+local_disk_path	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    local_disk_path: String,$/;"	m	struct:Syncable
+local_path	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn local_path(&self) -> &Path {$/;"	P	implementation:Syncable
+local_path	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn local_path(&self) -> &Path;$/;"	P	interface:Uploader
 location	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/cmn.rs	/^    pub location: Option<String>$/;"	m	struct:ServerMessage
 location	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub location: Option<FileImageMediaMetadataLocation>,$/;"	m	struct:FileImageMediaMetadata
 location	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/common/mod.rs	/^mod location;$/;"	n
@@ -6789,6 +6827,7 @@ multiple	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/
 multiple	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/usage_parser.rs	/^    fn multiple(&mut self, arg: &mut Arg) {$/;"	P	implementation:UsageParser
 multiple_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/args/arg_builder/positional.rs	/^    pub fn multiple_str(&self) -> &str {$/;"	P	implementation:PosBuilder
 multiply_exponent_extended	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/lexical/algorithm.rs	/^fn multiply_exponent_extended<F>(fp: &mut ExtendedFloat, exponent: i32, truncated: bool) -> bool$/;"	f
+my_quote	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^macro_rules! my_quote {$/;"	M
 n	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/number.rs	/^    n: N,$/;"	m	struct:Number
 name	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/app/meta.rs	/^    pub name: String,$/;"	m	struct:AppMeta
 name	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/app/mod.rs	/^    fn name(&self) -> &'n str {$/;"	P	implementation:App
@@ -6820,8 +6859,10 @@ name	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.5
 name	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/value/ser.rs	/^    name: String,$/;"	m	struct:SerializeTupleVariant
 name_end	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/usage_parser.rs	/^fn name_end(b: u8) -> bool {$/;"	f
 name_no_brackets	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/args/arg_builder/positional.rs	/^    pub fn name_no_brackets(&self) -> Cow<str> {$/;"	P	implementation:PosBuilder
+named	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    named: bool,$/;"	m	struct:FieldExt
 names	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/de/mod.rs	/^    names: &'static [&'static str],$/;"	m	struct:OneOf
 nearest_error_is_accurate	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/lexical/errors.rs	/^fn nearest_error_is_accurate(errors: u64, fp: &ExtendedFloat, extrabits: u64) -> bool {$/;"	f
+needs_arg	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    pub fn needs_arg(&self) -> bool {$/;"	P	implementation:FieldExt
 needs_flags_tag	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/app/usage.rs	/^fn needs_flags_tag(p: &Parser) -> bool {$/;"	f
 needs_more_vals	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/args/arg_matcher.rs	/^    pub fn needs_more_vals<'b, A>(&self, o: &A) -> bool$/;"	P	implementation:ArgMatcher
 net	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/lib.rs	/^pub mod net;$/;"	n
@@ -6853,6 +6894,7 @@ new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/c
 new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/fmt.rs	/^    pub fn new(option: ColorizerOption) -> Colorizer {$/;"	P	implementation:Colorizer
 new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/map.rs	/^        pub fn new() -> Self {$/;"	P	implementation:vec_map::VecMap
 new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/usage_parser.rs	/^    fn new(usage: &'a str) -> Self {$/;"	P	implementation:UsageParser
+new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    pub fn new(field: &'a syn::Field, idx: usize, named: bool) -> FieldExt<'a> {$/;"	P	implementation:FieldExt
 new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub fn new(client: C, authenticator: A) -> DriveHub<C, A> {$/;"	f
 new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/buffer.rs	/^    pub fn new(rdr: R) -> BufReader<R> {$/;"	P	implementation:BufReader
 new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/client/mod.rs	/^    pub fn new() -> Client {$/;"	P	implementation:Client
@@ -6972,6 +7014,9 @@ new	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12
 new_bitflags_form	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/lib.rs	/^    fn new_bitflags_form() {$/;"	f	module:op_test
 new_event_trigger	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    new_event_trigger: Arc<Condvar>,$/;"	m	struct:ScheduleWorker
 new_event_trigger	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    new_event_trigger: Arc<Condvar>,$/;"	m	struct:WatchTimer
+new_for_enum	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^fn new_for_enum(ast: &syn::DeriveInput, data: &syn::DataEnum) -> proc_macro2::TokenStream {$/;"	f
+new_for_struct	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^fn new_for_struct($/;"	f
+new_impl	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^fn new_impl($/;"	f
 new_in	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/dir.rs	/^    pub fn new_in<P: AsRef<Path>>(dir: P) -> io::Result<TempDir> {$/;"	P	implementation:TempDir
 new_in	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn new_in<P: AsRef<Path>>(dir: P) -> io::Result<NamedTempFile> {$/;"	P	implementation:NamedTempFile
 new_message	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/http/h1.rs	/^    fn new_message(&self, host: &str, port: u16, scheme: &str) -> ::Result<Box<HttpMessage>> {$/;"	P	implementation:Http11Protocol
@@ -7234,10 +7279,13 @@ param	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1
 param	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub fn param<T>(mut self, name: T, value: T) -> TeamdriveUpdateCall<'a, C, A>$/;"	f
 parameters	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/common/content_disposition.rs	/^    pub parameters: Vec<DispositionParam>,$/;"	m	struct:ContentDisposition
 params	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub params: Option<HashMap<String, String>>,$/;"	m	struct:Channel
+parent_path	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn parent_path(&self) -> Result<PathBuf, SyncerErrors> {$/;"	P	implementation:Syncable
+parent_path	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn parent_path(&self) -> Result<PathBuf, SyncerErrors>;$/;"	P	interface:Uploader
 parent_path_to_base_64	/home/alan/local-devel/pi_drive_sync/src/main.rs	/^fn parent_path_to_base_64(local_path: &str) -> Option<String> {$/;"	f
 parents	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub parents: Option<Vec<String>>,$/;"	m	struct:File
 parse	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/lib.rs	/^        fn parse() -> Self {$/;"	P	interface:derive::ClapApp
 parse	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/usage_parser.rs	/^    pub fn parse(mut self) -> Arg<'a, 'a> {$/;"	P	implementation:UsageParser
+parse	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    pub fn parse(attrs: &[syn::Attribute]) -> Option<FieldAttr> {$/;"	P	implementation:FieldAttr
 parse	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/internals/item.rs	/^fn parse<H: Header + HeaderFormat>(raw: &Vec<Vec<u8>>) ->$/;"	f
 parse	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/http/h1.rs	/^fn parse<R: Read, T: TryParse<Subject=I>, I>(rdr: &mut BufReader<R>) -> ::Result<Incoming<I>> {$/;"	f
 parse	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/lexical/mod.rs	/^pub(crate) mod parse;$/;"	n
@@ -7328,6 +7376,7 @@ path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/s
 path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    path: TempPath,$/;"	m	struct:NamedTempFile
 path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub fn path(&self) -> &Path {$/;"	P	implementation:NamedTempFile
 path	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    pub path: TempPath,$/;"	m	struct:PathPersistError
+path_to_string	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^fn path_to_string(path: &syn::Path) -> String {$/;"	f
 paths	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^    paths: cf::CFMutableArrayRef,$/;"	m	struct:FsEventWatcher
 paths	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/inotify.rs	/^    paths: HashMap<WatchDescriptor, PathBuf>,$/;"	m	struct:EventLoop
 paths	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/poll.rs	/^    paths: HashMap<PathBuf, PathData>,$/;"	m	struct:WatchData
@@ -7379,6 +7428,7 @@ persist_noclobber	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tem
 phantom	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde-1.0.114/src/de/impls.rs	/^        pub phantom: PhantomData<Idx>,$/;"	m	struct:range::RangeVisitor
 photo_link	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub photo_link: Option<String>,$/;"	m	struct:Permission
 photo_link	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub photo_link: Option<String>,$/;"	m	struct:User
+pi_err	/home/alan/local-devel/pi_drive_sync/src/main.rs	/^mod pi_err;$/;"	n
 plaintext	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/common/content_type.rs	/^    pub fn plaintext() -> ContentType {$/;"	P	implementation:ContentType
 png	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/common/content_type.rs	/^    pub fn png() -> ContentType {$/;"	P	implementation:ContentType
 pointer	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/value/mod.rs	/^    pub fn pointer(&self, pointer: &str) -> Option<&Value> {$/;"	P	implementation:Value
@@ -7766,6 +7816,8 @@ scratch	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.
 sdebug	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/macros.rs	/^    macro_rules! sdebug {$/;"	M	module:debug_macros
 sdebugln	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/macros.rs	/^    macro_rules! sdebugln {$/;"	M	module:debug_macros
 sealed	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/mod.rs	/^mod sealed {$/;"	n
+search_remote_store_for_unique_id	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn search_remote_store_for_unique_id(&self) -> Option<String> {$/;"	P	implementation:Syncable
+search_remote_store_for_unique_id	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn search_remote_store_for_unique_id(&self) -> Option<String>;$/;"	P	interface:Uploader
 secret	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12/src/authenticator.rs	/^    secret: ApplicationSecret,$/;"	m	struct:Authenticator
 seek	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/mod.rs	/^    fn seek(&mut self, pos: SeekFrom) -> io::Result<u64> {$/;"	P	implementation:NamedTempFile
 seek	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/spooled.rs	/^    fn seek(&mut self, pos: SeekFrom) -> io::Result<u64> {$/;"	P	implementation:SpooledTempFile
@@ -8692,6 +8744,7 @@ test_from_raw	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0
 test_from_ssl	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/error.rs	/^    fn test_from_ssl() {$/;"	f	module:tests
 test_from_str	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/method.rs	/^    fn test_from_str() {$/;"	f	module:tests
 test_fsevent_watcher_drop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/fsevent.rs	/^fn test_fsevent_watcher_drop() {$/;"	f
+test_generate_parent_unique_id	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn test_generate_parent_unique_id() {$/;"	f	module:tests
 test_get_empty_body	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/client/request.rs	/^    fn test_get_empty_body() {$/;"	f	module:tests
 test_get_empty_body	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/server/request.rs	/^    fn test_get_empty_body() {$/;"	f	module:tests
 test_get_mutable	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/mod.rs	/^    fn test_get_mutable() {$/;"	f	module:tests
@@ -8823,6 +8876,7 @@ test_resize	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.1
 test_rfc_850	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/shared/httpdate.rs	/^    fn test_rfc_850() {$/;"	f	module:tests
 test_rightmost_header	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/common/referrer_policy.rs	/^fn test_rightmost_header() {$/;"	f
 test_safe	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/method.rs	/^    fn test_safe() {$/;"	f	module:tests
+test_search_remote_store_for_unique_id	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn test_search_remote_store_for_unique_id() {$/;"	f	module:tests
 test_service_account_e2e	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12/src/service_account.rs	/^    fn test_service_account_e2e() {$/;"	f	module:tests
 test_set_cookie_fmt	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/common/set_cookie.rs	/^fn test_set_cookie_fmt() {$/;"	f
 test_set_raw	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/mod.rs	/^    fn test_set_raw() {$/;"	f	module:tests
@@ -8832,7 +8886,15 @@ test_status_code	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hype
 test_streaming_drop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/server/response.rs	/^    fn test_streaming_drop() {$/;"	f	module:tests
 test_streaming_end	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/server/response.rs	/^    fn test_streaming_end() {$/;"	f	module:tests
 test_strip_local_fs	/home/alan/local-devel/pi_drive_sync/src/main.rs	/^    fn test_strip_local_fs() {$/;"	f	module:tests
+test_to_snake_case	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^fn test_to_snake_case() {$/;"	f
 test_trailing_whitespace	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/mod.rs	/^    fn test_trailing_whitespace() {$/;"	f	module:tests
+test_upload_get_unique_id_dir	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn test_upload_get_unique_id_dir() {$/;"	f	module:tests
+test_upload_get_unique_id_file	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn test_upload_get_unique_id_file() {$/;"	f	module:tests
+test_upload_is_dir	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn test_upload_is_dir() {$/;"	f	module:tests
+test_upload_is_file	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn test_upload_is_file() {$/;"	f	module:tests
+test_upload_local_path	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn test_upload_local_path() {$/;"	f	module:tests
+test_upload_remote_path	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn test_upload_remote_path() {$/;"	f	module:tests
+test_uploader	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn test_uploader() {$/;"	f	module:tests
 test_uri_display	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/uri.rs	/^fn test_uri_display() {$/;"	f
 test_uri_fromstr	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/uri.rs	/^fn test_uri_fromstr() {$/;"	f
 test_url_query	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/client/request.rs	/^    fn test_url_query() {$/;"	f	module:tests
@@ -8885,6 +8947,7 @@ tests	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.
 tests	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12/src/service_account.rs	/^mod tests {$/;"	n
 tests	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/yup-oauth2-1.0.12/src/types.rs	/^pub mod tests {$/;"	n
 tests	/home/alan/local-devel/pi_drive_sync/src/main.rs	/^mod tests {$/;"	n
+tests	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^mod tests {$/;"	n
 text	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/common/accept.rs	/^    pub fn text() -> Accept {$/;"	P	implementation:Accept
 theme_id	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub theme_id: Option<String>,$/;"	m	struct:Drive
 theme_id	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub theme_id: Option<String>,$/;"	m	struct:TeamDrive
@@ -8920,6 +8983,7 @@ to_owned	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1
 to_parts	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/cmn.rs	/^    fn to_parts(&self) -> String;$/;"	P	interface:ToParts
 to_raw_value	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/serde_json-1.0.57/src/raw.rs	/^pub fn to_raw_value<T>(value: &T) -> Result<Box<RawValue>, Error>$/;"	f
 to_sendable	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-2.5.2/src/lib.rs	/^    fn to_sendable(&self) -> Box<SerdeValue + Send + 'static>;$/;"	P	interface:SerdeValue
+to_snake_case	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^fn to_snake_case(s: &str) -> String {$/;"	f
 to_str_slice	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/args/arg_matches.rs	/^            fn to_str_slice(o: &OsString) -> &str {$/;"	f	method:ArgMatches::values_of
 to_str_slice	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/args/arg_matches.rs	/^        fn to_str_slice(_: &OsString) -> &OsStr {$/;"	f	method:OsValues::default
 to_str_slice	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/args/arg_matches.rs	/^        fn to_str_slice(_: &OsString) -> &str {$/;"	f	method:Values::default
@@ -8997,6 +9061,7 @@ tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/
 tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    tx: mpsc::Sender<DebouncedEvent>,$/;"	m	struct:ScheduleWorker
 tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    tx: Sender<Action>,$/;"	m	struct:ReadDirectoryChangesWatcher
 tx	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/slog-async-2.5.0/lib.rs	/^    tx: Sender<AsyncMsg>,$/;"	m	struct:AsyncGuard
+ty	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    ty: &'a syn::Type,$/;"	m	struct:FieldExt
 type_	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub type_: Option<String>,$/;"	m	struct:Change
 type_	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub type_: Option<String>,$/;"	m	struct:Channel
 type_	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub type_: Option<String>,$/;"	m	struct:Permission
@@ -9066,6 +9131,8 @@ upgrade	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16
 upload	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/cmn.rs	/^    pub fn upload(&mut self) -> Option<hyper::Result<hyper::client::Response>> {$/;"	f
 upload	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub fn upload<RS>(self, stream: RS, mime_type: mime::Mime) -> Result<(hyper::client::Respons/;"	f
 upload	/home/alan/local-devel/pi_drive_sync/src/main.rs	/^fn upload(hub: &Hub, path: &str) -> std::result::Result<u16, String> {$/;"	f
+upload	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn upload(&self) -> Option<String> {$/;"	P	implementation:Syncable
+upload	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn upload(&self) -> Option<String>;$/;"	P	interface:Uploader
 upload_handler	/home/alan/local-devel/pi_drive_sync/src/main.rs	/^mod upload_handler;$/;"	n
 upload_resumable	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub fn upload_resumable<RS>(self, resumeable_stream: RS, mime_type: mime::Mime) -> Result<(h/;"	f
 upload_url	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/cmn.rs	/^    fn upload_url(&mut self) -> Option<String> {$/;"	P	interface:Delegate

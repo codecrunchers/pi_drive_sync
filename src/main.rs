@@ -1,4 +1,6 @@
 #[macro_use]
+extern crate derive_new;
+#[macro_use]
 extern crate slog;
 #[macro_use]
 extern crate lazy_static;
@@ -10,7 +12,10 @@ extern crate notify;
 extern crate tempfile;
 extern crate yup_oauth2 as oauth2;
 
+mod pi_err;
+
 mod upload_handler;
+
 use self::base64::encode;
 use clap::{App, Arg};
 use drive3::{Comment, DriveHub, Error, File, Result};
