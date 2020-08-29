@@ -13,7 +13,7 @@ struct Syncable {
     local_disk_path: String,
 }
 
-trait Uploader {
+trait FileOperations {
     fn upload(&self) -> Option<String>;
     fn local_path(&self) -> &Path;
     fn cloud_path(&self) -> Result<PathBuf, SyncerErrors>;
@@ -24,7 +24,7 @@ trait Uploader {
     fn search_remote_store_for_unique_id(&self) -> Option<String>;
 }
 
-impl Uploader for Syncable {
+impl FileOperations for Syncable {
     fn upload(&self) -> Option<String> {
         todo!()
     }
@@ -39,7 +39,7 @@ impl Uploader for Syncable {
     }
 
     fn parent_path(&self) -> Result<PathBuf, SyncerErrors> {
-        let mut p_copy = PathBuf::from(&self.cloud_path().unwrap());
+        let mut p_copy = PathBuf::from(&self.cloud_path()?);
         match p_copy.pop() {
             true => Ok(p_copy),
             false => Err(SyncerErrors::InvalidPathError),
@@ -73,11 +73,11 @@ mod tests {
         let local_file = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan.txt");
         let s = Syncable::new(local_file.to_owned());
 
-        let cp = s.cloud_path();
-        assert_eq!(
-            format!("{}/{}", DRIVE_ROOT_FOLDER, "alan.txt"),
-            cp.unwrap().to_str().unwrap()
-        );
+        let cp = s.cloud_path().unwrap();
+        let cp_string = cp.to_str().unwrap();
+
+        println!("Root Test {}", cp_string);
+        assert_eq!(format!("{}/{}", DRIVE_ROOT_FOLDER, "alan.txt"), cp_string);
         assert_eq!(
             encode(format!("{}/{}", DRIVE_ROOT_FOLDER, "alan.txt")),
             s.get_unique_id().unwrap()
@@ -133,7 +133,7 @@ mod tests {
     }
 
     #[test]
-    fn test_uploader() {
+    fn test_upload_uploader() {
         let s = Syncable::new(format!("{}{}", LOCAL_ROOT_FOLDER, "/alan"));
         let id = s.upload();
         assert_eq!("".to_owned(), id.unwrap());
@@ -141,6 +141,10 @@ mod tests {
 
     #[test]
     fn test_upload_parent_path() {
+        let root_file = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan.txt");
+        let root_s = Syncable::new(root_file.to_owned());
+        assert_eq!(Path::new(DRIVE_ROOT_FOLDER), root_s.parent_path().unwrap());
+
         let child = format!("{}{}", LOCAL_ROOT_FOLDER, "/a/a.txt");
         let c = Syncable::new(child.to_owned());
         assert_eq!(
@@ -181,7 +185,6 @@ mod tests {
 
         let child_parent_path = c.parent_path();
         let ntpath = child_parent_path.unwrap().to_str().unwrap().to_owned();
-        println!("{}", ntpath);
         assert_eq!(encode(ntpath), folder_id.unwrap());
     }
 

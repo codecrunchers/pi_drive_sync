@@ -12,8 +12,8 @@ extern crate notify;
 extern crate tempfile;
 extern crate yup_oauth2 as oauth2;
 
+mod drive_cli;
 mod pi_err;
-
 mod upload_handler;
 
 use self::base64::encode;
