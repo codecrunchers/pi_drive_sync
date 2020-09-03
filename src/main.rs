@@ -13,7 +13,6 @@ extern crate tempfile;
 extern crate yup_oauth2 as oauth2;
 
 mod drive_cli;
-mod pi_err;
 mod upload_handler;
 
 use self::base64::encode;
@@ -32,14 +31,8 @@ use std::time::Duration;
 use tempfile::tempfile;
 
 mod common;
+mod pi_err;
 
-const PI_DRIVE_SYNC_PROPS_KEY: &str = "pi_sync_id";
-const DIR_SCAN_DELAY: &str = "1";
-const ROOT_FOLDER_ID: &str = "19ipt2Rg1TGzr5esE_vA_1oFjrt7l5g7a"; //TODO, needs to be smarter
-const LOCAL_FILE_STORE: &str = "/tmp/pi_sync/images";
-const DRIVE_ROOT_FOLDER: &str = "RpiCamSyncer";
-
-//save me typing this for sigs
 type Hub = drive3::DriveHub<
     hyper::Client,
     oauth2::Authenticator<
@@ -48,6 +41,12 @@ type Hub = drive3::DriveHub<
         hyper::Client,
     >,
 >;
+
+const PI_DRIVE_SYNC_PROPS_KEY: &str = "pi_sync_id";
+const DIR_SCAN_DELAY: &str = "1";
+const ROOT_FOLDER_ID: &str = "19ipt2Rg1TGzr5esE_vA_1oFjrt7l5g7a"; //TODO, needs to be smarter
+const LOCAL_FILE_STORE: &str = "/tmp/pi_sync/images";
+const DRIVE_ROOT_FOLDER: &str = "RpiCamSyncer";
 
 use common::LOG as log;
 
@@ -106,30 +105,12 @@ fn main() {
     trace!(log, "Using {} as WPS Script", secret_file);
     trace!(log, "Using {} as Dir to monitor", target_dir);
 
-    let secret = read_client_secret(secret_file.to_string());
-
-    let token_storage = DiskTokenStorage::new(&String::from("temp_token"))
-        .expect("Cannot create temp storage token - write permissions?");
-    let auth = Authenticator::new(
-        &secret,
-        DefaultAuthenticatorDelegate,
-        hyper::Client::with_connector(hyper::net::HttpsConnector::new(
-            hyper_rustls::TlsClient::new(),
-        )),
-        token_storage,
-        Some(yup_oauth2::FlowType::InstalledInteractive),
-    );
-
-    let hub = DriveHub::new(
-        hyper::Client::with_connector(hyper::net::HttpsConnector::new(
-            hyper_rustls::TlsClient::new(),
-        )),
-        auth,
-    );
+    let syncer_drive_cli = drive_cli::Drive3Client::new(secret_file.to_owned());
+    trace!(log, "Drive CLI {}", syncer_drive_cli.hub.is_ok());
 
     //TODO: first run
     //if ! -d "RpiCamSyncer"
-    mkdir(&hub, DRIVE_ROOT_FOLDER).unwrap();
+    //mkdir(&hub, DRIVE_ROOT_FOLDER).unwrap();
 
     let (sender, receiver) = channel();
     let mut watcher =
@@ -142,16 +123,17 @@ fn main() {
         if let Some(path) = p.to_str() {
             if std::path::Path::new(path).is_dir() {
                 trace!(log, "Dir  Create {:?}", p);
-                mkdir(&hub, path).unwrap_or({
-                    warn!(log, "Cannot create dir");
-                    0
-                });
+            //mkdir(&hub, path).unwrap_or({
+            //  warn!(log, "Cannot create dir");
+            //  0
+            //});
             } else {
                 trace!(log, "File Upload {:?}", p);
-                upload(&hub, path).unwrap_or({
-                    warn!(log, "Cannot create file");
-                    0
-                });
+                /*                upload(&hub, path).unwrap_or({
+                                    warn!(log, "Cannot create file");
+                                    0
+                                });
+                */
             }
         } else {
             warn!(log, "Cannot Create {:?}", p);
@@ -159,10 +141,10 @@ fn main() {
     };
 
     loop {
-        let hub = &hub;
+        //let hub = &hub;
         match receiver.recv() {
             Ok(notify::DebouncedEvent::Create(p)) => {
-                handle_event(hub, p.clone());
+                handle_event("s", p.clone());
             }
             _ => trace!(log, "unidentified event"),
             Err(e) => error!(log, "watch error: {:?}", e),
