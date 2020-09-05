@@ -12,7 +12,9 @@ extern crate notify;
 extern crate tempfile;
 extern crate yup_oauth2 as oauth2;
 
+mod common;
 mod drive_cli;
+mod pi_err;
 mod upload_handler;
 
 use self::base64::encode;
@@ -29,18 +31,7 @@ use std::path::Path;
 use std::sync::mpsc::channel;
 use std::time::Duration;
 use tempfile::tempfile;
-
-mod common;
-mod pi_err;
-
-type Hub = drive3::DriveHub<
-    hyper::Client,
-    oauth2::Authenticator<
-        oauth2::DefaultAuthenticatorDelegate,
-        oauth2::DiskTokenStorage,
-        hyper::Client,
-    >,
->;
+use upload_handler::{FileOperations, SyncableFile};
 
 const PI_DRIVE_SYNC_PROPS_KEY: &str = "pi_sync_id";
 const DIR_SCAN_DELAY: &str = "1";
@@ -106,11 +97,15 @@ fn main() {
     trace!(log, "Using {} as Dir to monitor", target_dir);
 
     let syncer_drive_cli = drive_cli::Drive3Client::new(secret_file.to_owned());
-    trace!(log, "Drive CLI {}", syncer_drive_cli.hub.is_ok());
 
-    //TODO: first run
-    //if ! -d "RpiCamSyncer"
-    //mkdir(&hub, DRIVE_ROOT_FOLDER).unwrap();
+    //syncer_drive_cli.create_dir("RpiCamsyncer", None);
+
+    /*let s = SyncableFile::new(
+        format!("{}/{}", upload_handler::LOCAL_ROOT_FOLDER, "RpiSyncer1"),
+        syncer_drive_cli,
+    );
+    s.upload();
+    */
 
     let (sender, receiver) = channel();
     let mut watcher =
@@ -180,7 +175,7 @@ fn get_file_name(lfsn: &str) -> Option<&str> {
     path.file_name()?.to_str()
 }
 
-fn parent_path_to_base_64(local_path: &str) -> Option<String> {
+/*fn parent_path_to_base_64(local_path: &str) -> Option<String> {
     trace!(log, "Path to id for {}", local_path);
 
     let ancestors = Path::new(local_path)
@@ -349,97 +344,9 @@ fn mkdir(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
             Ok(res.0.status.to_u16())
         }
     }
-}
+}*/
 
 #[cfg(test)]
 mod tests {
     use crate::common::LOG as log;
-
-    #[test]
-    fn test_strip_local_fs() {
-        assert_eq!(
-            Some("RpiCamSyncer"),
-            crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "RpiCamSyncer"))
-        );
-
-        assert_eq!(
-            Some("a/b.txt"),
-            crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "a/b.txt"))
-        );
-
-        assert_eq!(
-            Some("a/b"),
-            crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "a/b"))
-        );
-
-        assert_eq!(
-            Some("a"),
-            crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "a"))
-        );
-
-        assert_eq!(
-            Some("123"),
-            crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "123"))
-        );
-
-        assert_eq!(
-            Some("?123"),
-            crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "?123"))
-        );
-
-        assert_eq!(
-            Some("\\123"),
-            crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "\\123"))
-        );
-
-        assert_eq!(
-            Some("tmp/a/b/c/123"),
-            crate::strip_local_fs(&format!("{}/{}", crate::LOCAL_FILE_STORE, "tmp/a/b/c/123"))
-        );
-
-        assert_eq!(
-            Some(""),
-            crate::strip_local_fs(&format!("{}", crate::LOCAL_FILE_STORE))
-        );
-    }
-
-    #[test]
-    fn test_get_unique_entry_id_dir() {
-        let b64 =
-            crate::get_unique_entry_id(&format!("{}{}", crate::LOCAL_FILE_STORE, "/test/1/2/"));
-        println!("{:?}", b64);
-        assert_eq!(String::from("UnBpQ2FtU3luY2VydGVzdC8xLzIK"), b64.unwrap());
-    }
-
-    #[test]
-    fn test_create_unique_dir_id_for_root_entry() {
-        let b64 = crate::get_unique_entry_id(&format!("{}{}", crate::LOCAL_FILE_STORE, "/test"));
-        println!("{:?}", b64);
-        assert_eq!(String::from("UnBpQ2FtU3luY2VydGVzdA=="), b64.unwrap());
-    }
-
-    #[test]
-    fn test_create_unique_dir_id_for_root_root_entry() {
-        let b64 = crate::get_unique_entry_id("/test");
-        println!("{:?}", b64);
-        assert_eq!(String::from("UnBpQ2FtU3luY2VydGVzdA=="), b64.unwrap());
-    }
-
-    #[test]
-    fn test_parent_path_to_base_64() {
-        let pid = crate::parent_path_to_base_64(&format!("{}{}", crate::LOCAL_FILE_STORE, "/test"));
-        println!("{:?}", pid);
-        assert_eq!(Some("UnBpQ2FtU3luY2VydGVzdA==".to_owned()), pid);
-    }
-
-    #[test]
-    fn test_get_unique_entry_id() {
-        let b64 = crate::get_unique_entry_id(&format!(
-            "{}{}",
-            crate::LOCAL_FILE_STORE,
-            "/test/1/2/abc.txt"
-        ));
-        println!("{:?}", b64);
-        assert_eq!(String::from("UnBpQ2FtU3luY2VyYWJjLnR4dA=="), b64.unwrap());
-    }
 }
