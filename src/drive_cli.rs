@@ -33,8 +33,12 @@ pub trait CloudClient {
         local_fs_path: &std::path::Path,
         parent_id: Option<&str>,
     ) -> PiSyncResult<Option<String>>;
-    fn create_dir(&self, s: &str, parent_id: Option<&str>) -> PiSyncResult<Option<String>>;
-    fn id(&self, s: &str) -> PiSyncResult<Option<String>>;
+    fn create_dir(
+        &self,
+        local_fs_path: &str,
+        parent_id: Option<&str>,
+    ) -> PiSyncResult<Option<String>>;
+    fn id(&self, local_path: &str) -> PiSyncResult<Option<String>>; //should this be cloud path
     fn app_props_map(&self, id: &str) -> Option<HashMap<String, String>>;
 }
 
@@ -98,9 +102,13 @@ impl CloudClient for Drive3Client {
         todo!()
     }
 
-    ///Create a remote dir and then return the Storage Service File Id
-    fn create_dir(&self, s: &str, parent_id: Option<&str>) -> PiSyncResult<Option<String>> {
-        let s = SyncableFile::new(s.to_owned());
+    ///Create a remote dir in root offset relatie to local_dir and then return the Storage Service File Id
+    fn create_dir(
+        &self,
+        local_fs_path: &str,
+        parent_id: Option<&str>,
+    ) -> PiSyncResult<Option<String>> {
+        let s = SyncableFile::new(local_fs_path.to_owned());
         trace!(
             log,
             "Create dir:: Dir to create {:?} from local {:?}",
@@ -155,10 +163,11 @@ impl CloudClient for Drive3Client {
     }
 
     ///Get the google drive id for this entry
-    fn id(&self, s: &str) -> PiSyncResult<Option<String>> {
-        let s = SyncableFile::new(s.to_owned());
-        trace!(log, "File Search for {:?}", s.cloud_path().unwrap());
+    fn id(&self, local_path: &str) -> PiSyncResult<Option<String>> {
+        trace!(log, "File Search for {:?}", local_path);
+        let s = SyncableFile::new(local_path.to_owned());
         let b64_id = s.get_unique_id()?;
+        trace!(log, "Unique ID = {} or {:?}", b64_id, local_path);
         let q = &format!(
             "{} {{ key='{}' and value='{}' }}",
             "appProperties has ", PI_DRIVE_SYNC_PROPS_KEY, b64_id

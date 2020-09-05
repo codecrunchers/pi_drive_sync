@@ -39,8 +39,18 @@ impl FileOperations for SyncableFile {
     fn parent_path(&self) -> Result<PathBuf, SyncerErrors> {
         let mut p_copy = PathBuf::from(&self.cloud_path()?);
         match p_copy.pop() {
-            true => Ok(p_copy),
-            false => Err(SyncerErrors::InvalidPathError),
+            true => {
+                debug!(log, "FileOperations::Parent Path = {:?}", p_copy);
+                Ok(PathBuf::from(format!(
+                    "{}/{}",
+                    LOCAL_ROOT_FOLDER,
+                    p_copy.to_str().unwrap()
+                )))
+            }
+            false => {
+                error!(log, "cannot pop  {:?}", p_copy);
+                Err(SyncerErrors::InvalidPathError)
+            }
         }
     }
 
