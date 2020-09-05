@@ -221,12 +221,14 @@ mod tests {
 
     #[test]
     fn test_drive_cli_id() {
-        let mut file = std::fs::File::create("/tmp/pi_sync/images/alan.txt").unwrap();
-        file.write_all(b"empty_file\n").unwrap();
         let dc = Drive3Client::new("/home/alan/.google-service-cli/drive3-secret.json".to_owned());
-        let s = "/tmp/pi_sync/images/alan.txt";
-        let r = dc.id(s);
+        let d = "/tmp/pi_sync/images/new_dir";
+        let api_id = dc.create_dir(d, None).unwrap();
+        let r = dc.id(d);
         assert_eq!(r.is_ok(), true);
-        assert_eq!(r.unwrap(), None);
+        assert_eq!(r.unwrap(), api_id);
+
+        //let mut file = std::fs::File::create("/tmp/pi_sync/images/alan.txt").unwrap();
+        //file.write_all(b"empty_file\n").unwrap();
     }
 }
