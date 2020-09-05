@@ -1,15 +1,20 @@
+use crate::drive_cli::{CloudClient, Drive3Client, Hub};
+
 use crate::pi_err::SyncerErrors;
+
+use crate::common::LOG as log;
 use base64::{decode, encode};
 use std::path::{Path, PathBuf, StripPrefixError};
 
 const DIR_SCAN_DELAY: &str = "1";
 const ROOT_FOLDER_ID: &str = "19ipt2Rg1TGzr5esE_vA_1oFjrt7l5g7a"; //TODO, needs to be smarter
-const LOCAL_ROOT_FOLDER: &str = "/tmp/pi_sync/images";
+pub const LOCAL_ROOT_FOLDER: &str = "/tmp/pi_sync/images";
 const DRIVE_ROOT_FOLDER: &str = "RpiCamSyncer";
 
 #[derive(new)]
 pub struct SyncableFile {
     local_disk_path: String,
+    pub storage_cli: Drive3Client, //circular deps here need to go
 }
 
 pub trait FileOperations {
@@ -24,7 +29,13 @@ pub trait FileOperations {
 
 impl FileOperations for SyncableFile {
     fn upload(&self) -> Option<String> {
-        todo!()
+        match self.storage_cli.create_dir(&self, None) {
+            Ok(id) => id,
+            Err(e) => {
+                warn!(log, "Cannot Upload {:?} [{:?}", &self.local_path(), e);
+                None
+            }
+        }
     }
     fn local_path(&self) -> &Path {
         Path::new(&self.local_disk_path)
@@ -64,14 +75,20 @@ impl FileOperations for SyncableFile {
 #[cfg(test)]
 mod tests {
     use crate::common::LOG as log;
+    use crate::drive_cli::*;
     use crate::upload_handler::*;
     use std::path::{Path, PathBuf, StripPrefixError};
+
+    fn syncable_file(p: String) -> SyncableFile {
+        let drive_cli =
+            Drive3Client::new("/home/alan/.google-service-cli/drive3-secret.json".to_owned());
+        SyncableFile::new(p, drive_cli)
+    }
 
     #[test]
     fn test_upload_get_unique_id_file() {
         let local_file = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan.txt");
-        let s = SyncableFile::new(local_file.to_owned());
-
+        let s = syncable_file(local_file);
         let cp = s.cloud_path().unwrap();
         let cp_string = cp.to_str().unwrap();
 
@@ -86,7 +103,7 @@ mod tests {
     #[test]
     fn test_upload_get_unique_id_dir() {
         let local_file = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan");
-        let s = SyncableFile::new(local_file.to_owned());
+        let s = syncable_file(local_file);
 
         let cp = s.cloud_path();
         assert_eq!(
@@ -102,21 +119,21 @@ mod tests {
     #[test]
     fn test_upload_is_file() {
         let local_file = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan.txt");
-        let s = SyncableFile::new(local_file.to_owned());
+        let s = syncable_file(local_file);
         assert_eq!(true, s.is_file());
     }
 
     #[test]
     fn test_upload_is_dir() {
         let local_dir = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan");
-        let s = SyncableFile::new(local_dir.to_owned());
+        let s = syncable_file(local_dir);
         assert_eq!(true, s.is_dir());
     }
 
     #[test]
     fn test_upload_remote_path() {
         let local_dir = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan");
-        let s = SyncableFile::new(local_dir.clone().to_owned());
+        let s = syncable_file(local_dir);
         let rp = Path::new(DRIVE_ROOT_FOLDER).join("alan");
         let cp = s.cloud_path();
         assert_eq!(rp, cp.unwrap());
@@ -125,7 +142,7 @@ mod tests {
     #[test]
     fn test_upload_local_path() {
         let local_dir = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan");
-        let s = SyncableFile::new(local_dir.clone().to_owned());
+        let s = syncable_file(local_dir.clone());
         let p = Path::new(&local_dir);
         let lp = s.local_path();
         assert_eq!(p, lp);
@@ -133,7 +150,8 @@ mod tests {
 
     #[test]
     fn test_upload_uploader() {
-        let s = SyncableFile::new(format!("{}{}", LOCAL_ROOT_FOLDER, "/alan"));
+        let local_file = (format!("{}{}", LOCAL_ROOT_FOLDER, "/alan"));
+        let s = syncable_file(local_file);
         let id = s.upload();
         assert_eq!("".to_owned(), id.unwrap());
     }
@@ -141,44 +159,47 @@ mod tests {
     #[test]
     fn test_upload_parent_path() {
         let root_file = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan.txt");
-        let root_s = SyncableFile::new(root_file.to_owned());
+        let root_s = syncable_file(root_file);
+
         assert_eq!(Path::new(DRIVE_ROOT_FOLDER), root_s.parent_path().unwrap());
 
         let child = format!("{}{}", LOCAL_ROOT_FOLDER, "/a/a.txt");
-        let c = SyncableFile::new(child.to_owned());
+        let c = syncable_file(child);
+
         assert_eq!(
             Path::new(DRIVE_ROOT_FOLDER).join("a"),
             c.parent_path().unwrap()
         );
 
         let child1 = format!("{}{}", LOCAL_ROOT_FOLDER, "/b/b");
-        let c1 = SyncableFile::new(child1.to_owned());
+        let c1 = syncable_file(child1);
+
         assert_eq!(
             Path::new(DRIVE_ROOT_FOLDER).join("b"),
             c1.parent_path().unwrap()
         );
 
         let child2 = format!("{}{}", LOCAL_ROOT_FOLDER, "/c/c/test.txt");
-        let c2 = SyncableFile::new(child2.to_owned());
+        let c2 = syncable_file(child2);
         assert_eq!(
             Path::new(DRIVE_ROOT_FOLDER).join("c/c"),
             c2.parent_path().unwrap()
         );
 
         let child3 = format!("{}{}", LOCAL_ROOT_FOLDER, "/d");
-        let c3 = SyncableFile::new(child3.to_owned());
+        let c3 = syncable_file(child3);
         assert_eq!(Path::new(DRIVE_ROOT_FOLDER), c3.parent_path().unwrap());
     }
 
     #[test]
     fn test_upload_generate_parent_unique_id() {
         let parent = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan");
-        let f = SyncableFile::new(parent.clone().to_owned());
+        let f = syncable_file(parent);
+
         let folder_id = f.get_unique_id();
 
         let child = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan/alan.txt");
-        let c = SyncableFile::new(child.to_owned());
-
+        let c = syncable_file(child);
         let rp = Path::new(DRIVE_ROOT_FOLDER).join("alan/alan.txt");
         assert_eq!(rp.as_path(), c.cloud_path().unwrap());
 
