@@ -20,6 +20,7 @@ mod upload_handler;
 use self::base64::encode;
 use clap::{App, Arg};
 use drive3::{Comment, DriveHub, Error, File, Result};
+use drive_cli::{CloudClient, Drive3Client};
 use notify::{watcher, RecursiveMode, Watcher};
 use oauth2::{
     parse_application_secret, read_application_secret, ApplicationSecret, Authenticator,
@@ -96,16 +97,19 @@ fn main() {
     trace!(log, "Using {} as WPS Script", secret_file);
     trace!(log, "Using {} as Dir to monitor", target_dir);
 
+    //Create Base Folder on Cloud Provider
     let syncer_drive_cli = drive_cli::Drive3Client::new(secret_file.to_owned());
-
-    //syncer_drive_cli.create_dir("RpiCamsyncer", None);
-
-    /*let s = SyncableFile::new(
-        format!("{}/{}", upload_handler::LOCAL_ROOT_FOLDER, "RpiSyncer1"),
-        syncer_drive_cli,
-    );
-    s.upload();
-    */
+    let root_remote_dir = format!("{}/{}", upload_handler::LOCAL_ROOT_FOLDER, "RpiCamera");
+    match syncer_drive_cli.id(&root_remote_dir) {
+        Ok(id) => match id {
+            Some(id) => debug!(log, "Root Dir Exists, not creating"),
+            None => match syncer_drive_cli.create_dir(&root_remote_dir, None) {
+                Ok(id) => debug!(log, "Created Root Dir {:?}", id),
+                Err(e) => debug!(log, "Could not create  roo dir {:?}", e),
+            },
+        },
+        Err(e) => warn!(log, "Error getting drive id for root folder"),
+    }
 
     let (sender, receiver) = channel();
     let mut watcher =

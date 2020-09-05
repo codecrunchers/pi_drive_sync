@@ -8894,7 +8894,6 @@ test_slog_o_macro_expansion	/home/alan/.cargo/registry/src/github.com-1ecc6299db
 test_status_code	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/status.rs	/^    fn test_status_code() {$/;"	f	module:tests
 test_streaming_drop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/server/response.rs	/^    fn test_streaming_drop() {$/;"	f	module:tests
 test_streaming_end	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/server/response.rs	/^    fn test_streaming_end() {$/;"	f	module:tests
-test_strip_local_fs	/home/alan/local-devel/pi_drive_sync/src/drive_cli.rs	/^    fn test_strip_local_fs() {$/;"	f	module:tests
 test_to_snake_case	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^fn test_to_snake_case() {$/;"	f
 test_trailing_whitespace	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/mod.rs	/^    fn test_trailing_whitespace() {$/;"	f	module:tests
 test_upload_generate_parent_unique_id	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn test_upload_generate_parent_unique_id() {$/;"	f	module:tests
