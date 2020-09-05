@@ -99,7 +99,11 @@ fn main() {
 
     //Create Base Folder on Cloud Provider
     let syncer_drive_cli = drive_cli::Drive3Client::new(secret_file.to_owned());
-    let root_remote_dir = format!("{}/{}", upload_handler::LOCAL_ROOT_FOLDER, "RpiCamera");
+    let root_remote_dir = format!(
+        "{}/{}",
+        upload_handler::LOCAL_ROOT_FOLDER,
+        upload_handler::DRIVE_ROOT_FOLDER
+    );
     match syncer_drive_cli.id(&root_remote_dir) {
         Ok(id) => match id {
             Some(id) => debug!(log, "Root Dir Exists, not creating"),

@@ -201,7 +201,9 @@ impl CloudClient for Drive3Client {
 mod tests {
     use crate::common::LOG as log;
     use crate::drive_cli::*;
-    use crate::upload_handler::{FileOperations, SyncableFile};
+    use crate::upload_handler::{
+        FileOperations, SyncableFile, DRIVE_ROOT_FOLDER, LOCAL_ROOT_FOLDER,
+    };
     use std::io::prelude::*;
     use std::path::{Path, PathBuf, StripPrefixError};
 
@@ -219,14 +221,25 @@ mod tests {
         todo!()
     }
 
+    ///TODO: this is leaveing state on provider, will fail on second run
     #[test]
     fn test_drive_cli_id() {
         let dc = Drive3Client::new("/home/alan/.google-service-cli/drive3-secret.json".to_owned());
+
+        let root_remote_dir = format!("{}/{}", LOCAL_ROOT_FOLDER, DRIVE_ROOT_FOLDER);
+        let root_folder_provider_id = dc.id(&root_remote_dir).unwrap().unwrap();
+        println!("root_folder_provider_id =  {}", root_folder_provider_id);
+
         let d = "/tmp/pi_sync/images/new_dir";
-        let api_id = dc.create_dir(d, None).unwrap();
+        let api_id = dc.create_dir(d, Some(&root_folder_provider_id)).unwrap();
         let r = dc.id(d);
         assert_eq!(r.is_ok(), true);
         assert_eq!(r.unwrap(), api_id);
+        let child_d = "/tmp/pi_sync/images/new_dir/child_dir";
+        let child_id_response = dc.create_dir(child_d, Some(&api_id.unwrap())).unwrap();
+        let child_remote_id = dc.id(d);
+        assert_eq!(child_remote_id.is_ok(), true);
+        assert_eq!(child_remote_id.unwrap(), child_id_response);
 
         //let mut file = std::fs::File::create("/tmp/pi_sync/images/alan.txt").unwrap();
         //file.write_all(b"empty_file\n").unwrap();
