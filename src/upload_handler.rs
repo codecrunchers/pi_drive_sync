@@ -9,7 +9,7 @@ use std::path::{Path, PathBuf, StripPrefixError};
 const DIR_SCAN_DELAY: &str = "1";
 const ROOT_FOLDER_ID: &str = "19ipt2Rg1TGzr5esE_vA_1oFjrt7l5g7a"; //TODO, needs to be smarter
 pub const LOCAL_ROOT_FOLDER: &str = "/tmp/pi_sync/images";
-const DRIVE_ROOT_FOLDER: &str = "RpiCamSyncer";
+pub const DRIVE_ROOT_FOLDER: &str = "RpiCamera";
 
 #[derive(new)]
 pub struct SyncableFile {
