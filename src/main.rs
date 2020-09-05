@@ -103,7 +103,7 @@ fn main() {
         "{}/{}",
         upload_handler::LOCAL_ROOT_FOLDER,
         upload_handler::DRIVE_ROOT_FOLDER
-    );
+    ); //virtual folder, this is the dir that all in LOCAL_FILE_STORE will count as parent
     match syncer_drive_cli.id(&root_remote_dir) {
         Ok(id) => match id {
             Some(id) => debug!(log, "Root Dir Exists, not creating"),
@@ -124,19 +124,22 @@ fn main() {
 
     let handle_event = |_h, p: std::path::PathBuf| {
         if let Some(path) = p.to_str() {
-            if std::path::Path::new(path).is_dir() {
-                trace!(log, "Dir  Create {:?}", p);
-            //mkdir(&hub, path).unwrap_or({
-            //  warn!(log, "Cannot create dir");
-            //  0
-            //});
+            if SyncableFile::new(path.into()).is_dir() {
+                trace!(log, "Dir  Create {:?}", path);
+                let parent_path = SyncableFile::new(path.into()).parent_path().unwrap();
+                let parent_path = parent_path.to_str().unwrap();
+
+                let parent_id = syncer_drive_cli.id(parent_path);
+                trace!(log, "Parent Id for {}=  {:?}", path, parent_id);
+
+                match syncer_drive_cli
+                    .create_dir(path, Some(parent_id.ok().unwrap().unwrap().as_str()))
+                {
+                    Ok(id) => debug!(log, "created {}, id = {:?}", path, id),
+                    Err(e) => warn!(log, "cannot  create {}", path),
+                }
             } else {
-                trace!(log, "File Upload {:?}", p);
-                /*                upload(&hub, path).unwrap_or({
-                                    warn!(log, "Cannot create file");
-                                    0
-                                });
-                */
+                trace!(log, "TODO: File Upload {:?}", path);
             }
         } else {
             warn!(log, "Cannot Create {:?}", p);
@@ -182,177 +185,6 @@ fn get_file_name(lfsn: &str) -> Option<&str> {
     let path = std::path::Path::new(lfsn);
     path.file_name()?.to_str()
 }
-
-/*fn parent_path_to_base_64(local_path: &str) -> Option<String> {
-    trace!(log, "Path to id for {}", local_path);
-
-    let ancestors = Path::new(local_path)
-        .strip_prefix(Path::new(LOCAL_FILE_STORE))
-        .and_then(|p| Ok(p.ancestors().next()))
-        .ok();
-
-    trace!(log, "ancestors={:?}", &ancestors,);
-    ancestors.and_then(|a| get_unique_entry_id(a.unwrap().file_name()?.to_str()?))
-}
-
-fn local_dir_to_drive_file_id(hub: &Hub, path: &str) -> Option<String> {
-    //hyper::client::Response, drive3::DriveList)> {
-    trace!(log, "File Search for"; "path"=>path);
-
-    let b64_id = parent_path_to_base_64(path)
-        .unwrap_or(ROOT_FOLDER_ID.to_owned()) //here we use root
-        .as_str()
-        .to_owned();
-
-    trace!(log, "B64 id  = {} for path {}", b64_id, path);
-
-    let q = &format!(
-        "{} {{ key='{}' and value='{}' }}",
-        "appProperties has ", PI_DRIVE_SYNC_PROPS_KEY, b64_id
-    );
-
-    trace!(log, "Query {:?}", q);
-
-    let result = hub.files().list().q(q).doit();
-
-    match result {
-        Err(e) => match e {
-            // The Error enum provides details about what exactly happened.
-            // You can also just use its `trace`, `Display` or `Error` traits
-            Error::HttpError(_)
-            | Error::MissingAPIKey
-            | Error::MissingToken(_)
-            | Error::Cancelled
-            | Error::UploadSizeLimitExceeded(_, _)
-            | Error::Failure(_)
-            | Error::BadRequest(_)
-            | Error::FieldClash(_)
-            | Error::JsonDecodeError(_, _) => {
-                error!(log, "Failed to invoke upload api {}", e);
-                None
-            }
-        },
-        Ok(res) => {
-            trace!(log, "Query Success {:?}", res);
-            res.1.files?.get(0)?.id.clone()
-        }
-    }
-}
-
-fn app_props_map(id: &str) -> Option<HashMap<String, String>> {
-    let mut app_props = HashMap::new();
-    app_props.insert(PI_DRIVE_SYNC_PROPS_KEY.into(), id.to_owned());
-    Some(app_props)
-}
-
-fn upload(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
-    trace!(log,"entering"; "method"=>"upload");
-    let mut req = drive3::File::default();
-    req.name = get_file_name(path).and_then(|p| Some(p.into()));
-    let id = get_unique_entry_id(path).unwrap();
-    trace!(log, "Added Drive Idr"; "id"=>&id);
-    req.app_properties = app_props_map(&id);
-
-    if path.ne(DRIVE_ROOT_FOLDER) {
-        req.parents = Some(vec![
-            local_dir_to_drive_file_id(&hub, &path).unwrap_or("".to_owned())
-        ])
-    }
-
-    trace!(log, "Upload Req {:?}", req);
-
-    // Values shown here are possibly random and not representative !
-    let result = hub
-        .files()
-        .create(req)
-        .use_content_as_indexable_text(true)
-        .supports_team_drives(false)
-        .supports_all_drives(true)
-        .keep_revision_forever(false)
-        .ignore_default_visibility(true)
-        .enforce_single_parent(true)
-        .upload_resumable(
-            std::fs::File::open(path).unwrap(),
-            "application/octet-stream".parse().unwrap(),
-        );
-
-    match result {
-        Err(e) => match e {
-            // The Error enum provides details about what exactly happened.
-            // You can also just use its `trace`, `Display` or `Error` traits
-            Error::HttpError(_)
-            | Error::MissingAPIKey
-            | Error::MissingToken(_)
-            | Error::Cancelled
-            | Error::UploadSizeLimitExceeded(_, _)
-            | Error::Failure(_)
-            | Error::BadRequest(_)
-            | Error::FieldClash(_)
-            | Error::JsonDecodeError(_, _) => {
-                error!(log, "Failed to invoke upload api {}", e);
-                Err(e.to_string())
-            }
-        },
-        Ok(res) => {
-            trace!(log, "Success Upload: {:?}", res);
-            Ok(res.0.status.to_u16())
-        }
-    }
-}
-
-///expecting folders to be hierarcihal so
-/// 2020 -> [01,02,...12] [m]: n=>{1..31}, [d] [0-7]...
-fn mkdir(hub: &Hub, path: &str) -> std::result::Result<u16, String> {
-    trace!(log, "Mkdir:: Dir to create: {:?}", path);
-    let mut temp_file = tempfile().expect("err");
-    let mut req = drive3::File::default();
-
-    req.name = get_file_name(path).and_then(|p| Some(p.into()));
-    trace!(log, "File name {:?}", req.name);
-
-    if path.ne(DRIVE_ROOT_FOLDER) {
-        req.parents = Some(vec![local_dir_to_drive_file_id(&hub, &path)
-            .unwrap_or("1iwbQaaWNQgWYxGI4NSjrOzfDtbRrnc_o".to_owned())])
-    }
-
-    get_unique_entry_id(path).and_then(|b64_id| {
-        trace!(log, "Added Drive Id"; "id"=>b64_id.clone());
-        Some(req.app_properties = app_props_map(&b64_id))
-    });
-
-    req.mime_type = Some("application/vnd.google-apps.folder".to_string());
-
-    trace!(log, "Mkdir Req {:?}", req);
-
-    // Values shown here are possibly random and not representative !
-    let result = hub.files().create(req).upload(
-        temp_file,
-        "application/vnd.google-apps.folder".parse().unwrap(),
-    );
-
-    match result {
-        Err(e) => match e {
-            // The Error enum provides details about what exactly happened.
-            // You can also just use its `trace`, `Display` or `Error` traits
-            Error::HttpError(_)
-            | Error::MissingAPIKey
-            | Error::MissingToken(_)
-            | Error::Cancelled
-            | Error::UploadSizeLimitExceeded(_, _)
-            | Error::Failure(_)
-            | Error::BadRequest(_)
-            | Error::FieldClash(_)
-            | Error::JsonDecodeError(_, _) => {
-                error!(log, "Failed to invoke mkdir API {}", e.to_string());
-                Err(e.to_string())
-            }
-        },
-        Ok(res) => {
-            trace!(log, "Success, dir  created: {:?}", res);
-            Ok(res.0.status.to_u16())
-        }
-    }
-}*/
 
 #[cfg(test)]
 mod tests {
