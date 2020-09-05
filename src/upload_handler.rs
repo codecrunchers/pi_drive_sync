@@ -14,11 +14,9 @@ const DRIVE_ROOT_FOLDER: &str = "RpiCamSyncer";
 #[derive(new)]
 pub struct SyncableFile {
     local_disk_path: String,
-    pub storage_cli: Drive3Client, //circular deps here need to go
 }
 
 pub trait FileOperations {
-    fn upload(&self) -> Option<String>;
     fn local_path(&self) -> &Path;
     fn cloud_path(&self) -> Result<PathBuf, SyncerErrors>;
     fn parent_path(&self) -> Result<PathBuf, SyncerErrors>;
@@ -28,15 +26,6 @@ pub trait FileOperations {
 }
 
 impl FileOperations for SyncableFile {
-    fn upload(&self) -> Option<String> {
-        match self.storage_cli.create_dir(&self, None) {
-            Ok(id) => id,
-            Err(e) => {
-                warn!(log, "Cannot Upload {:?} [{:?}", &self.local_path(), e);
-                None
-            }
-        }
-    }
     fn local_path(&self) -> &Path {
         Path::new(&self.local_disk_path)
     }
@@ -80,9 +69,7 @@ mod tests {
     use std::path::{Path, PathBuf, StripPrefixError};
 
     fn syncable_file(p: String) -> SyncableFile {
-        let drive_cli =
-            Drive3Client::new("/home/alan/.google-service-cli/drive3-secret.json".to_owned());
-        SyncableFile::new(p, drive_cli)
+        SyncableFile::new(p)
     }
 
     #[test]
@@ -146,14 +133,6 @@ mod tests {
         let p = Path::new(&local_dir);
         let lp = s.local_path();
         assert_eq!(p, lp);
-    }
-
-    #[test]
-    fn test_upload_uploader() {
-        let local_file = (format!("{}{}", LOCAL_ROOT_FOLDER, "/alan"));
-        let s = syncable_file(local_file);
-        let id = s.upload();
-        assert_eq!("".to_owned(), id.unwrap());
     }
 
     #[test]

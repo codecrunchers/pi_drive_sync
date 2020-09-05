@@ -31,11 +31,10 @@ pub trait CloudClient {
     fn upload_file(
         &self,
         local_fs_path: &std::path::Path,
-        parent_id: &str,
+        parent_id: Option<&str>,
     ) -> PiSyncResult<Option<String>>;
-    fn create_dir(&self, s: &SyncableFile, parent_id: Option<&str>)
-        -> PiSyncResult<Option<String>>;
-    fn id(&self, s: &SyncableFile) -> PiSyncResult<Option<String>>;
+    fn create_dir(&self, s: &str, parent_id: Option<&str>) -> PiSyncResult<Option<String>>;
+    fn id(&self, s: &str) -> PiSyncResult<Option<String>>;
     fn app_props_map(&self, id: &str) -> Option<HashMap<String, String>>;
 }
 
@@ -65,7 +64,7 @@ impl Drive3Client {
                 Drive3Client { hub: Ok(hub) }
             }
             None => Drive3Client {
-                hub: Err(SyncerErrors::SyncerNoneError),
+                hub: Err(SyncerErrors::NoAppSecret),
             },
         }
     }
@@ -94,35 +93,37 @@ impl CloudClient for Drive3Client {
     fn upload_file(
         &self,
         local_fs_path: &std::path::Path,
-        parent_id: &str,
+        parent_id: Option<&str>,
     ) -> PiSyncResult<Option<String>> {
         todo!()
     }
 
     ///Create a remote dir and then return the Storage Service File Id
-    fn create_dir(
-        &self,
-        s: &SyncableFile,
-        parent_id: Option<&str>,
-    ) -> PiSyncResult<Option<String>> {
+    fn create_dir(&self, s: &str, parent_id: Option<&str>) -> PiSyncResult<Option<String>> {
+        let s = SyncableFile::new(s.to_owned());
         trace!(
             log,
-            "Mkdir:: Dir to create {:?} from local {:?}",
+            "Create dir:: Dir to create {:?} from local {:?}",
             s.cloud_path(),
             s.local_path()
         );
 
-        let temp_file = tempfile().or_else(|e| Err(SyncerErrors::InvalidPathError));
-        let mut req = drive3::File::default();
+        let temp_file = tempfile().or_else(|e| {
+            error!(log, "Cannot create temp file");
+            Err(SyncerErrors::InvalidPathError)
+        });
 
+        let mut req = drive3::File::default();
         req.name = s
             .local_path()
             .file_name()
             .and_then(|p| Some(p.to_str().unwrap().to_owned()));
 
-        req.parents = Some(vec![parent_id.unwrap_or("").to_owned()]);
+        req.parents = parent_id.and_then(|p| Some(vec![p.to_owned()]));
         req.app_properties = self.app_props_map(&s.get_unique_id()?);
         req.mime_type = Some("application/vnd.google-apps.folder".to_string());
+
+        trace!(log, "Sending Request {:?}", req);
 
         let result = self.get_hub().files().create(req).upload(
             temp_file.unwrap(),
@@ -142,19 +143,20 @@ impl CloudClient for Drive3Client {
                 | Error::BadRequest(_)
                 | Error::FieldClash(_)
                 | Error::JsonDecodeError(_, _) => {
-                    error!(log, "Failed to invoke mkdir API {}", e.to_string());
+                    error!(log, "Failed to invoke mkdir API {:?}", e);
                     Err(SyncerErrors::ProviderError)
                 }
             },
             Ok(res) => {
                 trace!(log, "Success, dir  created: {:?}", res);
-                Ok(Some("".to_string())) //res.1.id.as_ref())
+                Ok(res.1.id.clone())
             }
         }
     }
 
-    fn id(&self, s: &SyncableFile) -> PiSyncResult<Option<String>> {
-        let local_path = s.local_path().to_str();
+    ///Get the google drive id for this entry
+    fn id(&self, s: &str) -> PiSyncResult<Option<String>> {
+        let s = SyncableFile::new(s.to_owned());
         trace!(log, "File Search for {:?}", s.cloud_path().unwrap());
         let b64_id = s.get_unique_id()?;
         let q = &format!(
@@ -205,32 +207,26 @@ mod tests {
 
     #[test]
     fn test_drive_cli_create_dir() {
-
-        assert_eq!(1, 2);
+        let dc = Drive3Client::new("/home/alan/.google-service-cli/drive3-secret.json".to_owned());
+        let d = "/tmp/pi_sync/images/new_dir";
+        let r = dc.create_dir(d, None);
+        println!("Id of new Dir {:?}", r);
+        assert_eq!(r.is_ok(), true);
     }
 
     #[test]
     fn test_drive_cli_upload_file() {
-        assert_eq!(1, 2);
+        todo!()
     }
 
     #[test]
     fn test_drive_cli_id() {
-        let mut file = std::fs::File::create("/tmp/alan.txt").unwrap();
+        let mut file = std::fs::File::create("/tmp/pi_sync/images/alan.txt").unwrap();
         file.write_all(b"empty_file\n").unwrap();
-
-        let s: SyncableFile = SyncableFile::new(
-            "/tmp/pi_sync/images/alan.txt".to_string(),
-            Drive3Client::new("/home/alan/.google-service-cli/drive3-secret.json".to_owned()),
-        );
-
-        let r = s.storage_cli.id(&s);
+        let dc = Drive3Client::new("/home/alan/.google-service-cli/drive3-secret.json".to_owned());
+        let s = "/tmp/pi_sync/images/alan.txt";
+        let r = dc.id(s);
         assert_eq!(r.is_ok(), true);
-        assert_eq!(r.unwrap(), Some("123".to_string()));
-    }
-
-    #[test]
-    fn test_strip_local_fs() {
-        assert_eq!(1, 2);
+        assert_eq!(r.unwrap(), None);
     }
 }
