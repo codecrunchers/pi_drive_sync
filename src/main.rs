@@ -126,36 +126,33 @@ fn main() {
         .watch(target_dir, RecursiveMode::Recursive)
         .expect("Canot Watch Dir");
 
-    let handle_event = |_h, p: std::path::PathBuf| {
+    let handle_event = |_, p: std::path::PathBuf| {
         if let Some(path) = p.to_str() {
-            if SyncableFile::new(path.into()).is_dir() {
-                trace!(log, "Dir  Create {:?}", path);
-                let parent_path = SyncableFile::new(path.into()).parent_path().unwrap();
-                let parent_path = parent_path.to_str().unwrap();
+            let parent_path = SyncableFile::new(path.to_owned()).parent_path().unwrap();
+            let parent_path = parent_path.to_str().unwrap();
+            let parent_id = syncer_drive_cli.id(parent_path);
+            trace!(log, "Parent Id for {:?}=  {:?}", p, parent_id);
 
-                let parent_id = syncer_drive_cli.id(parent_path);
-                trace!(log, "Parent Id for {}=  {:?}", path, parent_id);
+            trace!(log, "Dir  Create {:?}", path);
 
-                match syncer_drive_cli
-                    .create_dir(path, Some(parent_id.ok().unwrap().unwrap().as_str()))
-                {
-                    Ok(id) => debug!(log, "created {}, id = {:?}", path, id),
-                    Err(e) => warn!(log, "cannot  create {}", path),
+            match parent_id {
+                Ok(pid) => {
+                    if SyncableFile::new(path.into()).is_dir() {
+                        match syncer_drive_cli.create_dir(path, Some(pid.unwrap().as_str())) {
+                            Ok(id) => debug!(log, "created {}, id = {:?}", path, id),
+                            Err(e) => warn!(log, "cannot  create {} {}", path, e),
+                        }
+                    } else {
+                        match syncer_drive_cli.upload_file(path, Some(pid.unwrap().as_str())) {
+                            Ok(id) => debug!(log, "created {}, id = {:?}", path, id),
+                            Err(e) => warn!(log, "cannot  create {} {}", path, e),
+                        }
+                    }
                 }
-            } else {
-                trace!(log, "Dir  Create {:?}", path);
-                let parent_path = SyncableFile::new(path.into()).parent_path().unwrap();
-                let parent_path = parent_path.to_str().unwrap();
-
-                let parent_id = syncer_drive_cli.id(parent_path);
-                trace!(log, "Parent Id for {}=  {:?}", path, parent_id);
-
-                match syncer_drive_cli
-                    .upload_file(path, Some(parent_id.ok().unwrap().unwrap().as_str()))
-                {
-                    Ok(id) => debug!(log, "created {}, id = {:?}", path, id),
-                    Err(e) => warn!(log, "cannot  create {}", path),
-                }
+                Err(e) => warn!(
+                    log,
+                    "cannot  fetch parent id, auth issues likely {} {}", path, e
+                ),
             }
         } else {
             warn!(log, "Cannot Create {:?}", p);
@@ -166,7 +163,7 @@ fn main() {
         //let hub = &hub;
         match receiver.recv() {
             Ok(notify::DebouncedEvent::Create(p)) => {
-                handle_event("s", p.clone());
+                handle_event("", p.clone());
             }
             _ => trace!(log, "unidentified event"),
             Err(e) => error!(log, "watch error: {:?}", e),

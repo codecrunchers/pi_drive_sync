@@ -23,7 +23,7 @@ pub type Hub = drive3::DriveHub<
 >;
 
 pub struct Drive3Client {
-    hub: std::result::Result<Hub, SyncerErrors>, //TODO:?? pub hmmm
+    hub: std::result::Result<Hub, SyncerErrors>,
 }
 
 pub trait CloudClient {
@@ -72,12 +72,8 @@ impl Drive3Client {
         }
     }
 
-    pub fn get_hub(&self) -> &Hub {
-        &self
-            .hub
-            .as_ref()
-            .map_err(|e| SyncerErrors::SyncerNoneError) //TODO
-            .unwrap()
+    pub fn get_hub(&self) -> PiSyncResult<&Hub> {
+        self.hub.as_ref().map_err(|e| SyncerErrors::NoAppSecret)
     }
 
     fn read_client_secret(file: String) -> Option<ApplicationSecret> {
@@ -121,7 +117,7 @@ impl CloudClient for Drive3Client {
 
         // Values shown here are possibly random and not representative !
         let result = self
-            .get_hub()
+            .get_hub()?
             .files()
             .create(req)
             .use_content_as_indexable_text(true)
@@ -190,7 +186,7 @@ impl CloudClient for Drive3Client {
 
         trace!(log, "Sending Request {:?}", req);
 
-        let result = self.get_hub().files().create(req).upload(
+        let result = self.get_hub()?.files().create(req).upload(
             temp_file.unwrap(),
             "application/vnd.google-apps.folder".parse().unwrap(),
         );
@@ -235,11 +231,7 @@ impl CloudClient for Drive3Client {
 
         trace!(log, "Query {:?}", q);
 
-        let h = &self
-            .hub
-            .as_ref()
-            .map_err(|e| SyncerErrors::NoAppSecret)
-            .unwrap();
+        let h = &self.get_hub()?;
 
         let result = h.files().list().q(q).doit();
 

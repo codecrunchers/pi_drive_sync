@@ -1,6 +1,6 @@
 use crate::common::LOG as log;
 use crate::drive_cli::{CloudClient, Drive3Client, Hub};
-use crate::pi_err::SyncerErrors;
+use crate::pi_err::{PiSyncResult, SyncerErrors};
 use base64::{decode, encode};
 use std::io::prelude::*;
 use std::path::{Path, PathBuf, StripPrefixError};
@@ -18,23 +18,23 @@ pub trait FileOperations {
     ///The path to the file on disk
     fn local_path(&self) -> &Path;
     ///Where on the cloud srorage provider is this file dir to be created
-    fn cloud_path(&self) -> Result<PathBuf, SyncerErrors>;
+    fn cloud_path(&self) -> PiSyncResult<PathBuf>;
     ///return the ancestors path on local disk e.g /tmp/images/a will return /tmp/images/
-    fn parent_path(&self) -> Result<PathBuf, SyncerErrors>;
+    fn parent_path(&self) -> PiSyncResult<PathBuf>;
     ///Is this a file on disk
     fn is_file(&self) -> bool;
     ///Is this a directory on disk
     fn is_dir(&self) -> bool;
     ///Take the  unique cloud porition of the file
     ///path and return a Base64 Unique Id of this
-    fn get_unique_id(&self) -> Result<String, SyncerErrors>;
+    fn get_unique_id(&self) -> PiSyncResult<String>;
 }
 
 impl FileOperations for SyncableFile {
     fn local_path(&self) -> &Path {
         Path::new(&self.local_disk_path)
     }
-    fn cloud_path(&self) -> Result<PathBuf, SyncerErrors> {
+    fn cloud_path(&self) -> PiSyncResult<PathBuf> {
         Ok(Path::new(DRIVE_ROOT_FOLDER).join(
             self.local_path()
                 .strip_prefix(Path::new(LOCAL_ROOT_FOLDER))?,
@@ -42,7 +42,7 @@ impl FileOperations for SyncableFile {
     }
 
     ///Using the local fs based path, return the parent directory path
-    fn parent_path(&self) -> Result<PathBuf, SyncerErrors> {
+    fn parent_path(&self) -> PiSyncResult<PathBuf> {
         let mut p_copy = PathBuf::from(&self.local_disk_path);
         match p_copy.pop() {
             true => {
@@ -66,8 +66,7 @@ impl FileOperations for SyncableFile {
     }
 
     ///Return a Base64 representation of the file path on your storage host
-    fn get_unique_id(&self) -> Result<String, SyncerErrors> {
-        //TODO:!!!
+    fn get_unique_id(&self) -> PiSyncResult<String> {
         let cp = &self.cloud_path()?;
         cp.to_str()
             .and_then(|p| Some(Ok(encode(p))))
