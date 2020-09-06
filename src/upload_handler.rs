@@ -1,14 +1,12 @@
-use crate::drive_cli::{CloudClient, Drive3Client, Hub};
-
-use crate::pi_err::SyncerErrors;
-
 use crate::common::LOG as log;
+use crate::drive_cli::{CloudClient, Drive3Client, Hub};
+use crate::pi_err::SyncerErrors;
 use base64::{decode, encode};
+use std::io::prelude::*;
 use std::path::{Path, PathBuf, StripPrefixError};
 
 const DIR_SCAN_DELAY: &str = "1";
-const ROOT_FOLDER_ID: &str = "19ipt2Rg1TGzr5esE_vA_1oFjrt7l5g7a"; //TODO, needs to be smarter
-pub const LOCAL_ROOT_FOLDER: &str = "/tmp/pi_sync/images";
+pub const LOCAL_ROOT_FOLDER: &str = "/tmp/pi_sync/images"; //basing base64 on this is dodgy as if I change this we get a different id
 pub const DRIVE_ROOT_FOLDER: &str = "RpiCamera";
 
 #[derive(new)]
@@ -17,11 +15,17 @@ pub struct SyncableFile {
 }
 
 pub trait FileOperations {
+    ///The path to the file on disk
     fn local_path(&self) -> &Path;
+    ///Where on the cloud srorage provider is this file dir to be created
     fn cloud_path(&self) -> Result<PathBuf, SyncerErrors>;
+    ///return the ancestors path on local disk e.g /tmp/images/a will return /tmp/images/
     fn parent_path(&self) -> Result<PathBuf, SyncerErrors>;
+    ///Is this a file on disk
     fn is_file(&self) -> bool;
+    ///Is this a directory on disk
     fn is_dir(&self) -> bool;
+    ///Take the  unique disk path and return a Base64 Unique Id of ths
     fn get_unique_id(&self) -> Result<String, SyncerErrors>;
 }
 
@@ -36,19 +40,17 @@ impl FileOperations for SyncableFile {
         ))
     }
 
+    ///Using the local fs based path, return the parent directory path
     fn parent_path(&self) -> Result<PathBuf, SyncerErrors> {
-        let mut p_copy = PathBuf::from(&self.cloud_path()?);
+        let mut p_copy = PathBuf::from(&self.local_disk_path);
         match p_copy.pop() {
             true => {
                 debug!(log, "FileOperations::Parent Path = {:?}", p_copy);
-                Ok(PathBuf::from(format!(
-                    "{}/{}",
-                    LOCAL_ROOT_FOLDER,
-                    p_copy.to_str().unwrap()
-                )))
+                Ok(p_copy)
             }
             false => {
                 error!(log, "cannot pop  {:?}", p_copy);
+                //Err(SyncerErrors::InvalidPathError("Cannot calc parent path"))
                 Err(SyncerErrors::InvalidPathError)
             }
         }
@@ -89,32 +91,47 @@ mod tests {
         let cp = s.cloud_path().unwrap();
         let cp_string = cp.to_str().unwrap();
 
-        println!("Root Test {}", cp_string);
-        assert_eq!(format!("{}/{}", DRIVE_ROOT_FOLDER, "alan.txt"), cp_string);
+        assert_eq!(
+            format!("{}/{}", DRIVE_ROOT_FOLDER, "alan.txt"),
+            cp_string,
+            "Cloud path not correctly computed"
+        );
         assert_eq!(
             encode(format!("{}/{}", DRIVE_ROOT_FOLDER, "alan.txt")),
-            s.get_unique_id().unwrap()
+            s.get_unique_id().unwrap(),
+            "Base64 Calc of Syncable File does not match a manual encode of same path"
         );
     }
 
     #[test]
     fn test_upload_get_unique_id_dir() {
-        let local_file = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan");
-        let s = syncable_file(local_file);
+        let local_dir_parent = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan");
+        let parent_dir = syncable_file(local_dir_parent.clone());
+        assert_eq!(local_dir_parent, parent_dir.local_path().to_str().unwrap());
+        let puid = parent_dir.get_unique_id().unwrap();
 
-        let cp = s.cloud_path();
+        let local_file = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan/alan.txt");
+        let child_file = syncable_file(local_file);
+
+        let pp_from_child_path = child_file.parent_path().unwrap();
+        let parent_path_as_string = pp_from_child_path.to_str().unwrap();
         assert_eq!(
-            format!("{}/{}", DRIVE_ROOT_FOLDER, "alan"),
-            cp.unwrap().to_str().unwrap()
+            "/tmp/pi_sync/images/alan", parent_path_as_string,
+            "Parent Path Calc is wrong"
         );
-        assert_eq!(
-            encode(format!("{}/{}", DRIVE_ROOT_FOLDER, "alan")),
-            s.get_unique_id().unwrap()
-        );
+
+        //issue cannot construct a Sycable path from Cloud Path
+
+        let tmp_syncable = SyncableFile::new(parent_path_as_string.clone().to_owned());
+        let tuid = tmp_syncable.get_unique_id().unwrap();
+        assert_eq!(puid, tuid);
     }
 
     #[test]
     fn test_upload_is_file() {
+        let mut file = std::fs::File::create("/tmp/pi_sync/images/alan.txt").unwrap();
+        file.write_all(b"empty_file\n").unwrap();
+
         let local_file = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan.txt");
         let s = syncable_file(local_file);
         assert_eq!(true, s.is_file());
@@ -122,6 +139,7 @@ mod tests {
 
     #[test]
     fn test_upload_is_dir() {
+        std::fs::create_dir("/tmp/pi_sync/images/alan");
         let local_dir = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan");
         let s = syncable_file(local_dir);
         assert_eq!(true, s.is_dir());
@@ -140,9 +158,9 @@ mod tests {
     fn test_upload_local_path() {
         let local_dir = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan");
         let s = syncable_file(local_dir.clone());
-        let p = Path::new(&local_dir);
         let lp = s.local_path();
-        assert_eq!(p, lp);
+        let str_lp = lp.to_str().unwrap();
+        assert_eq!(local_dir, str_lp);
     }
 
     #[test]
@@ -150,50 +168,44 @@ mod tests {
         let root_file = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan.txt");
         let root_s = syncable_file(root_file);
 
-        assert_eq!(Path::new(DRIVE_ROOT_FOLDER), root_s.parent_path().unwrap());
+        assert_eq!(
+            Path::new(LOCAL_ROOT_FOLDER),
+            root_s.parent_path().unwrap(),
+            "Parent path is not correct"
+        );
 
         let child = format!("{}{}", LOCAL_ROOT_FOLDER, "/a/a.txt");
         let c = syncable_file(child);
 
         assert_eq!(
-            Path::new(DRIVE_ROOT_FOLDER).join("a"),
-            c.parent_path().unwrap()
+            Path::new(LOCAL_ROOT_FOLDER).join("a"),
+            c.parent_path().unwrap(),
+            "Parent path is not correct for /a/a.txt"
         );
 
         let child1 = format!("{}{}", LOCAL_ROOT_FOLDER, "/b/b");
         let c1 = syncable_file(child1);
 
         assert_eq!(
-            Path::new(DRIVE_ROOT_FOLDER).join("b"),
-            c1.parent_path().unwrap()
+            Path::new(LOCAL_ROOT_FOLDER).join("b"),
+            c1.parent_path().unwrap(),
+            "Parent path is not correct for /b/b"
         );
 
         let child2 = format!("{}{}", LOCAL_ROOT_FOLDER, "/c/c/test.txt");
         let c2 = syncable_file(child2);
         assert_eq!(
-            Path::new(DRIVE_ROOT_FOLDER).join("c/c"),
-            c2.parent_path().unwrap()
+            Path::new(LOCAL_ROOT_FOLDER).join("c/c"),
+            c2.parent_path().unwrap(),
+            "Parent path is not correct for /c/c/test.txt"
         );
 
         let child3 = format!("{}{}", LOCAL_ROOT_FOLDER, "/d");
         let c3 = syncable_file(child3);
-        assert_eq!(Path::new(DRIVE_ROOT_FOLDER), c3.parent_path().unwrap());
-    }
-
-    #[test]
-    fn test_upload_generate_parent_unique_id() {
-        let parent = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan");
-        let f = syncable_file(parent);
-
-        let folder_id = f.get_unique_id();
-
-        let child = format!("{}{}", LOCAL_ROOT_FOLDER, "/alan/alan.txt");
-        let c = syncable_file(child);
-        let rp = Path::new(DRIVE_ROOT_FOLDER).join("alan/alan.txt");
-        assert_eq!(rp.as_path(), c.cloud_path().unwrap());
-
-        let child_parent_path = c.parent_path();
-        let ntpath = child_parent_path.unwrap().to_str().unwrap().to_owned();
-        assert_eq!(encode(ntpath), folder_id.unwrap());
+        assert_eq!(
+            Path::new(LOCAL_ROOT_FOLDER),
+            c3.parent_path().unwrap(),
+            "Parent path is not correct for /d"
+        );
     }
 }

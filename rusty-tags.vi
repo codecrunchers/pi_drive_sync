@@ -4322,8 +4322,8 @@ create	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0
 create	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/unix.rs	/^pub fn create(dir: &Path) -> io::Result<File> {$/;"	f
 create	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/tempfile-3.1.0/src/file/imp/windows.rs	/^pub fn create(dir: &Path) -> io::Result<File> {$/;"	f
 create_debounced	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/windows.rs	/^    pub fn create_debounced($/;"	P	implementation:ReadDirectoryChangesWatcher
-create_dir	/home/alan/local-devel/pi_drive_sync/src/drive_cli.rs	/^    fn create_dir(&self, s: &str, parent_id: Option<&str>) -> PiSyncResult<Option<String>> {$/;"	P	implementation:Drive3Client
-create_dir	/home/alan/local-devel/pi_drive_sync/src/drive_cli.rs	/^    fn create_dir(&self, s: &str, parent_id: Option<&str>) -> PiSyncResult<Option<String>>;$/;"	P	interface:CloudClient
+create_dir	/home/alan/local-devel/pi_drive_sync/src/drive_cli.rs	/^    fn create_dir($/;"	P	implementation:Drive3Client
+create_dir	/home/alan/local-devel/pi_drive_sync/src/drive_cli.rs	/^    fn create_dir($/;"	P	interface:CloudClient
 create_error_usage	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/app/usage.rs	/^pub fn create_error_usage<'a, 'b>($/;"	f
 create_flag_usage	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/usage_parser.rs	/^    fn create_flag_usage() {$/;"	f	module:test
 create_help_and_version	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/clap-2.33.2/src/app/parser.rs	/^    pub fn create_help_and_version(&mut self) {$/;"	f
@@ -6124,8 +6124,8 @@ id	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.
 id	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/google-drive3-1.0.14+20200618/src/lib.rs	/^    pub id: Option<String>,$/;"	m	struct:TeamDriveBackgroundImageFile
 id	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/mock.rs	/^    pub id: u64,$/;"	m	struct:MockStream
 id	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/notify-4.0.15/src/debounce/timer.rs	/^    id: u64,$/;"	m	struct:ScheduledEvent
-id	/home/alan/local-devel/pi_drive_sync/src/drive_cli.rs	/^    fn id(&self, s: &str) -> PiSyncResult<Option<String>> {$/;"	P	implementation:Drive3Client
-id	/home/alan/local-devel/pi_drive_sync/src/drive_cli.rs	/^    fn id(&self, s: &str) -> PiSyncResult<Option<String>>;$/;"	P	interface:CloudClient
+id	/home/alan/local-devel/pi_drive_sync/src/drive_cli.rs	/^    fn id(&self, local_path: &str) -> PiSyncResult<Option<String>> {$/;"	P	implementation:Drive3Client
+id	/home/alan/local-devel/pi_drive_sync/src/drive_cli.rs	/^    fn id(&self, local_path: &str) -> PiSyncResult<Option<String>>; \/\/should this be cloud pat/;"	P	interface:CloudClient
 idempotent	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/method.rs	/^    pub fn idempotent(&self) -> bool {$/;"	P	implementation:Method
 ident	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^    ident: syn::Ident,$/;"	m	struct:FieldExt
 idle	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/client/pool.rs	/^    idle: Option<Instant>,$/;"	m	struct:PooledStreamInner
@@ -8896,7 +8896,6 @@ test_streaming_drop	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/h
 test_streaming_end	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/server/response.rs	/^    fn test_streaming_end() {$/;"	f	module:tests
 test_to_snake_case	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/derive-new-0.5.8/src/lib.rs	/^fn test_to_snake_case() {$/;"	f
 test_trailing_whitespace	/home/alan/.cargo/registry/src/github.com-1ecc6299db9ec823/hyper-0.10.16/src/header/mod.rs	/^    fn test_trailing_whitespace() {$/;"	f	module:tests
-test_upload_generate_parent_unique_id	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn test_upload_generate_parent_unique_id() {$/;"	f	module:tests
 test_upload_get_unique_id_dir	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn test_upload_get_unique_id_dir() {$/;"	f	module:tests
 test_upload_get_unique_id_file	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn test_upload_get_unique_id_file() {$/;"	f	module:tests
 test_upload_is_dir	/home/alan/local-devel/pi_drive_sync/src/upload_handler.rs	/^    fn test_upload_is_dir() {$/;"	f	module:tests

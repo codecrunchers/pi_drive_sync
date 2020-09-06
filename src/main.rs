@@ -109,7 +109,7 @@ fn main() {
             Some(id) => debug!(log, "Root Dir Exists, not creating"),
             None => match syncer_drive_cli.create_dir(&root_remote_dir, None) {
                 Ok(id) => debug!(log, "Created Root Dir {:?}", id),
-                Err(e) => debug!(log, "Could not create  roo dir {:?}", e),
+                Err(e) => debug!(log, "Could not create root dir {:?}", e),
             },
         },
         Err(e) => warn!(log, "Error getting drive id for root folder"),

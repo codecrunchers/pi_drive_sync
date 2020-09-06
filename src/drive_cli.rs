@@ -164,10 +164,10 @@ impl CloudClient for Drive3Client {
 
     ///Get the google drive id for this entry
     fn id(&self, local_path: &str) -> PiSyncResult<Option<String>> {
-        trace!(log, "File Search for {:?}", local_path);
+        trace!(log, "Search for Google Drive Id for {}", local_path);
         let s = SyncableFile::new(local_path.to_owned());
         let b64_id = s.get_unique_id()?;
-        trace!(log, "Unique ID = {} or {:?}", b64_id, local_path);
+        debug!(log, "Unique ID = {} or {:?}", b64_id, local_path);
         let q = &format!(
             "{} {{ key='{}' and value='{}' }}",
             "appProperties has ", PI_DRIVE_SYNC_PROPS_KEY, b64_id
@@ -200,7 +200,16 @@ impl CloudClient for Drive3Client {
             },
             Ok(res) => {
                 trace!(log, "Query Success {:?}", res);
-                Ok(res.1.files.and_then(|mut fv| fv.pop()?.id))
+                Ok(res.1.files.and_then(|mut fv| {
+                    if fv.len() > 1 {
+                        warn!(
+                            log,
+                            "More than one file returned when searching for pi_sync_id = {:?}",
+                            b64_id
+                        );
+                    }
+                    fv.pop()?.id
+                }))
             }
         }
     }
@@ -234,23 +243,43 @@ mod tests {
     #[test]
     fn test_drive_cli_id() {
         let dc = Drive3Client::new("/home/alan/.google-service-cli/drive3-secret.json".to_owned());
-
-        let root_remote_dir = format!("{}/{}", LOCAL_ROOT_FOLDER, DRIVE_ROOT_FOLDER);
-        let root_folder_provider_id = dc.id(&root_remote_dir).unwrap().unwrap();
-        println!("root_folder_provider_id =  {}", root_folder_provider_id);
-
         let d = "/tmp/pi_sync/images/new_dir";
-        let api_id = dc.create_dir(d, Some(&root_folder_provider_id)).unwrap();
-        let r = dc.id(d);
-        assert_eq!(r.is_ok(), true);
-        assert_eq!(r.unwrap(), api_id);
-        let child_d = "/tmp/pi_sync/images/new_dir/child_dir";
-        let child_id_response = dc.create_dir(child_d, Some(&api_id.unwrap())).unwrap();
-        let child_remote_id = dc.id(d);
-        assert_eq!(child_remote_id.is_ok(), true);
-        assert_eq!(child_remote_id.unwrap(), child_id_response);
 
+        /*let parent_on_fs_id = SyncableFile::new(d.to_owned())
+            .parent_path()
+            .and_then(|pp| SyncableFile::new(pp.to_str().unwrap().to_owned()).get_unique_id())
+            .unwrap();
+        */
+
+        let drive_id_for_parent = dc.id(SyncableFile::new(d.to_owned())
+            .parent_path()
+            .unwrap()
+            .to_str()
+            .unwrap());
+
+        println!(" parent gdrive id = {:?}", drive_id_for_parent);
+        assert_eq!(1, 2);
+
+        /*
+        let id_returned_from_call = dc.create_dir(d, "drive_id_for_parent.ok().unwrap()).unwrap();
+        let id_returned_from_cloud_provider_lookup = dc.id(d);
+
+
+        assert_eq!(
+            id_returned_from_cloud_provider_lookup.ok().unwrap(),
+            id_returned_from_call
+        );
+
+        */
+        /*        let child_d = "/tmp/pi_sync/images/new_dir/child_dir";
+                let child_id_response = dc.create_dir(child_d, Some(&api_id.unwrap())).unwrap();
+                let child_remote_id = dc.id(d);
+                assert_eq!(child_remote_id.is_ok(), true);
+                assert_eq!(child_remote_id.unwrap(), child_id_response);
+        */
         //let mut file = std::fs::File::create("/tmp/pi_sync/images/alan.txt").unwrap();
         //file.write_all(b"empty_file\n").unwrap();
+
+        
     }
 }
