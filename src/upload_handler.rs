@@ -1,11 +1,12 @@
-use crate::common::LOG as log;
-use crate::drive_cli::{CloudClient, Drive3Client, Hub};
-use crate::pi_err::{PiSyncResult, SyncerErrors};
-use base64::{decode, encode};
 use std::io::prelude::*;
-use std::path::{Path, PathBuf, StripPrefixError};
 
-const DIR_SCAN_DELAY: &str = "1";
+use crate::common::LOG as log;
+
+use crate::pi_err::{PiSyncResult, SyncerErrors};
+use base64::encode;
+
+use std::path::{Path, PathBuf};
+
 pub const LOCAL_ROOT_FOLDER: &str = "/tmp/pi_sync/images"; //basing base64 on this is dodgy as if I change this we get a different id
 pub const DRIVE_ROOT_FOLDER: &str = "RpiCamera";
 
@@ -76,10 +77,9 @@ impl FileOperations for SyncableFile {
 
 #[cfg(test)]
 mod tests {
-    use crate::common::LOG as log;
-    use crate::drive_cli::*;
+
     use crate::upload_handler::*;
-    use std::path::{Path, PathBuf, StripPrefixError};
+    use std::path::Path;
 
     fn syncable_file(p: String) -> SyncableFile {
         SyncableFile::new(p)

@@ -1,15 +1,15 @@
 use crate::common::LOG as log;
 use crate::pi_err::{PiSyncResult, SyncerErrors};
 use crate::upload_handler::{FileOperations, SyncableFile};
-use drive3::{Comment, DriveHub, Error, File, Result};
+use drive3::{DriveHub, Error};
 use oauth2::{
-    parse_application_secret, read_application_secret, ApplicationSecret, Authenticator,
-    DefaultAuthenticatorDelegate, DiskTokenStorage, MemoryStorage,
+    read_application_secret, ApplicationSecret, Authenticator, DefaultAuthenticatorDelegate,
+    DiskTokenStorage,
 };
+
 use std::collections::HashMap;
 use std::default::Default;
-use std::sync::mpsc::channel;
-use std::time::Duration;
+
 use tempfile::tempfile;
 
 const PI_DRIVE_SYNC_PROPS_KEY: &str = "pi_sync_id";
@@ -73,7 +73,7 @@ impl Drive3Client {
     }
 
     pub fn get_hub(&self) -> PiSyncResult<&Hub> {
-        self.hub.as_ref().map_err(|e| SyncerErrors::NoAppSecret)
+        self.hub.as_ref().map_err(|_e| SyncerErrors::NoAppSecret)
     }
 
     fn read_client_secret(file: String) -> Option<ApplicationSecret> {
@@ -169,7 +169,7 @@ impl CloudClient for Drive3Client {
             s.local_path()
         );
 
-        let temp_file = tempfile().or_else(|e| {
+        let temp_file = tempfile().or_else(|_e| {
             error!(log, "Cannot create temp file");
             Err(SyncerErrors::InvalidPathError)
         });
@@ -269,13 +269,9 @@ impl CloudClient for Drive3Client {
 
 #[cfg(test)]
 mod tests {
-    use crate::common::LOG as log;
+
     use crate::drive_cli::*;
-    use crate::upload_handler::{
-        FileOperations, SyncableFile, DRIVE_ROOT_FOLDER, LOCAL_ROOT_FOLDER,
-    };
-    use std::io::prelude::*;
-    use std::path::{Path, PathBuf, StripPrefixError};
+    use crate::upload_handler::{FileOperations, SyncableFile};
 
     #[test]
     fn test_drive_cli_create_dir() {

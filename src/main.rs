@@ -2,12 +2,11 @@
 extern crate derive_new;
 #[macro_use]
 extern crate slog;
-#[macro_use]
-extern crate lazy_static;
 extern crate base64;
 extern crate google_drive3 as drive3;
 extern crate hyper;
 extern crate hyper_rustls;
+extern crate lazy_static;
 extern crate notify;
 extern crate tempfile;
 extern crate yup_oauth2 as oauth2;
@@ -17,34 +16,19 @@ mod drive_cli;
 mod pi_err;
 mod upload_handler;
 
-use self::base64::encode;
 use clap::{App, Arg};
-use drive3::{Comment, DriveHub, Error, File, Result};
-use drive_cli::{CloudClient, Drive3Client};
+
+use drive_cli::CloudClient;
 use notify::{watcher, RecursiveMode, Watcher};
-use oauth2::{
-    parse_application_secret, read_application_secret, ApplicationSecret, Authenticator,
-    DefaultAuthenticatorDelegate, DiskTokenStorage, MemoryStorage,
-};
-use std::collections::HashMap;
-use std::default::Default;
-use std::path::Path;
+
 use std::sync::mpsc::channel;
 use std::time::Duration;
-use tempfile::tempfile;
+
 use upload_handler::{FileOperations, SyncableFile};
 
-const PI_DRIVE_SYNC_PROPS_KEY: &str = "pi_sync_id";
 const DIR_SCAN_DELAY: &str = "1";
-const ROOT_FOLDER_ID: &str = "19ipt2Rg1TGzr5esE_vA_1oFjrt7l5g7a"; //TODO, needs to be smarter
-const LOCAL_FILE_STORE: &str = "/tmp/pi_sync/images";
-const DRIVE_ROOT_FOLDER: &str = "RpiCamSyncer";
 
 use common::LOG as log;
-
-fn read_client_secret(file: String) -> ApplicationSecret {
-    read_application_secret(std::path::Path::new(&file)).expect("No App Secret")
-}
 
 fn main() {
     trace!(log, "Statring Syncer");
@@ -84,7 +68,9 @@ fn main() {
         .value_of("secret_file")
         .unwrap_or("/home/alan/.google-service-cli/drive3-secret.json");
 
-    let target_dir = matches.value_of("target_dir").unwrap_or(LOCAL_FILE_STORE);
+    let target_dir = matches
+        .value_of("target_dir")
+        .unwrap_or(upload_handler::LOCAL_ROOT_FOLDER);
 
     let scan_interval_seconds = String::from(
         matches
@@ -107,16 +93,18 @@ fn main() {
         upload_handler::DRIVE_ROOT_FOLDER
     );
 
-    std::fs::create_dir(root_remote_dir.clone());
+    if let Err(e) = std::fs::create_dir(root_remote_dir.clone()) {
+        println!("Root Folder error: {}", e.to_string());
+    }
     match syncer_drive_cli.id(&root_remote_dir) {
         Ok(id) => match id {
-            Some(id) => debug!(log, "Root Dir Exists, not creating"),
+            Some(_id) => debug!(log, "Root Dir Exists, not creating"),
             None => match syncer_drive_cli.create_dir(&root_remote_dir, None) {
                 Ok(id) => debug!(log, "Created Root Dir {:?}", id),
                 Err(e) => debug!(log, "Could not create root dir {:?}", e),
             },
         },
-        Err(e) => warn!(log, "Error getting drive id for root folder"),
+        Err(_e) => warn!(log, "Error getting drive id for root folder"),
     }
 
     let (sender, receiver) = channel();
@@ -165,8 +153,8 @@ fn main() {
             Ok(notify::DebouncedEvent::Create(p)) => {
                 handle_event("", p.clone());
             }
-            _ => trace!(log, "unidentified event"),
             Err(e) => error!(log, "watch error: {:?}", e),
+            _ => trace!(log, "unidentified event"),
         }
     }
 }
