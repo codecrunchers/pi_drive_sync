@@ -11,31 +11,27 @@ extern crate notify;
 extern crate tempfile;
 extern crate yup_oauth2 as oauth2;
 
+use clap::{App, Arg};
+use common::LOG as log;
+use drive_cli::CloudClient;
+use notify::{watcher, RecursiveMode, Watcher};
+use std::sync::mpsc::channel;
+use std::time::Duration;
+use upload_handler::{FileOperations, SyncableFile};
+
 mod common;
 mod drive_cli;
 mod pi_err;
 mod upload_handler;
 
-use clap::{App, Arg};
-
-use drive_cli::CloudClient;
-use notify::{watcher, RecursiveMode, Watcher};
-
-use std::sync::mpsc::channel;
-use std::time::Duration;
-
-use upload_handler::{FileOperations, SyncableFile};
-
 const DIR_SCAN_DELAY: &str = "1";
 
-use common::LOG as log;
-
 fn main() {
-    trace!(log, "Statring Syncer");
+    debug!(log, "Statring Syncer");
 
     let matches = App::new("Rusty Cam Syncer")
         .version("1.0")
-        .author("Alan R. <alan@alanryan.name.com>")
+        .author("Alan R. <alan@alanryan.name>")
         .version("1.0")
         .about("Will Sync a Dir recursvively with the smarts of a sheep")
         .arg(
@@ -80,8 +76,8 @@ fn main() {
     .parse::<u64>()
     .unwrap();
 
-    trace!(log, "Using {} as WPS Script", secret_file);
-    trace!(log, "Using {} as Dir to monitor", target_dir);
+    debug!(log, "Using {} as Auth File", secret_file);
+    debug!(log, "Using {} as Local Dir to monitor", target_dir);
 
     //Create Base Folder on Cloud Provider
     //make sure it exists locally too
@@ -94,7 +90,7 @@ fn main() {
     );
 
     if let Err(e) = std::fs::create_dir(root_remote_dir.clone()) {
-        println!("Root Folder error: {}", e.to_string());
+        warn!(log, "Root Folder Create Response: {}", e.to_string());
     }
     match syncer_drive_cli.id(&root_remote_dir) {
         Ok(id) => match id {
