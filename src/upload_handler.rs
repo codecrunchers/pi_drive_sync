@@ -25,7 +25,8 @@ pub trait FileOperations {
     fn is_file(&self) -> bool;
     ///Is this a directory on disk
     fn is_dir(&self) -> bool;
-    ///Take the  unique disk path and return a Base64 Unique Id of ths
+    ///Take the  unique cloud porition of the file
+    ///path and return a Base64 Unique Id of this
     fn get_unique_id(&self) -> Result<String, SyncerErrors>;
 }
 
@@ -66,6 +67,7 @@ impl FileOperations for SyncableFile {
 
     ///Return a Base64 representation of the file path on your storage host
     fn get_unique_id(&self) -> Result<String, SyncerErrors> {
+        //TODO:!!!
         let cp = &self.cloud_path()?;
         cp.to_str()
             .and_then(|p| Some(Ok(encode(p))))

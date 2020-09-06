@@ -2,7 +2,6 @@ use crate::common::LOG as log;
 use crate::pi_err::{PiSyncResult, SyncerErrors};
 use crate::upload_handler::{FileOperations, SyncableFile};
 use drive3::{Comment, DriveHub, Error, File, Result};
-use notify::{watcher, RecursiveMode, Watcher};
 use oauth2::{
     parse_application_secret, read_application_secret, ApplicationSecret, Authenticator,
     DefaultAuthenticatorDelegate, DiskTokenStorage, MemoryStorage,
@@ -30,7 +29,7 @@ pub struct Drive3Client {
 pub trait CloudClient {
     fn upload_file(
         &self,
-        local_fs_path: &std::path::Path,
+        local_fs_path: &str,
         parent_id: Option<&str>,
     ) -> PiSyncResult<Option<String>>;
     fn create_dir(
@@ -77,7 +76,7 @@ impl Drive3Client {
         &self
             .hub
             .as_ref()
-            .map_err(|e| SyncerErrors::SyncerNoneError) //?
+            .map_err(|e| SyncerErrors::SyncerNoneError) //TODO
             .unwrap()
     }
 
@@ -96,10 +95,68 @@ impl CloudClient for Drive3Client {
     ///Create a remote file, assigned a parent folder - and then return the Storage Service File Id
     fn upload_file(
         &self,
-        local_fs_path: &std::path::Path,
+        local_fs_path: &str,
         parent_id: Option<&str>,
     ) -> PiSyncResult<Option<String>> {
-        todo!()
+        let s = SyncableFile::new(local_fs_path.to_owned());
+        trace!(
+            log,
+            "Create dir:: Dir to create {:?} from local {:?}",
+            s.cloud_path(),
+            s.local_path()
+        );
+
+        let mut req = drive3::File::default();
+        req.name = Some(
+            s.local_path()
+                .file_name()
+                .unwrap()
+                .to_str()
+                .unwrap()
+                .to_owned(),
+        );
+        req.parents = parent_id.and_then(|p| Some(vec![p.to_owned()]));
+        req.app_properties = self.app_props_map(&s.get_unique_id()?);
+        trace!(log, "Upload Req {:?}", req);
+
+        // Values shown here are possibly random and not representative !
+        let result = self
+            .get_hub()
+            .files()
+            .create(req)
+            .use_content_as_indexable_text(true)
+            .supports_team_drives(false)
+            .supports_all_drives(true)
+            .keep_revision_forever(false)
+            .ignore_default_visibility(true)
+            .enforce_single_parent(true)
+            .upload_resumable(
+                std::fs::File::open(local_fs_path).unwrap(),
+                "application/octet-stream".parse().unwrap(),
+            );
+
+        match result {
+            Err(e) => match e {
+                // The Error enum provides details about what exactly happened.
+                // You can also just use its `trace`, `Display` or `Error` traits
+                Error::HttpError(_)
+                | Error::MissingAPIKey
+                | Error::MissingToken(_)
+                | Error::Cancelled
+                | Error::UploadSizeLimitExceeded(_, _)
+                | Error::Failure(_)
+                | Error::BadRequest(_)
+                | Error::FieldClash(_)
+                | Error::JsonDecodeError(_, _) => {
+                    error!(log, "Failed to invoke upload api {}", e);
+                    Err(SyncerErrors::ProviderError)
+                }
+            },
+            Ok(res) => {
+                trace!(log, "Upload Call Success: {:?}", res);
+                Ok(res.1.id.clone())
+            }
+        }
     }
 
     ///Create a remote dir in root offset relatie to local_dir and then return the Storage Service File Id
@@ -167,7 +224,10 @@ impl CloudClient for Drive3Client {
         trace!(log, "Search for Google Drive Id for {}", local_path);
         let s = SyncableFile::new(local_path.to_owned());
         let b64_id = s.get_unique_id()?;
-        debug!(log, "Unique ID = {} or {:?}", b64_id, local_path);
+        debug!(
+            log,
+            "Base64 Unique ID = {} for file {:?}", b64_id, local_path
+        );
         let q = &format!(
             "{} {{ key='{}' and value='{}' }}",
             "appProperties has ", PI_DRIVE_SYNC_PROPS_KEY, b64_id

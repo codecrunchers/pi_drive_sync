@@ -98,12 +98,16 @@ fn main() {
     trace!(log, "Using {} as Dir to monitor", target_dir);
 
     //Create Base Folder on Cloud Provider
+    //make sure it exists locally too
     let syncer_drive_cli = drive_cli::Drive3Client::new(secret_file.to_owned());
+
     let root_remote_dir = format!(
         "{}/{}",
         upload_handler::LOCAL_ROOT_FOLDER,
         upload_handler::DRIVE_ROOT_FOLDER
-    ); //virtual folder, this is the dir that all in LOCAL_FILE_STORE will count as parent
+    );
+
+    std::fs::create_dir(root_remote_dir.clone());
     match syncer_drive_cli.id(&root_remote_dir) {
         Ok(id) => match id {
             Some(id) => debug!(log, "Root Dir Exists, not creating"),
@@ -139,7 +143,19 @@ fn main() {
                     Err(e) => warn!(log, "cannot  create {}", path),
                 }
             } else {
-                trace!(log, "TODO: File Upload {:?}", path);
+                trace!(log, "Dir  Create {:?}", path);
+                let parent_path = SyncableFile::new(path.into()).parent_path().unwrap();
+                let parent_path = parent_path.to_str().unwrap();
+
+                let parent_id = syncer_drive_cli.id(parent_path);
+                trace!(log, "Parent Id for {}=  {:?}", path, parent_id);
+
+                match syncer_drive_cli
+                    .upload_file(path, Some(parent_id.ok().unwrap().unwrap().as_str()))
+                {
+                    Ok(id) => debug!(log, "created {}, id = {:?}", path, id),
+                    Err(e) => warn!(log, "cannot  create {}", path),
+                }
             }
         } else {
             warn!(log, "Cannot Create {:?}", p);
@@ -156,37 +172,4 @@ fn main() {
             Err(e) => error!(log, "watch error: {:?}", e),
         }
     }
-}
-
-///Return base64 of Parent  [ROOT_ID + File Name] - will work for now, clashes possible with poor
-///encoder ///expecting file to be YYYYMMDDHHSS.[?]
-fn get_unique_entry_id(base_path: &str) -> Option<String> {
-    trace!(log,"get_unique_entry_id for {:?}", base_path; "base_path"=>true);
-    strip_local_fs(base_path).and_then(|file_name| {
-        trace!(log,"get_unique_entry_id {:?}", file_name; "relative_path"=>true);
-        let base64_buf = encode(format!("{}{}", DRIVE_ROOT_FOLDER, &file_name));
-        trace!(log,"get_unique_entry_id as b64 of {}{} = {:?}", DRIVE_ROOT_FOLDER, &file_name, base64_buf; "x"=>1);
-        Some(base64_buf.clone())
-    })
-}
-
-fn strip_local_fs(lfsn: &str) -> Option<&str> {
-    trace!(log,"strip_local_fs"; "lfsn"=>lfsn);
-    if lfsn.len() > LOCAL_FILE_STORE.len() && lfsn[0..LOCAL_FILE_STORE.len()].eq(LOCAL_FILE_STORE) {
-        Some(&lfsn[LOCAL_FILE_STORE.len() + 1..])
-    } else {
-        trace!(log, "Invalid file {}, returning root of FileSystem", &lfsn);
-        std::path::Path::new(lfsn).file_name()?.to_str()
-    }
-}
-
-fn get_file_name(lfsn: &str) -> Option<&str> {
-    trace!(log,"get_file_name"; "name"=>lfsn);
-    let path = std::path::Path::new(lfsn);
-    path.file_name()?.to_str()
-}
-
-#[cfg(test)]
-mod tests {
-    use crate::common::LOG as log;
 }
