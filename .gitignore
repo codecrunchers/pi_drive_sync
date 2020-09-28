@@ -1,3 +1,6 @@
 /target
 temp_token
 /auth/*
+target
+*.mp4
+*.jpg
