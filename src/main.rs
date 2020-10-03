@@ -35,6 +35,14 @@ fn main() {
         .version("1.0")
         .about("Will Sync a Dir recursvively with the smarts of a sheep")
         .arg(
+            Arg::with_name("check_auth")
+                .short("a")
+                .long("check_auth")
+                .value_name("check_auth")
+                .help("yes/no")
+                .takes_value(true),
+        )
+        .arg(
             Arg::with_name("secret_file")
                 .short("s")
                 .long("secret_file")
@@ -60,6 +68,8 @@ fn main() {
         )
         .get_matches();
 
+    let do_auth = matches.value_of("check_auth");
+
     let secret_file = matches
         .value_of("secret_file")
         .unwrap_or("/home/alan/.google-service-cli/drive3-secret.json");
@@ -82,6 +92,11 @@ fn main() {
     //Create Base Folder on Cloud Provider
     //make sure it exists locally too
     let syncer_drive_cli = drive_cli::Drive3Client::new(secret_file.to_owned());
+    if let Err(hub_err) = syncer_drive_cli.get_hub() {
+        println!("Error {}", hub_err);
+        error!(log, "Cloud Provider {}", hub_err);
+        std::process::exit(0x0100);
+    }
 
     let root_remote_dir = format!(
         "{}/{}",
@@ -92,6 +107,15 @@ fn main() {
     if let Err(e) = std::fs::create_dir(root_remote_dir.clone()) {
         warn!(log, "Root Folder Create Response: {}", e.to_string());
     }
+
+    match syncer_drive_cli.upload_file(
+        format!("{}/{}", root_remote_dir, "touchfile").as_str(),
+        None,
+    ) {
+        Ok(id) => debug!(log, "created temp file, id = {:?}", id),
+        Err(e) => warn!(log, "cannot auth / write test file {}", e),
+    }
+
     match syncer_drive_cli.id(&root_remote_dir) {
         Ok(id) => match id {
             Some(_id) => debug!(log, "Root Dir Exists, not creating"),
@@ -101,6 +125,12 @@ fn main() {
             },
         },
         Err(_e) => warn!(log, "Error getting drive id for root folder"),
+    }
+
+    if let Some("yes") = matches.value_of("check_auth") {
+        println!("Token Check Done");
+        debug!(log, "outta here, just getting doing a token check");
+        std::process::exit(0x0100);
     }
 
     let (sender, receiver) = channel();

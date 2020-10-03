@@ -2,9 +2,9 @@ use crate::common::LOG as log;
 use crate::pi_err::{PiSyncResult, SyncerErrors};
 use crate::upload_handler::{FileOperations, SyncableFile};
 use drive3::{DriveHub, Error};
-use oauth2::{
+use yup_oauth2::{
     read_application_secret, ApplicationSecret, Authenticator, DefaultAuthenticatorDelegate,
-    DiskTokenStorage,
+    DiskTokenStorage, MemoryStorage,
 };
 
 use std::collections::HashMap;
@@ -47,6 +47,7 @@ impl Drive3Client {
             Some(secret) => {
                 let token_storage = DiskTokenStorage::new(&String::from("temp_token"))
                     .expect("Cannot create temp storage token - write permissions?");
+
                 let auth = Authenticator::new(
                     &secret,
                     DefaultAuthenticatorDelegate,
@@ -63,6 +64,8 @@ impl Drive3Client {
                     )),
                     auth,
                 );
+
+                //debug!(log, "Token = {:?}", auth);
 
                 Drive3Client { hub: Ok(hub) }
             }
@@ -289,7 +292,7 @@ mod tests {
 
     ///TODO: this is leaveing state on provider, will fail on second run
     #[test]
-    fn test_drive_cli_id() {
+    fn test_drive_cli_id(dc: Drive3Client) {
         let dc = Drive3Client::new("/home/alan/.google-service-cli/drive3-secret.json".to_owned());
         let d = "/tmp/pi_sync/images/new_dir";
 
