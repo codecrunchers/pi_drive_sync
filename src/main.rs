@@ -108,13 +108,14 @@ fn main() {
         warn!(log, "Root Folder Create Response: {}", e.to_string());
     }
 
-    match syncer_drive_cli.upload_file(
-        format!("{}/{}", root_remote_dir, "touchfile").as_str(),
-        None,
-    ) {
-        Ok(id) => debug!(log, "created temp file, id = {:?}", id),
-        Err(e) => warn!(log, "cannot auth / write test file {}", e),
-    }
+    /*    match syncer_drive_cli.upload_file(
+            format!("{}/{}", root_remote_dir, "touchfile").as_str(),
+            None,
+        ) {
+            Ok(id) => debug!(log, "created temp file, id = {:?}", id),
+            Err(e) => warn!(log, "cannot auth / write test file {}", e),
+        }
+    */
 
     match syncer_drive_cli.id(&root_remote_dir) {
         Ok(id) => match id {
@@ -129,7 +130,10 @@ fn main() {
 
     if let Some("yes") = matches.value_of("check_auth") {
         println!("Token Check Done");
-        debug!(log, "outta here, just getting doing a token check");
+        debug!(
+            log,
+            "outta here, just getting doing a token check -we may never meet"
+        );
         std::process::exit(0x0100);
     }
 

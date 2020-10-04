@@ -4,8 +4,9 @@ use crate::upload_handler::{FileOperations, SyncableFile};
 use drive3::{DriveHub, Error};
 use yup_oauth2::{
     read_application_secret, ApplicationSecret, Authenticator, DefaultAuthenticatorDelegate,
-    DiskTokenStorage, MemoryStorage,
+    DiskTokenStorage, GetToken, MemoryStorage,
 };
+//use crate::oauth2::GetToken;`
 
 use std::collections::HashMap;
 use std::default::Default;
@@ -48,7 +49,7 @@ impl Drive3Client {
                 let token_storage = DiskTokenStorage::new(&String::from("temp_token"))
                     .expect("Cannot create temp storage token - write permissions?");
 
-                let auth = Authenticator::new(
+                let mut auth = Authenticator::new(
                     &secret,
                     DefaultAuthenticatorDelegate,
                     hyper::Client::with_connector(hyper::net::HttpsConnector::new(
@@ -57,6 +58,16 @@ impl Drive3Client {
                     token_storage,
                     Some(yup_oauth2::FlowType::InstalledInteractive),
                 );
+
+                let scopes = &[
+                    "https://www.googleapis.com/auth/drive",
+                    "https://www.googleapis.com/auth/drive.metadata.readonly",
+                ];
+
+                match auth.token(scopes) {
+                    Err(e) => println!("error: {:?}", e),
+                    Ok(t) => println!("The token is {:?}", t),
+                };
 
                 let hub = DriveHub::new(
                     hyper::Client::with_connector(hyper::net::HttpsConnector::new(
