@@ -98,24 +98,16 @@ fn main() {
         std::process::exit(0x0100);
     }
 
+    //create our dirs to sync
     let root_remote_dir = format!(
         "{}/{}",
-        upload_handler::LOCAL_ROOT_FOLDER,
+        upload_handler::LOCAL_ROOT_FOLDER, //TODO: should be using target dir
         upload_handler::DRIVE_ROOT_FOLDER
     );
 
     if let Err(e) = std::fs::create_dir(root_remote_dir.clone()) {
         warn!(log, "Root Folder Create Response: {}", e.to_string());
     }
-
-    /*    match syncer_drive_cli.upload_file(
-            format!("{}/{}", root_remote_dir, "touchfile").as_str(),
-            None,
-        ) {
-            Ok(id) => debug!(log, "created temp file, id = {:?}", id),
-            Err(e) => warn!(log, "cannot auth / write test file {}", e),
-        }
-    */
 
     match syncer_drive_cli.id(&root_remote_dir) {
         Ok(id) => match id {

@@ -7,8 +7,8 @@ use base64::encode;
 
 use std::path::{Path, PathBuf};
 
-pub const LOCAL_ROOT_FOLDER: &str = "/tmp/pi_sync/images"; //basing base64 on this is dodgy as if I change this we get a different id
-pub const DRIVE_ROOT_FOLDER: &str = "RpiCamera";
+pub const LOCAL_ROOT_FOLDER: &str = "/var/www"; //basing base64 on this is dodgy as if I change this we get a different id
+pub const DRIVE_ROOT_FOLDER: &str = "RpiCamera"; //TODO: this does not allow cli to override
 
 #[derive(new)]
 pub struct SyncableFile {
