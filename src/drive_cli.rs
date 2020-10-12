@@ -130,42 +130,48 @@ impl CloudClient for Drive3Client {
         trace!(log, "Upload Req {:?}", req);
 
         // Values shown here are possibly random and not representative !
-        let result = self
-            .get_hub()?
-            .files()
-            .create(req)
-            .use_content_as_indexable_text(true)
-            .supports_team_drives(false)
-            .supports_all_drives(true)
-            .keep_revision_forever(false)
-            .ignore_default_visibility(true)
-            .enforce_single_parent(true)
-            .upload_resumable(
-                std::fs::File::open(local_fs_path).unwrap(),
-                "application/octet-stream".parse().unwrap(),
-            );
+        //handle file deletion
+        if let Ok(file) = std::fs::File::open(local_fs_path) {
+            let result = self
+                .get_hub()?
+                .files()
+                .create(req)
+                .use_content_as_indexable_text(true)
+                .supports_team_drives(false)
+                .supports_all_drives(true)
+                .keep_revision_forever(false)
+                .ignore_default_visibility(true)
+                .enforce_single_parent(true)
+                .upload_resumable(
+                    std::fs::File::open(local_fs_path).unwrap(),
+                    "application/octet-stream".parse().unwrap(),
+                );
 
-        match result {
-            Err(e) => match e {
-                // The Error enum provides details about what exactly happened.
-                // You can also just use its `trace`, `Display` or `Error` traits
-                Error::HttpError(_)
-                | Error::MissingAPIKey
-                | Error::MissingToken(_)
-                | Error::Cancelled
-                | Error::UploadSizeLimitExceeded(_, _)
-                | Error::Failure(_)
-                | Error::BadRequest(_)
-                | Error::FieldClash(_)
-                | Error::JsonDecodeError(_, _) => {
-                    error!(log, "Failed to invoke upload api {}", e);
-                    Err(SyncerErrors::ProviderError)
+            match result {
+                Err(e) => match e {
+                    // The Error enum provides details about what exactly happened.
+                    // You can also just use its `trace`, `Display` or `Error` traits
+                    Error::HttpError(_)
+                    | Error::MissingAPIKey
+                    | Error::MissingToken(_)
+                    | Error::Cancelled
+                    | Error::UploadSizeLimitExceeded(_, _)
+                    | Error::Failure(_)
+                    | Error::BadRequest(_)
+                    | Error::FieldClash(_)
+                    | Error::JsonDecodeError(_, _) => {
+                        error!(log, "Failed to invoke upload api {}", e);
+                        Err(SyncerErrors::ProviderError)
+                    }
+                },
+                Ok(res) => {
+                    trace!(log, "Upload Call Success: {:?}", res);
+                    Ok(res.1.id.clone())
                 }
-            },
-            Ok(res) => {
-                trace!(log, "Upload Call Success: {:?}", res);
-                Ok(res.1.id.clone())
             }
+        } else {
+            error!(log, "File deleted before we got to it");
+            Err(SyncerErrors::ProviderError)
         }
     }
 

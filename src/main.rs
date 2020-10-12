@@ -50,14 +50,14 @@ fn main() {
                 .help("Where to find Google Drive API JSON secrets")
                 .takes_value(true),
         )
-        .arg(
+        /*        .arg(
             Arg::with_name("target_dir")
                 .short("t")
                 .long("target_dir")
                 .value_name("target_dir")
                 .help("Directory to monitor and sync")
                 .takes_value(true),
-        )
+        )*/
         .arg(
             Arg::with_name("scan_interval_seconds")
                 .short("i")
@@ -74,9 +74,7 @@ fn main() {
         .value_of("secret_file")
         .unwrap_or("/home/alan/.google-service-cli/drive3-secret.json");
 
-    let target_dir = matches
-        .value_of("target_dir")
-        .unwrap_or(upload_handler::LOCAL_ROOT_FOLDER);
+    let target_dir = upload_handler::LOCAL_ROOT_FOLDER;
 
     let scan_interval_seconds = String::from(
         matches
@@ -143,19 +141,19 @@ fn main() {
             let parent_id = syncer_drive_cli.id(parent_path);
             trace!(log, "Parent Id for {:?}=  {:?}", p, parent_id);
 
-            trace!(log, "Dir  Create {:?}", path);
+            trace!(log, "Create For file/dir {:?}", path);
 
             match parent_id {
                 Ok(pid) => {
                     if SyncableFile::new(path.into()).is_dir() {
                         match syncer_drive_cli.create_dir(path, Some(pid.unwrap().as_str())) {
-                            Ok(id) => debug!(log, "created {}, id = {:?}", path, id),
-                            Err(e) => warn!(log, "cannot  create {} {}", path, e),
+                            Ok(id) => debug!(log, "created Dir  {}, id = {:?}", path, id),
+                            Err(e) => warn!(log, "cannot  create  dir {} {}", path, e),
                         }
                     } else {
                         match syncer_drive_cli.upload_file(path, Some(pid.unwrap().as_str())) {
-                            Ok(id) => debug!(log, "created {}, id = {:?}", path, id),
-                            Err(e) => warn!(log, "cannot  create {} {}", path, e),
+                            Ok(id) => debug!(log, "created File {}, id = {:?}", path, id),
+                            Err(e) => warn!(log, "cannot  create  File{} {}", path, e),
                         }
                     }
                 }
