@@ -8,9 +8,9 @@ use yup_oauth2::{
 };
 //use crate::oauth2::GetToken;`
 
+use regex::Regex;
 use std::collections::HashMap;
 use std::default::Default;
-
 use tempfile::tempfile;
 
 const PI_DRIVE_SYNC_PROPS_KEY: &str = "pi_sync_id";
@@ -25,6 +25,7 @@ pub type Hub = drive3::DriveHub<
 
 pub struct Drive3Client {
     hub: std::result::Result<Hub, SyncerErrors>,
+    filters: Vec<String>,
 }
 
 pub trait CloudClient {
@@ -43,7 +44,7 @@ pub trait CloudClient {
 }
 
 impl Drive3Client {
-    pub fn new(secret_file: String) -> Self {
+    pub fn new(secret_file: String, filters: Vec<&str>) -> Self {
         match Drive3Client::read_client_secret(secret_file) {
             Some(secret) => {
                 let token_storage = DiskTokenStorage::new(&String::from("temp_token"))
@@ -76,12 +77,17 @@ impl Drive3Client {
                     auth,
                 );
 
-                //debug!(log, "Token = {:?}", auth);
-
-                Drive3Client { hub: Ok(hub) }
+                Drive3Client {
+                    hub: Ok(hub),
+                    filters: filters
+                        .iter()
+                        .map(|x| x.to_string())
+                        .collect::<Vec<String>>(),
+                }
             }
             None => Drive3Client {
                 hub: Err(SyncerErrors::NoAppSecret),
+                filters: vec![],
             },
         }
     }
@@ -92,6 +98,24 @@ impl Drive3Client {
 
     fn read_client_secret(file: String) -> Option<ApplicationSecret> {
         read_application_secret(std::path::Path::new(&file)).ok()
+    }
+
+    fn passes_filter(&self, filename: String) -> bool {
+        trace!(log, "Check Filter for {}", filename);
+
+        if self.filters.len() == 0 {
+            true
+        } else {
+            self.filters
+                .iter()
+                .map(|val| {
+                    Regex::new(&val)
+                        .ok()
+                        .and_then(|re: Regex| re.captures(&filename))
+                })
+                .map(|captures| captures.is_some())
+                .fold(false, |ordd, regexp_find| ordd || regexp_find)
+        }
     }
 }
 
@@ -109,12 +133,36 @@ impl CloudClient for Drive3Client {
         parent_id: Option<&str>,
     ) -> PiSyncResult<Option<String>> {
         let s = SyncableFile::new(local_fs_path.to_owned());
+
         trace!(
             log,
-            "Create dir:: Dir to create {:?} from local {:?}",
+            "Upload File:: Cloud Target={:?} from local {:?}",
             s.cloud_path(),
-            s.local_path()
+            s.local_path(),
         );
+
+        if !self.passes_filter(
+            s.local_path()
+                .file_name()
+                .unwrap()
+                .to_str()
+                .unwrap()
+                .to_string(),
+        ) {
+            trace!(
+                log,
+                "Upload File:: Fail , disallowed by filter in: {:?} for {}",
+                self.filters,
+                s.local_path()
+                    .file_name()
+                    .unwrap()
+                    .to_str()
+                    .unwrap()
+                    .to_string()
+            );
+
+            return Err(SyncerErrors::ProviderError); //TODO: Fix error handling / message
+        }
 
         let mut req = drive3::File::default();
         req.name = Some(

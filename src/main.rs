@@ -50,14 +50,14 @@ fn main() {
                 .help("Where to find Google Drive API JSON secrets")
                 .takes_value(true),
         )
-        /*        .arg(
-            Arg::with_name("target_dir")
-                .short("t")
-                .long("target_dir")
-                .value_name("target_dir")
-                .help("Directory to monitor and sync")
+        .arg(
+            Arg::with_name("regexp_filter")
+                .short("f")
+                .long("regexp_filter")
+                .value_name("regexp_filter")
+                .help("Command separated list of filters, e.g. ^im.*jpg$ or ^vi.*mp4$ ")
                 .takes_value(true),
-        )*/
+        )
         .arg(
             Arg::with_name("scan_interval_seconds")
                 .short("i")
@@ -69,6 +69,12 @@ fn main() {
         .get_matches();
 
     let do_auth = matches.value_of("check_auth");
+
+    let file_name_filters = matches
+        .value_of("regexp_filter")
+        .unwrap_or("")
+        .split(",")
+        .collect::<Vec<&str>>();
 
     let secret_file = matches
         .value_of("secret_file")
@@ -89,7 +95,7 @@ fn main() {
 
     //Create Base Folder on Cloud Provider
     //make sure it exists locally too
-    let syncer_drive_cli = drive_cli::Drive3Client::new(secret_file.to_owned());
+    let syncer_drive_cli = drive_cli::Drive3Client::new(secret_file.to_owned(), file_name_filters);
     if let Err(hub_err) = syncer_drive_cli.get_hub() {
         println!("Error {}", hub_err);
         error!(log, "Cloud Provider {}", hub_err);
