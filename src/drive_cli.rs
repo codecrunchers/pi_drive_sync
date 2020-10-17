@@ -152,6 +152,8 @@ impl CloudClient for Drive3Client {
             s.local_path(),
         );
 
+        s.local_path().iter().map(|d| slef.create_dir(d));
+
         let mut req = drive3::File::default();
         req.name = Some(
             s.local_path()
