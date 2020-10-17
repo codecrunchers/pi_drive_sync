@@ -1,10 +1,8 @@
-use std::io::prelude::*;
-
 use crate::common::LOG as log;
-
 use crate::pi_err::{PiSyncResult, SyncerErrors};
 use base64::encode;
-
+use std::ffi::OsStr;
+use std::io::prelude::*;
 use std::path::{Path, PathBuf};
 
 pub const LOCAL_ROOT_FOLDER: &str = "/var/www"; //basing base64 on this is dodgy as if I change this we get a different id
@@ -29,6 +27,8 @@ pub trait FileOperations {
     ///Take the  unique cloud porition of the file
     ///path and return a Base64 Unique Id of this
     fn get_unique_id(&self) -> PiSyncResult<String>;
+    ///return filename
+    fn get_filename(&self) -> Option<&str>;
 }
 
 impl FileOperations for SyncableFile {
@@ -72,6 +72,14 @@ impl FileOperations for SyncableFile {
         cp.to_str()
             .and_then(|p| Some(Ok(encode(p))))
             .ok_or(SyncerErrors::SyncerNoneError)?
+    }
+
+    fn get_filename(&self) -> Option<&str> {
+        let x = Path::new(self.local_path())
+            .file_name()
+            .and_then(OsStr::to_str);
+        trace!(log, "filename() for file to uploa {:?}", x);
+        x
     }
 }
 

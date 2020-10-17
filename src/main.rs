@@ -134,39 +134,41 @@ fn main() {
     }
 
     let (sender, receiver) = channel();
-    let mut watcher =
-        watcher(sender, Duration::from_secs(scan_interval_seconds)).expect("Cannot Create Watcher");
+    let mut watcher = watcher(sender, Duration::from_secs(scan_interval_seconds))
+        .expect("Cannot Create Watcherns");
     watcher
         .watch(target_dir, RecursiveMode::Recursive)
-        .expect("Canot Watch Dir");
+        .expect("Cannot Watch Dir");
 
     let handle_event = |_, p: std::path::PathBuf| {
         if let Some(path) = p.to_str() {
-            let parent_path = SyncableFile::new(path.to_owned()).parent_path().unwrap();
-            let parent_path = parent_path.to_str().unwrap();
-            let parent_id = syncer_drive_cli.id(parent_path);
-            trace!(log, "Parent Id for {:?}=  {:?}", p, parent_id);
+            let file_to_sync = SyncableFile::new(path.into());
 
-            trace!(log, "Create For file/dir {:?}", path);
+            let parent_path = file_to_sync.parent_path().unwrap(); //TODO p!
+            let parent_path = parent_path.to_str().unwrap(); //TODO: p!
 
-            match parent_id {
+            if syncer_drive_cli.passes_filter(path) {
+                let parent_id = syncer_drive_cli.id(parent_path);
+                trace!(log, "Parent Id for {:?}=  {:?}", p, parent_id);
+                trace!(log, "Create For file/dir {:?}", path);
+                match parent_id {
                 Ok(pid) => {
-                    if SyncableFile::new(path.into()).is_dir() {
-                        match syncer_drive_cli.create_dir(path, Some(pid.unwrap().as_str())) {
-                            Ok(id) => debug!(log, "created Dir  {}, id = {:?}", path, id),
-                            Err(e) => warn!(log, "cannot  create  dir {} {}", path, e),
-                        }
-                    } else {
+                    if file_to_sync.is_file() {
                         match syncer_drive_cli.upload_file(path, Some(pid.unwrap().as_str())) {
                             Ok(id) => debug!(log, "created File {}, id = {:?}", path, id),
                             Err(e) => warn!(log, "cannot  create  File{} {}", path, e),
                         }
+                    }else{
+                        info!(log, "Not creating dir {}", path);
                     }
                 }
                 Err(e) => warn!(
                     log,
-                    "cannot  fetch parent id, auth issues likely {} {}", path, e
+                    "cannot calculate parent id from provider flesystem, auth issues  or fs sync problems likely {} {}", path, e
                 ),
+            }
+            } else {
+                debug!(log, "{} is filtered out", path);
             }
         } else {
             warn!(log, "Cannot Create {:?}", p);

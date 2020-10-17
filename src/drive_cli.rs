@@ -41,6 +41,7 @@ pub trait CloudClient {
     ) -> PiSyncResult<Option<String>>;
     fn id(&self, local_path: &str) -> PiSyncResult<Option<String>>; //should this be cloud path
     fn app_props_map(&self, id: &str) -> Option<HashMap<String, String>>;
+    fn passes_filter(&self, local_fs_path: &str) -> bool;
 }
 
 impl Drive3Client {
@@ -99,24 +100,6 @@ impl Drive3Client {
     fn read_client_secret(file: String) -> Option<ApplicationSecret> {
         read_application_secret(std::path::Path::new(&file)).ok()
     }
-
-    fn passes_filter(&self, filename: String) -> bool {
-        trace!(log, "Check Filter for {}", filename);
-
-        if self.filters.len() == 0 {
-            true
-        } else {
-            self.filters
-                .iter()
-                .map(|val| {
-                    Regex::new(&val)
-                        .ok()
-                        .and_then(|re: Regex| re.captures(&filename))
-                })
-                .map(|captures| captures.is_some())
-                .fold(false, |ordd, regexp_find| ordd || regexp_find)
-        }
-    }
 }
 
 impl CloudClient for Drive3Client {
@@ -124,6 +107,34 @@ impl CloudClient for Drive3Client {
         let mut app_props = HashMap::new();
         app_props.insert(PI_DRIVE_SYNC_PROPS_KEY.into(), id.to_owned());
         Some(app_props)
+    }
+
+    fn passes_filter(&self, local_fs_path: &str) -> bool {
+        let s = SyncableFile::new(local_fs_path.to_owned());
+        let filename = s.get_filename().unwrap(); //TODO: p!
+        trace!(log, "Check Filter for {}", filename);
+
+        if self.filters.len() == 0 {
+            trace!(log, "No filters enabled, {:?} allowed", &s.get_filename());
+            true
+        } else {
+            let matched = self
+                .filters
+                .iter()
+                .map(|val| {
+                    Regex::new(&val).ok().and_then(|re: Regex| {
+                        trace!(log, "Checking {:} against {:?} ", &filename, re);
+                        re.captures(&filename)
+                    })
+                })
+                .map(|captures| captures.is_some())
+                .fold(false, |ordd, regexp_find| {
+                    trace!(log, "{:} || {:?} ", ordd, regexp_find);
+                    ordd || regexp_find
+                });
+            debug!(log, "Passes Filter = {}", matched);
+            matched
+        }
     }
 
     ///Create a remote file, assigned a parent folder - and then return the Storage Service File Id
@@ -140,29 +151,6 @@ impl CloudClient for Drive3Client {
             s.cloud_path(),
             s.local_path(),
         );
-
-        if !self.passes_filter(
-            s.local_path()
-                .file_name()
-                .unwrap()
-                .to_str()
-                .unwrap()
-                .to_string(),
-        ) {
-            trace!(
-                log,
-                "Upload File:: Fail , disallowed by filter in: {:?} for {}",
-                self.filters,
-                s.local_path()
-                    .file_name()
-                    .unwrap()
-                    .to_str()
-                    .unwrap()
-                    .to_string()
-            );
-
-            return Err(SyncerErrors::ProviderError); //TODO: Fix error handling / message
-        }
 
         let mut req = drive3::File::default();
         req.name = Some(
