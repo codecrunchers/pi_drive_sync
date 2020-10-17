@@ -144,29 +144,41 @@ fn main() {
         if let Some(path) = p.to_str() {
             let file_to_sync = SyncableFile::new(path.into());
 
-            let parent_path = file_to_sync.parent_path().unwrap(); //TODO p!
-            let parent_path = parent_path.to_str().unwrap(); //TODO: p!
+            /*let parent_path = file_to_sync.parent_path().unwrap(); //TODO p!
+            let parent_path = parent_path.to_str().unwrap(); //TODO: p!*/
 
             if syncer_drive_cli.passes_filter(path) {
-                let parent_id = syncer_drive_cli.id(parent_path);
-                trace!(log, "Parent Id for {:?}=  {:?}", p, parent_id);
-                trace!(log, "Create For file/dir {:?}", path);
-                match parent_id {
-                Ok(pid) => {
+                /*let parent_id = syncer_drive_cli.id(parent_path);
+                    trace!(log, "Parent Id for {:?}=  {:?}", p, parent_id);
+                    trace!(log, "Create For file/dir {:?}", path);
+                    match parent_id {
+                    Ok(pid) => {
+                        if file_to_sync.is_file() {
+                            match syncer_drive_cli.upload_file(path, Some(pid.unwrap().as_str())) {
+                                Ok(id) => debug!(log, "created File {}, id = {:?}", path, id),
+                                Err(e) => warn!(log, "cannot  create  File{} {}", path, e),
+                            }
+                        }else{
+                            info!(log, "Not creating dir {}", path);
+                        }
+                    }
+                    Err(e) => warn!(
+                        log,
+                        "cannot calculate parent id from provider flesystem, auth issues  or fs sync problems likely {} {}", path, e
+                    ),
+                }*/
+                {
                     if file_to_sync.is_file() {
-                        match syncer_drive_cli.upload_file(path, Some(pid.unwrap().as_str())) {
+                        match syncer_drive_cli
+                            .upload_file(path /*, Some(pid.unwrap().as_str())*/)
+                        {
                             Ok(id) => debug!(log, "created File {}, id = {:?}", path, id),
                             Err(e) => warn!(log, "cannot  create  File{} {}", path, e),
                         }
-                    }else{
+                    } else {
                         info!(log, "Not creating dir {}", path);
                     }
                 }
-                Err(e) => warn!(
-                    log,
-                    "cannot calculate parent id from provider flesystem, auth issues  or fs sync problems likely {} {}", path, e
-                ),
-            }
             } else {
                 debug!(log, "{} is filtered out", path);
             }

@@ -29,11 +29,7 @@ pub struct Drive3Client {
 }
 
 pub trait CloudClient {
-    fn upload_file(
-        &self,
-        local_fs_path: &str,
-        parent_id: Option<&str>,
-    ) -> PiSyncResult<Option<String>>;
+    fn upload_file(&self, local_fs_path: &str) -> PiSyncResult<Option<String>>;
     fn create_dir(
         &self,
         local_fs_path: &str,
@@ -138,11 +134,7 @@ impl CloudClient for Drive3Client {
     }
 
     ///Create a remote file, assigned a parent folder - and then return the Storage Service File Id
-    fn upload_file(
-        &self,
-        local_fs_path: &str,
-        parent_id: Option<&str>,
-    ) -> PiSyncResult<Option<String>> {
+    fn upload_file(&self, local_fs_path: &str) -> PiSyncResult<Option<String>> {
         let s = SyncableFile::new(local_fs_path.to_owned());
 
         trace!(
@@ -152,7 +144,10 @@ impl CloudClient for Drive3Client {
             s.local_path(),
         );
 
-        s.local_path().iter().map(|d| slef.create_dir(d));
+        s.local_path().ancestors().map(|d| {
+            trace!(log, "Creating Ancestor Dir {:?}", d);
+            self.create_dir(d.file_name().unwrap().to_str().unwrap(), None); //TODO: p!
+        });
 
         let mut req = drive3::File::default();
         req.name = Some(
@@ -163,7 +158,14 @@ impl CloudClient for Drive3Client {
                 .unwrap()
                 .to_owned(),
         );
-        req.parents = parent_id.and_then(|p| Some(vec![p.to_owned()]));
+
+        let parent_path = s.parent_path().unwrap(); //TODO p!
+        let parent_path = parent_path.to_str().unwrap(); //TODO: p!
+
+        let parent_id = self.id(parent_path).ok(); // TODO: p!
+        trace!(log, "Parent Id for {:?}=  {:?}", parent_path, parent_id);
+
+        req.parents = parent_id.unwrap().and_then(|p| Some(vec![p.to_owned()])); //TODO P!
         req.app_properties = self.app_props_map(&s.get_unique_id()?);
         trace!(log, "Upload Req {:?}", req);
 
