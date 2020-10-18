@@ -52,7 +52,6 @@ impl FileOperations for SyncableFile {
             }
             false => {
                 error!(log, "cannot pop  {:?}", p_copy);
-                //Err(SyncerErrors::InvalidPathError("Cannot calc parent path"))
                 Err(SyncerErrors::InvalidPathError)
             }
         }

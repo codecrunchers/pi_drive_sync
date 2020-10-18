@@ -96,6 +96,35 @@ impl Drive3Client {
     fn read_client_secret(file: String) -> Option<ApplicationSecret> {
         read_application_secret(std::path::Path::new(&file)).ok()
     }
+
+    ///TODO: Panic Central
+    fn create_path(&self, syncable: &SyncableFile) -> PiSyncResult<bool> {
+        debug!(log, "create path for {:?}", syncable.local_path());
+
+        let mut rel_path = syncable
+            .local_path()
+            .strip_prefix("/var/www/RpiCamera")
+            .unwrap();
+
+        let components: Vec<_> = rel_path.components().map(|comp| comp.as_os_str()).collect();
+
+        debug!(log, "components {:?}", components);
+
+        let file_name_index = components.len() - 1;
+        let mut last_dir = String::from("/var/www/RpiCamera/");
+        for (path_index, dir) in components.iter().enumerate() {
+            if path_index != file_name_index {
+                debug!(log, "Create Dir {}{:?}", last_dir.as_str(), dir.to_str());
+                self.create_dir(
+                    format!("{}{}", last_dir, dir.to_str().unwrap()).as_str(),
+                    None,
+                );
+            }
+            //should be async
+            last_dir.push_str(format!("{}/", dir.to_str().unwrap().to_string()).as_str());
+        }
+        Ok(true)
+    }
 }
 
 impl CloudClient for Drive3Client {
@@ -144,10 +173,7 @@ impl CloudClient for Drive3Client {
             s.local_path(),
         );
 
-        s.local_path().ancestors().map(|d| {
-            trace!(log, "Creating Ancestor Dir {:?}", d);
-            self.create_dir(d.file_name().unwrap().to_str().unwrap(), None); //TODO: p!
-        });
+        self.create_path(&s);
 
         let mut req = drive3::File::default();
         req.name = Some(
@@ -329,13 +355,15 @@ impl CloudClient for Drive3Client {
 
 #[cfg(test)]
 mod tests {
-
     use crate::drive_cli::*;
     use crate::upload_handler::{FileOperations, SyncableFile};
 
     #[test]
     fn test_drive_cli_create_dir() {
-        let dc = Drive3Client::new("/home/alan/.google-service-cli/drive3-secret.json".to_owned());
+        let dc = Drive3Client::new(
+            "/home/alan/.google-service-cli/drive3-secret.json".to_owned(),
+            vec![],
+        );
         let d = "/tmp/pi_sync/images/new_dir";
         let r = dc.create_dir(d, None);
         println!("Id of new Dir {:?}", r);
@@ -349,15 +377,12 @@ mod tests {
 
     ///TODO: this is leaveing state on provider, will fail on second run
     #[test]
-    fn test_drive_cli_id(dc: Drive3Client) {
-        let dc = Drive3Client::new("/home/alan/.google-service-cli/drive3-secret.json".to_owned());
+    fn test_drive_cli_id() {
+        let dc = Drive3Client::new(
+            "/home/alan/.google-service-cli/drive3-secret.json".to_owned(),
+            vec![],
+        );
         let d = "/tmp/pi_sync/images/new_dir";
-
-        /*let parent_on_fs_id = SyncableFile::new(d.to_owned())
-            .parent_path()
-            .and_then(|pp| SyncableFile::new(pp.to_str().unwrap().to_owned()).get_unique_id())
-            .unwrap();
-        */
 
         let drive_id_for_parent = dc.id(SyncableFile::new(d.to_owned())
             .parent_path()
@@ -389,5 +414,13 @@ mod tests {
         //file.write_all(b"empty_file\n").unwrap();
 
         
+    }
+
+    #[test]
+    fn test_create_path() {
+        let s = Drive3Client::create_path(&SyncableFile::new(
+            "/var/www/RpiCamera/1/2/3/4/im1.jpg".to_string(),
+        ));
+        assert_eq!(true, s.is_ok());
     }
 }
