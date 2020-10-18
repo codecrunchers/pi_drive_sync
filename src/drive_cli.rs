@@ -98,6 +98,7 @@ impl Drive3Client {
     }
 
     ///TODO: Panic Central
+    ///should probably be async
     fn create_path(&self, syncable: &SyncableFile) -> PiSyncResult<bool> {
         debug!(log, "create path for {:?}", syncable.local_path());
 
@@ -114,16 +115,26 @@ impl Drive3Client {
         let mut last_dir = String::from("/var/www/RpiCamera/");
         for (path_index, dir) in components.iter().enumerate() {
             if path_index != file_name_index {
-                debug!(log, "Create Dir {}{:?}", last_dir.as_str(), dir.to_str());
-                self.create_dir(
-                    format!("{}{}", last_dir, dir.to_str().unwrap()).as_str(),
-                    None,
-                );
+                debug!(log, "Create Dir {:?}{:?}", last_dir, dir);
+
+                let parent_id = self
+                    .id(&last_dir)
+                    .ok()
+                    .and_then(|o| o)
+                    .and_then(|s| Some(s))
+                    .unwrap();
+
+                let d = dir.to_str().unwrap();
+                let dir_to_create = format!("{}{}", last_dir, d);
+                self.id(&dir_to_create.clone()).or({
+                    //TODO: Needs cache to recude load
+                    self.create_dir(&dir_to_create.to_owned(), Some(&parent_id.to_owned()))
+                });
             }
-            //should be async
+            //build up the parent path hierarchy with root and last created dir concats
             last_dir.push_str(format!("{}/", dir.to_str().unwrap().to_string()).as_str());
         }
-        Ok(true)
+        Ok(true) //TODO: can panic
     }
 }
 
@@ -301,7 +312,7 @@ impl CloudClient for Drive3Client {
         }
     }
 
-    ///Get the google drive id for this entry
+    ///Query Google for the pi-sync-id, validating if this dir exists or not
     fn id(&self, local_path: &str) -> PiSyncResult<Option<String>> {
         trace!(log, "Search for Google Drive Id for {}", local_path);
         let s = SyncableFile::new(local_path.to_owned());

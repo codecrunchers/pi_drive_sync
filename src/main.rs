@@ -80,8 +80,6 @@ fn main() {
         .value_of("secret_file")
         .unwrap_or("/home/alan/.google-service-cli/drive3-secret.json");
 
-    let target_dir = upload_handler::LOCAL_ROOT_FOLDER;
-
     let scan_interval_seconds = String::from(
         matches
             .value_of("scan_interval_seconds")
@@ -91,7 +89,6 @@ fn main() {
     .unwrap();
 
     debug!(log, "Using {} as Auth File", secret_file);
-    debug!(log, "Using {} as Local Dir to monitor", target_dir);
 
     //Create Base Folder on Cloud Provider
     //make sure it exists locally too
@@ -108,6 +105,8 @@ fn main() {
         upload_handler::LOCAL_ROOT_FOLDER, //TODO: should be using target dir
         upload_handler::DRIVE_ROOT_FOLDER
     );
+
+    debug!(log, "Using {} as Local Dir to monitor", root_remote_dir);
 
     if let Err(e) = std::fs::create_dir(root_remote_dir.clone()) {
         warn!(log, "Root Folder Create Response: {}", e.to_string());
@@ -137,47 +136,20 @@ fn main() {
     let mut watcher = watcher(sender, Duration::from_secs(scan_interval_seconds))
         .expect("Cannot Create Watcherns");
     watcher
-        .watch(target_dir, RecursiveMode::Recursive)
+        .watch(root_remote_dir, RecursiveMode::Recursive)
         .expect("Cannot Watch Dir");
 
     let handle_event = |_, p: std::path::PathBuf| {
         if let Some(path) = p.to_str() {
             let file_to_sync = SyncableFile::new(path.into());
-
-            /*let parent_path = file_to_sync.parent_path().unwrap(); //TODO p!
-            let parent_path = parent_path.to_str().unwrap(); //TODO: p!*/
-
             if syncer_drive_cli.passes_filter(path) {
-                /*let parent_id = syncer_drive_cli.id(parent_path);
-                    trace!(log, "Parent Id for {:?}=  {:?}", p, parent_id);
-                    trace!(log, "Create For file/dir {:?}", path);
-                    match parent_id {
-                    Ok(pid) => {
-                        if file_to_sync.is_file() {
-                            match syncer_drive_cli.upload_file(path, Some(pid.unwrap().as_str())) {
-                                Ok(id) => debug!(log, "created File {}, id = {:?}", path, id),
-                                Err(e) => warn!(log, "cannot  create  File{} {}", path, e),
-                            }
-                        }else{
-                            info!(log, "Not creating dir {}", path);
-                        }
+                if file_to_sync.is_file() {
+                    match syncer_drive_cli.upload_file(path /*, Some(pid.unwrap().as_str())*/) {
+                        Ok(id) => debug!(log, "created File {}, id = {:?}", path, id),
+                        Err(e) => warn!(log, "cannot  create  File{} {}", path, e),
                     }
-                    Err(e) => warn!(
-                        log,
-                        "cannot calculate parent id from provider flesystem, auth issues  or fs sync problems likely {} {}", path, e
-                    ),
-                }*/
-                {
-                    if file_to_sync.is_file() {
-                        match syncer_drive_cli
-                            .upload_file(path /*, Some(pid.unwrap().as_str())*/)
-                        {
-                            Ok(id) => debug!(log, "created File {}, id = {:?}", path, id),
-                            Err(e) => warn!(log, "cannot  create  File{} {}", path, e),
-                        }
-                    } else {
-                        info!(log, "Not creating dir {}", path);
-                    }
+                } else {
+                    info!(log, "Not creating dir {}", path);
                 }
             } else {
                 debug!(log, "{} is filtered out", path);
@@ -194,7 +166,7 @@ fn main() {
                 handle_event("", p.clone());
             }
             Err(e) => error!(log, "watch error: {:?}", e),
-            _ => trace!(log, "unidentified event"),
+            Ok(x) => trace!(log, "unidentified event {:?}", x),
         }
     }
 }
