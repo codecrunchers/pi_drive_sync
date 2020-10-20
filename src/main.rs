@@ -14,7 +14,7 @@ extern crate yup_oauth2 as oauth2;
 use clap::{App, Arg};
 use common::LOG as log;
 use drive_cli::CloudClient;
-use notify::{watcher, RecursiveMode, Watcher};
+use notify::{raw_watcher, RecommendedWatcher, RecursiveMode, Watcher};
 use std::sync::mpsc::channel;
 use std::time::Duration;
 use upload_handler::{FileOperations, SyncableFile};
@@ -23,8 +23,6 @@ mod common;
 mod drive_cli;
 mod pi_err;
 mod upload_handler;
-
-const DIR_SCAN_DELAY: &str = "1";
 
 fn main() {
     debug!(log, "Statring Syncer");
@@ -58,14 +56,6 @@ fn main() {
                 .help("Command separated list of filters, e.g. ^im.*jpg$ or ^vi.*mp4$ ")
                 .takes_value(true),
         )
-        .arg(
-            Arg::with_name("scan_interval_seconds")
-                .short("i")
-                .long("scan_interval_seconds")
-                .value_name("scan_interval_seconds")
-                .help("Directory to monitor and sync")
-                .takes_value(true),
-        )
         .get_matches();
 
     let do_auth = matches.value_of("check_auth");
@@ -79,14 +69,6 @@ fn main() {
     let secret_file = matches
         .value_of("secret_file")
         .unwrap_or("/home/alan/.google-service-cli/drive3-secret.json");
-
-    let scan_interval_seconds = String::from(
-        matches
-            .value_of("scan_interval_seconds")
-            .unwrap_or(DIR_SCAN_DELAY),
-    )
-    .parse::<u64>()
-    .unwrap();
 
     debug!(log, "Using {} as Auth File", secret_file);
 
@@ -105,7 +87,7 @@ fn main() {
         upload_handler::LOCAL_ROOT_FOLDER, //TODO: should be using target dir
         upload_handler::DRIVE_ROOT_FOLDER
     );
-
+    let target_dir = root_remote_dir.clone();
     debug!(log, "Using {} as Local Dir to monitor", root_remote_dir);
 
     if let Err(e) = std::fs::create_dir(root_remote_dir.clone()) {
@@ -127,17 +109,10 @@ fn main() {
         println!("Token Check Done");
         debug!(
             log,
-            "outta here, just getting doing a token check -we may never meet"
+            "outta here, just getting a token check - we may have never meet"
         );
         std::process::exit(0x0100);
     }
-
-    let (sender, receiver) = channel();
-    let mut watcher = watcher(sender, Duration::from_secs(scan_interval_seconds))
-        .expect("Cannot Create Watcherns");
-    watcher
-        .watch(root_remote_dir, RecursiveMode::Recursive)
-        .expect("Cannot Watch Dir");
 
     let handle_event = |_, p: std::path::PathBuf| {
         if let Some(path) = p.to_str() {
@@ -159,14 +134,28 @@ fn main() {
         }
     };
 
+    let (sender, receiver) = channel();
+    let mut watcher: RecommendedWatcher = Watcher::new_raw(sender).expect("cannot create watcher");
+    watcher
+        .watch(target_dir, RecursiveMode::Recursive)
+        .expect("cannot create watcher");
+
     loop {
-        //let hub = &hub;
         match receiver.recv() {
-            Ok(notify::DebouncedEvent::Create(p)) => {
-                handle_event("", p.clone());
+            Ok(notify::RawEvent {
+                path: Some(path),
+                op: Ok(op),
+                cookie,
+            }) => {
+                if op == notify::Op::CREATE {
+                    trace!(log, "handled event {:?}{:?}{:?}", path, op, cookie);
+                    handle_event("", path.clone());
+                } else {
+                    warn!(log, "unhandled event {:?}{:?}{:?}", path, op, cookie);
+                }
             }
+            Ok(other) => trace!(log, "unhandled event {:?}", other),
             Err(e) => error!(log, "watch error: {:?}", e),
-            Ok(x) => trace!(log, "unidentified event {:?}", x),
         }
     }
 }

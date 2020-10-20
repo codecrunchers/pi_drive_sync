@@ -184,6 +184,7 @@ impl CloudClient for Drive3Client {
             s.local_path(),
         );
 
+        //build the ancestor file tree on provider
         self.create_path(&s);
 
         let mut req = drive3::File::default();
@@ -252,7 +253,8 @@ impl CloudClient for Drive3Client {
         }
     }
 
-    ///Create a remote dir in root offset relatie to local_dir and then return the Storage Service File Id
+    ///Create a remote dir in root offset relative, from target-dir
+    ///and then return the Storage Service File Id
     fn create_dir(
         &self,
         local_fs_path: &str,
@@ -261,7 +263,7 @@ impl CloudClient for Drive3Client {
         let s = SyncableFile::new(local_fs_path.to_owned());
         trace!(
             log,
-            "Create dir:: Dir to create {:?} from local {:?}",
+            "Create dir:: Remote Dir to create {:?} from local {:?}",
             s.cloud_path(),
             s.local_path()
         );
