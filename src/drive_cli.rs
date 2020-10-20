@@ -98,7 +98,6 @@ impl Drive3Client {
     }
 
     ///TODO: Panic Central
-    ///should probably be async
     fn create_path(&self, syncable: &SyncableFile) -> PiSyncResult<bool> {
         debug!(log, "create path for {:?}", syncable.local_path());
 
@@ -324,8 +323,8 @@ impl CloudClient for Drive3Client {
             "Base64 Unique ID = {} for file {:?}", b64_id, local_path
         );
         let q = &format!(
-            "{} {{ key='{}' and value='{}' }}",
-            "appProperties has ", PI_DRIVE_SYNC_PROPS_KEY, b64_id
+            "{} {{ key='{}' and value='{}' }} and {} = {}",
+            "appProperties has ", PI_DRIVE_SYNC_PROPS_KEY, b64_id, "trashed", "false"
         );
 
         trace!(log, "Query {:?}", q);
