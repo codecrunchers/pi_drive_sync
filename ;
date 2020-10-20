@@ -181,16 +181,8 @@ fn main() {
     loop {
         //let hub = &hub;
         match receiver.recv() {
-            Ok(notify::RawEvent {
-                path: Some(path),
-                op: Ok(op),
-                cookie,
-            }) => {
-                if op == notify::Op::CREATE {
-                    handle_event("", path.clone());
-                } else {
-                    warn!(log, "unhandled event {:?}{:?}{:?}", path, op, cookie);
-                }
+            Ok(notify::DebouncedEvent::Create(p)) => {
+                handle_event("", p.clone());
             }
             Err(e) => error!(log, "watch error: {:?}", e),
             _ => trace!(log, "unidentified event"),
