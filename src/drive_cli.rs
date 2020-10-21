@@ -128,33 +128,68 @@ impl Drive3Client {
             if path_index != file_name_index {
                 let d = dir.to_str().unwrap();
                 let dir_to_create = format!("{}{}", last_dir, d);
+                let b64_id = SyncableFile::new(dir_to_create.clone()).get_unique_id()?;
                 debug!(log, "Cache check for {:?}", dir_to_create.clone());
                 let c_lock = Arc::clone(&self.cache);
-                //if not in cache and does not exist
+                //if not in cache
                 if !c_lock.read().unwrap().contains_key(
                     &SyncableFile::new(dir_to_create.clone())
                         .get_unique_id()
                         .unwrap(),
-                ) && self
-                    .id(&SyncableFile::new(dir_to_create.clone())
-                        .cloud_path()
-                        .unwrap()
-                        .to_str()
-                        .unwrap())
-                    .and_then(|s| (Ok(s)))
-                    is_ok())
-                //TODO: add to cache now
-                {
-                    let parent_id = self
-                        .id(&last_dir)
-                        .ok()
-                        .and_then(|o| o)
-                        .and_then(|s| Some(s))
-                        .unwrap();
+                ) {
+                    //if does exist on disk
+                    let drive_id = self.id(&dir_to_create).ok().and_then(|id| id);
+                    if drive_id.is_some() {
+                        trace!(
+                            log,
+                            "create_path: Adding Cache Entry for Existing dir {} with drive_id {:?}",
+                            dir_to_create,
+                            drive_id
+                        );
+                        // let c_lock = Arc::clone(&self.cache);
+                        let mut c_lock = c_lock.write().unwrap();
+                        c_lock.insert(b64_id.clone(), drive_id.unwrap(), *CACHE_TTL);
+                    } else {
+                        //create it now, then cache it
+                        let parent_id = self //check_cache
+                            .id(&last_dir)
+                            .ok()
+                            .and_then(|o| o)
+                            .and_then(|s| Some(s))
+                            .unwrap();
 
-                    self.id(&dir_to_create.clone()).or({
-                        self.create_dir(&dir_to_create.to_owned(), Some(&parent_id.to_owned()))
-                    });
+                        match self
+                            .create_dir(&dir_to_create.to_owned(), Some(&parent_id.to_owned()))
+                        {
+                            Ok(did) => match did {
+                                Some(drive_id) => {
+                                    let c_lock = Arc::clone(&self.cache);
+                                    let mut cached_w = c_lock.write().unwrap();
+                                    let x = cached_w.insert(
+                                        b64_id.clone(),
+                                        drive_id.clone(),
+                                        *CACHE_TTL,
+                                    );
+                                    debug!(
+                            log,
+                            "create_path: Cache Entry Added for new dir = {} , uid={}, drive_id={:?}",
+                            dir_to_create,
+                            b64_id,
+                            drive_id.to_owned()
+                        );
+                                }
+                                _ => warn!(
+                                    log,
+                                    "invalid drive id returned from call to create dir: {:?}",
+                                    drive_id
+                                ),
+                            },
+                            Err(e) => error!(
+                                log,
+                                "invalid drive id returned from call to create dir: {:?}", drive_id
+                            ),
+                        }
+                    }
                 } else {
                     debug!(log, "Cache hit for {:?}, not creating dir", dir_to_create);
                 }
@@ -354,7 +389,7 @@ impl CloudClient for Drive3Client {
                     drive_id.clone()
                 );
 
-                let c_lock = &self.cache.clone();
+                let c_lock = Arc::clone(&self.cache);
                 let mut cached_w = c_lock.write().unwrap();
                 let x = cached_w.insert(uid.clone(), drive_id.clone(), *CACHE_TTL);
                 debug!(
@@ -379,6 +414,17 @@ impl CloudClient for Drive3Client {
             log,
             "Base64 Unique ID = {} for file {:?}", b64_id, local_path
         );
+        //{
+        /*let c_lock = Arc::clone(&self.cache);
+            //check cache
+            if c_lock.read().unwrap().contains_key(&b64_id) {
+                trace!(log, "Get Drive ID, cache hit for {}", local_path);
+                return Ok(Some(
+                    c_lock.read().unwrap().get(&b64_id).unwrap().to_owned(),
+                ));
+            }
+        }*/
+
         let q = &format!(
             "{} {{ key='{}' and value='{}' }} and {} = {}",
             "appProperties has ", PI_DRIVE_SYNC_PROPS_KEY, b64_id, "trashed", "false"
@@ -406,8 +452,10 @@ impl CloudClient for Drive3Client {
                 }
             },
             Ok(res) => {
-                trace!(log, "Query Success {:?}", res);
+                trace!(log, "Id Query Success {:?}", res);
                 Ok(res.1.files.and_then(|mut fv| {
+                    let drive_id = fv.pop()?.id.unwrap();
+
                     if fv.len() > 1 {
                         warn!(
                             log,
@@ -415,7 +463,7 @@ impl CloudClient for Drive3Client {
                             b64_id
                         );
                     }
-                    fv.pop()?.id
+                    Some(drive_id)
                 }))
             }
         }
@@ -461,28 +509,6 @@ mod tests {
 
         println!(" parent gdrive id = {:?}", drive_id_for_parent);
         assert_eq!(1, 2);
-
-        /*
-        let id_returned_from_call = dc.create_dir(d, "drive_id_for_parent.ok().unwrap()).unwrap();
-        let id_returned_from_cloud_provider_lookup = dc.id(d);
-
-
-        assert_eq!(
-            id_returned_from_cloud_provider_lookup.ok().unwrap(),
-            id_returned_from_call
-        );
-
-        */
-        /*        let child_d = "/tmp/pi_sync/images/new_dir/child_dir";
-                let child_id_response = dc.create_dir(child_d, Some(&api_id.unwrap())).unwrap();
-                let child_remote_id = dc.id(d);
-                assert_eq!(child_remote_id.is_ok(), true);
-                assert_eq!(child_remote_id.unwrap(), child_id_response);
-        */
-        //let mut file = std::fs::File::create("/tmp/pi_sync/images/alan.txt").unwrap();
-        //file.write_all(b"empty_file\n").unwrap();
-
-        
     }
 
     #[test]
