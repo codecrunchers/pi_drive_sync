@@ -11,7 +11,14 @@ use yup_oauth2::{
 use regex::Regex;
 use std::collections::HashMap;
 use std::default::Default;
+use std::sync::{Arc, RwLock};
+use std::time::Duration;
 use tempfile::tempfile;
+use ttl_cache::TtlCache;
+
+lazy_static::lazy_static! {
+    static ref CACHE_TTL: std::time::Duration = Duration::new(86400, 0);
+}
 
 const PI_DRIVE_SYNC_PROPS_KEY: &str = "pi_sync_id";
 pub type Hub = drive3::DriveHub<
@@ -26,6 +33,7 @@ pub type Hub = drive3::DriveHub<
 pub struct Drive3Client {
     hub: std::result::Result<Hub, SyncerErrors>,
     filters: Vec<String>,
+    cache: Arc<RwLock<TtlCache<String, String>>>,
 }
 
 pub trait CloudClient {
@@ -42,6 +50,8 @@ pub trait CloudClient {
 
 impl Drive3Client {
     pub fn new(secret_file: String, filters: Vec<&str>) -> Self {
+        let cache = Arc::new(RwLock::new(TtlCache::new(100)));
+
         match Drive3Client::read_client_secret(secret_file) {
             Some(secret) => {
                 let token_storage = DiskTokenStorage::new(&String::from("temp_token"))
@@ -80,11 +90,13 @@ impl Drive3Client {
                         .iter()
                         .map(|x| x.to_string())
                         .collect::<Vec<String>>(),
+                    cache: cache,
                 }
             }
             None => Drive3Client {
                 hub: Err(SyncerErrors::NoAppSecret),
                 filters: vec![],
+                cache: cache,
             },
         }
     }
@@ -114,21 +126,38 @@ impl Drive3Client {
         let mut last_dir = String::from("/var/www/RpiCamera/");
         for (path_index, dir) in components.iter().enumerate() {
             if path_index != file_name_index {
-                debug!(log, "Create Dir {:?}{:?}", last_dir, dir);
-
-                let parent_id = self
-                    .id(&last_dir)
-                    .ok()
-                    .and_then(|o| o)
-                    .and_then(|s| Some(s))
-                    .unwrap();
-
                 let d = dir.to_str().unwrap();
                 let dir_to_create = format!("{}{}", last_dir, d);
-                self.id(&dir_to_create.clone()).or({
-                    //TODO: Needs cache to recude load
-                    self.create_dir(&dir_to_create.to_owned(), Some(&parent_id.to_owned()))
-                });
+                debug!(log, "Cache check for {:?}", dir_to_create.clone());
+                let c_lock = Arc::clone(&self.cache);
+                //if not in cache and does not exist
+                if !c_lock.read().unwrap().contains_key(
+                    &SyncableFile::new(dir_to_create.clone())
+                        .get_unique_id()
+                        .unwrap(),
+                ) && self
+                    .id(&SyncableFile::new(dir_to_create.clone())
+                        .cloud_path()
+                        .unwrap()
+                        .to_str()
+                        .unwrap())
+                    .and_then(|s| (Ok(s)))
+                    is_ok())
+                //TODO: add to cache now
+                {
+                    let parent_id = self
+                        .id(&last_dir)
+                        .ok()
+                        .and_then(|o| o)
+                        .and_then(|s| Some(s))
+                        .unwrap();
+
+                    self.id(&dir_to_create.clone()).or({
+                        self.create_dir(&dir_to_create.to_owned(), Some(&parent_id.to_owned()))
+                    });
+                } else {
+                    debug!(log, "Cache hit for {:?}, not creating dir", dir_to_create);
+                }
             }
             //build up the parent path hierarchy with root and last created dir concats
             last_dir.push_str(format!("{}/", dir.to_str().unwrap().to_string()).as_str());
@@ -183,8 +212,11 @@ impl CloudClient for Drive3Client {
             s.local_path(),
         );
 
-        //build the ancestor file tree on provider
+        //build the ancestor file tree on provider if we don't have it
         self.create_path(&s);
+
+        let parent_path = s.parent_path().unwrap();
+        let parent_path = parent_path.to_str().unwrap();
 
         let mut req = drive3::File::default();
         req.name = Some(
@@ -243,7 +275,9 @@ impl CloudClient for Drive3Client {
                 },
                 Ok(res) => {
                     trace!(log, "Upload Call Success: {:?}", res);
-                    Ok(res.1.id.clone())
+                    let drive_id = res.1.id.clone();
+                    let drive_id = drive_id.unwrap();
+                    Ok(Some(drive_id.into()))
                 }
             }
         } else {
@@ -308,7 +342,30 @@ impl CloudClient for Drive3Client {
             },
             Ok(res) => {
                 trace!(log, "Success, dir  created: {:?}", res);
-                Ok(res.1.id.clone())
+                let uid = s.get_unique_id().unwrap();
+
+                let drive_id = res.1.id.clone();
+                let drive_id = drive_id.unwrap();
+                trace!(
+                    log,
+                    "localpath = {} ,uid = {:?}, drive id ={}",
+                    s.local_path().to_str().unwrap(),
+                    uid,
+                    drive_id.clone()
+                );
+
+                let c_lock = &self.cache.clone();
+                let mut cached_w = c_lock.write().unwrap();
+                let x = cached_w.insert(uid.clone(), drive_id.clone(), *CACHE_TTL);
+                debug!(
+                    log,
+                    "Cache Entry Added for uid={}, dir={}, drive_id={}",
+                    uid,
+                    local_fs_path,
+                    &drive_id
+                );
+
+                Ok(Some(drive_id.into()))
             }
         }
     }
